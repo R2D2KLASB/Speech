@@ -4,26 +4,26 @@
 #include "portaudio.h"
 
 typedef struct {
-    int          frameIndex;
-    int          maxFrameIndex;
-    float        *recordedSamples;
+    int     frameIndex;
+    int     maxFrameIndex;
+    float   *recordedSamples;
 } PaTestData;
 
-typedef struct WAV_HEADER {
-    uint8_t ChunkID[4] = {'R', 'I', 'F', 'F'};
-    uint32_t ChunkSize;
-    uint8_t Format[4] = {'W', 'A', 'V', 'E'};
-    uint8_t Subchunk1ID[4] = {'f', 'm', 't', ' '};
-    uint32_t Subchunk1Size = 16;
-    uint16_t AudioFormat = 3;
-    uint16_t NumChannels = 1;
-    uint32_t SampleRate = 44100;
-    uint32_t ByteRate = 176400;
-    uint16_t BlockAlign = 4;
-    uint16_t BitsPerSample = 32;
-    uint8_t Subchunk2ID[4] = {'d', 'a', 't', 'a'};
-    uint32_t Subchunk2Size;
-} wav_hdr;
+typedef struct {
+    uint8_t     chunkID[4] = {'R', 'I', 'F', 'F'};
+    uint32_t    chunkSize;
+    uint8_t     format[4] = {'W', 'A', 'V', 'E'};
+    uint8_t     subchunk1ID[4] = {'f', 'm', 't', ' '};
+    uint32_t    subchunk1Size = 16;
+    uint16_t    audioFormat = 3;
+    uint16_t    numChannels = 1;
+    uint32_t    sampleRate = 44100;
+    uint32_t    byteRate = 176400;
+    uint16_t    blockAlign = 4;
+    uint16_t    bitsPerSample = 32;
+    uint8_t     subchunk2ID[4] = {'d', 'a', 't', 'a'};
+    uint32_t    subchunk2Size;
+} WAV_HEADER;
 
 static int recordCallback(const void *inputBuffer, void *outputBuffer,
                         unsigned long framesPerBuffer,
@@ -81,9 +81,9 @@ int main() {
         Pa_Sleep(1000);
     }
 
-    wav_hdr wav;
-    wav.ChunkSize = numBytes + sizeof(wav_hdr) - 8;
-    wav.Subchunk2Size = numBytes + sizeof(wav_hdr) - 44;
+    WAV_HEADER wav;
+    wav.chunkSize = numBytes + sizeof(WAV_HEADER) - 8;
+    wav.subchunk2Size = numBytes + sizeof(WAV_HEADER) - 44;
 
     FILE *sample;
     sample = fopen("recording.wav", "wb");
