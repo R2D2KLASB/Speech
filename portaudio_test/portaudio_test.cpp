@@ -65,7 +65,7 @@ int main() {
     }
 
     FILE *sample;
-    sample = fopen("recorded.raw", "wb");
+    sample = fopen("recording.raw", "wb");
     fwrite(data.recordedSamples, 1 * sizeof(float), totalFrames, sample);
     fclose(sample);
     printf("wrote data to 'recorded.raw'\n");
