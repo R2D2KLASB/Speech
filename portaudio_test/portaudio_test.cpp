@@ -61,16 +61,29 @@ static int recordCallback(const void *inputBuffer, void *outputBuffer,
 }
 
 int main() {
-    Pa_Initialize();
-
+    PaStreamParameters inputParameters;
     PaStream *stream;
     PaTestData data;
+    WAV_HEADER wav;
+    int numBytes;
+    FILE *sample;
 
     data.maxFrameIndex = 5 * 44100;
-    int numBytes = data.maxFrameIndex * sizeof(float);
+    numBytes = data.maxFrameIndex * sizeof(float);
     data.recordedSamples = (float*)malloc(numBytes);
 
-    Pa_OpenDefaultStream(&stream, Pa_GetDefaultInputDevice(), 0, paFloat32, 44100, 512, recordCallback, &data);
+    wav.chunkSize = numBytes + sizeof(WAV_HEADER) - 8;
+    wav.subchunk2Size = numBytes + sizeof(WAV_HEADER) - 44;
+
+    Pa_Initialize();
+
+    inputParameters.device = Pa_GetDefaultInputDevice();
+    inputParameters.channelCount = 1;
+    inputParameters.sampleFormat = paFloat32;
+    inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultLowInputLatency;
+    inputParameters.hostApiSpecificStreamInfo = NULL;
+
+    Pa_OpenStream(&stream, &inputParameters, NULL, 44100, 512, paClipOff, recordCallback, &data);
     Pa_StartStream(stream);
 
     while(Pa_IsStreamActive(stream)) {
@@ -78,11 +91,7 @@ int main() {
         Pa_Sleep(1000);
     }
 
-    WAV_HEADER wav;
-    wav.chunkSize = numBytes + sizeof(WAV_HEADER) - 8;
-    wav.subchunk2Size = numBytes + sizeof(WAV_HEADER) - 44;
-
-    FILE *sample = fopen("recording.wav", "wb");
+    sample = fopen("recording.wav", "wb");
     fwrite(&wav, sizeof(wav), 1, sample);
     fwrite(data.recordedSamples, sizeof(float), data.maxFrameIndex, sample);
     fclose(sample);
