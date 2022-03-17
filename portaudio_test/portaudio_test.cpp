@@ -4,7 +4,7 @@
 #include "portaudio.h"
 
 typedef struct {
-    int     frameIndex;
+    int     frameIndex = 0;
     int     maxFrameIndex;
     float   *recordedSamples;
 } PaTestData;
@@ -33,7 +33,7 @@ static int recordCallback(const void *inputBuffer, void *outputBuffer,
 {
     PaTestData *data = (PaTestData*)userData;
     const float *rptr = (const float*)inputBuffer;
-    float *wptr = &data->recordedSamples[data->frameIndex * 1];
+    float *wptr = &data->recordedSamples[data->frameIndex];
     unsigned long framesLeft = data->maxFrameIndex - data->frameIndex;
     long framesToCalc, i;
     int finished;
@@ -66,14 +66,11 @@ int main() {
     PaStream *stream;
     PaTestData data;
 
-    int totalFrames, numSamples, numBytes;
-    data.maxFrameIndex = totalFrames = 5 * 44100;
-    data.frameIndex = 0;
-    numSamples = totalFrames * 1;
-    numBytes = numSamples * sizeof(float);
+    data.maxFrameIndex = 5 * 44100;
+    int numBytes = data.maxFrameIndex * sizeof(float);
     data.recordedSamples = (float*)malloc(numBytes);
 
-    Pa_OpenDefaultStream(&stream, Pa_GetDefaultInputDevice(), 0, paFloat32, 44100, 256, recordCallback, &data);
+    Pa_OpenDefaultStream(&stream, Pa_GetDefaultInputDevice(), 0, paFloat32, 44100, 512, recordCallback, &data);
     Pa_StartStream(stream);
 
     while(Pa_IsStreamActive(stream)) {
@@ -85,12 +82,14 @@ int main() {
     wav.chunkSize = numBytes + sizeof(WAV_HEADER) - 8;
     wav.subchunk2Size = numBytes + sizeof(WAV_HEADER) - 44;
 
-    FILE *sample;
-    sample = fopen("recording.wav", "wb");
+    FILE *sample = fopen("recording.wav", "wb");
     fwrite(&wav, sizeof(wav), 1, sample);
-    fwrite(data.recordedSamples, 1 * sizeof(float), totalFrames, sample);
+    fwrite(data.recordedSamples, sizeof(float), data.maxFrameIndex, sample);
     fclose(sample);
     printf("wrote data to 'recording.wav'\n");
+
+    Pa_Terminate();
+    free(data.recordedSamples);
 
     return 0;
 }
