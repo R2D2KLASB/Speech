@@ -43,7 +43,7 @@ void getToken(TOKEN* token) {
 
 void checkToken(TOKEN* token) {
     time_point<steady_clock> end = steady_clock::now();
-    int deltaTime = duration_cast<microseconds>(end - token->issueTime).count();
+    long long deltaTime = duration_cast<microseconds>(end - token->issueTime).count();
 
     if(deltaTime > token->expiryTime) {
         getToken(token);

@@ -12,48 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <chrono>
-#include <memory>
-
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <portaudio.h>
 
 #include "transcribe_api.hpp"
+#include "pa_recorder.hpp"
 
-using namespace std::chrono_literals;
-
-/* This example creates a subclass of Node and uses std::bind() to register a
- * member function as a callback from the timer. */
-
-class MinimalPublisher : public rclcpp::Node
-{
+class MinimalPublisher: public rclcpp::Node {
 public:
-  MinimalPublisher()
-  : Node("minimal_publisher"), count_(0)
-  {
+  MinimalPublisher(): Node("minimal_publisher") {
     publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
-    timer_ = this->create_wall_timer(
-      500ms, std::bind(&MinimalPublisher::timer_callback, this));
-  }
-
-private:
-  void timer_callback()
-  {
-    TOKEN token;
     getToken(&token);
+
+    Pa_Initialize();
+    init_recorder(&handle);
+    send_transcription();
+    send_transcription();
+    Pa_Terminate();
+  }
+private:
+  void send_transcription() {
+    record(&handle);
     auto message = std_msgs::msg::String();
-    message.data = token.token;
+    message.data = transcribeAudio(&token, handle.buffer, handle.size);
     RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
     publisher_->publish(message);
   }
-  rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
-  size_t count_;
+  RECORDER handle;
+  TOKEN token;
 };
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
   rclcpp::init(argc, argv);
   rclcpp::spin(std::make_shared<MinimalPublisher>());
   rclcpp::shutdown();
