@@ -1,0 +1,52 @@
+[0.063s] Invoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': c:\opt\ros\foxy\x64\Scripts\cmake.EXE C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2 -DCMAKE_INSTALL_PREFIX=C:\Users\mimii\Documents\GitHub\Speech\install -G Visual Studio 16 2019
+[0.188s] -- Selecting Windows SDK version 10.0.20348.0 to target Windows 10.0.22000.
+[1.578s] -- The C compiler identification is MSVC 19.29.30141.0
+[2.328s] -- The CXX compiler identification is MSVC 19.29.30141.0
+[2.391s] -- Detecting C compiler ABI info
+[3.078s] -- Detecting C compiler ABI info - done
+[3.078s] -- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+[3.078s] -- Detecting C compile features
+[3.078s] -- Detecting C compile features - done
+[3.094s] -- Detecting CXX compiler ABI info
+[3.703s] -- Detecting CXX compiler ABI info - done
+[3.703s] -- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+[3.703s] -- Detecting CXX compile features
+[3.719s] -- Detecting CXX compile features - done
+[3.735s] -- Found ament_cmake: 0.9.9 (C:/opt/ros/foxy/x64/share/ament_cmake/cmake)
+[3.844s] -- Found PythonInterp: C:/opt/ros/foxy/x64/python.exe (found suitable version "3.8.3", minimum required is "3") 
+[3.844s] -- Using PYTHON_EXECUTABLE: C:/opt/ros/foxy/x64/python.exe
+[4.406s] -- Found rclcpp: 2.4.0 (C:/opt/ros/foxy/x64/share/rclcpp/cmake)
+[4.594s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.641s] -- Found rosidl_adapter: 1.2.1 (C:/opt/ros/foxy/x64/share/rosidl_adapter/cmake)
+[4.922s] -- Found OpenSSL: C:/opt/ros/foxy/x64/Lib/libcrypto.lib (found version "1.1.1g")  
+[5.063s] -- Found FastRTPS: C:/opt/ros/foxy/x64/include  
+[5.422s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[5.594s] -- Found rmw_implementation_cmake: 1.0.3 (C:/opt/ros/foxy/x64/share/rmw_implementation_cmake/cmake)
+[5.594s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[5.610s] -- Looking for pthread.h
+[6.063s] -- Looking for pthread.h - not found
+[6.078s] -- Found Threads: TRUE  
+[6.297s] -- Found std_msgs: 2.0.4 (C:/opt/ros/foxy/x64/share/std_msgs/cmake)
+[6.375s] -- Found ZLIB: C:/opt/ros/foxy/x64/Lib/zlib.lib (found suitable version "1.2.11", minimum required is "1") 
+[6.500s] -- Configuring done
+[6.688s] -- Generating done
+[6.688s] -- Build files have been written to: C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2
+[6.703s] Invoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': c:\opt\ros\foxy\x64\Scripts\cmake.EXE C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2 -DCMAKE_INSTALL_PREFIX=C:\Users\mimii\Documents\GitHub\Speech\install -G Visual Studio 16 2019
+[6.703s] Invoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': CL=/MP c:\opt\ros\foxy\x64\Scripts\cmake.EXE --build C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release
+[6.875s] Microsoft (R) Build Engine version 16.11.2+f32259642 for .NET Framework
+[6.875s] Copyright (C) Microsoft Corporation. All rights reserved.
+[6.875s] 
+[7.188s]   Checking Build System
+[7.328s]   Building Custom Rule C:/Users/mimii/Documents/GitHub/Speech/ros2/speech_ros2/CMakeLists.txt
+[7.469s]   publisher_member_function.cpp
+[8.594s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\transcribe_api.hpp(10,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.594s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(18,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.594s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(34,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.610s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(72,93): error C2065: 'recordCallback': undeclared identifier [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.610s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\publisher_member_function.cpp(43,12): error C3646: 'handle': unknown override specifier [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.610s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\publisher_member_function.cpp(43,18): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.610s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\publisher_member_function.cpp(38,44): error C2065: 'handle': undeclared identifier [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.610s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\publisher_member_function.cpp(38,59): error C2065: 'handle': undeclared identifier [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.610s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\publisher_member_function.cpp(38,1): error C2660: 'transcribeAudio': function does not take 1 arguments [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.610s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\transcribe_api.hpp(53,13): message : see declaration of 'transcribeAudio' [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[8.703s] Invoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '1': CL=/MP c:\opt\ros\foxy\x64\Scripts\cmake.EXE --build C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release

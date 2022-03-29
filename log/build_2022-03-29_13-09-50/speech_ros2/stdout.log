@@ -1,0 +1,26 @@
+-- Selecting Windows SDK version 10.0.20348.0 to target Windows 10.0.22000.
+-- Found ament_cmake: 0.9.9 (C:/opt/ros/foxy/x64/share/ament_cmake/cmake)
+-- Using PYTHON_EXECUTABLE: C:/opt/ros/foxy/x64/python.exe
+-- Found rclcpp: 2.4.0 (C:/opt/ros/foxy/x64/share/rclcpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_adapter: 1.2.1 (C:/opt/ros/foxy/x64/share/rosidl_adapter/cmake)
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 1.0.3 (C:/opt/ros/foxy/x64/share/rmw_implementation_cmake/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found std_msgs: 2.0.4 (C:/opt/ros/foxy/x64/share/std_msgs/cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2
+Microsoft (R) Build Engine version 16.11.2+f32259642 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  publisher_member_function.cpp
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\transcribe_api.hpp(10,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(18,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(34,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\publisher_member_function.cpp(38,47): error C2248: 'pa_recorder::buffer': cannot access private member declared in class 'pa_recorder' [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(81): message : see declaration of 'pa_recorder::buffer' [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(77): message : see declaration of 'pa_recorder' [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\publisher_member_function.cpp(38,59): error C2248: 'pa_recorder::size': cannot access private member declared in class 'pa_recorder' [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(82): message : see declaration of 'pa_recorder::size' [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(77): message : see declaration of 'pa_recorder' [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]

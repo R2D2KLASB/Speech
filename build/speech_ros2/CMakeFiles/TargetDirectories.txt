@@ -1,0 +1,7 @@
+C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2/CMakeFiles/uninstall.dir
+C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2/CMakeFiles/speech_ros2_uninstall.dir
+C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2/CMakeFiles/talker.dir
+C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2/CMakeFiles/INSTALL.dir
+C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2/CMakeFiles/RUN_TESTS.dir
+C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2/CMakeFiles/ALL_BUILD.dir
+C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2/CMakeFiles/ZERO_CHECK.dir

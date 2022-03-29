@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\CMakeFiles\a0ad5e2bff69e10a7b3ec29f3b4ca1c2\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{AEBBD2B7-0536-3067-8B37-AAE5DC202234}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

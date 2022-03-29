@@ -37,16 +37,50 @@ typedef struct {
     C_SAMPLE_TYPE   *recordedSamples;
 } PaTestData;
 
+static int recordCallback(const void* inputBuffer, void* outputBuffer,
+    unsigned long framesPerBuffer,
+    const PaStreamCallbackTimeInfo* timeInfo,
+    PaStreamCallbackFlags statusFlags,
+    void* userData)
+{
+    PaTestData* data = (PaTestData*)userData;
+    const C_SAMPLE_TYPE* rptr = (const C_SAMPLE_TYPE*)inputBuffer;
+    C_SAMPLE_TYPE* wptr = &data->recordedSamples[data->frameIndex];
+    unsigned long framesLeft = data->maxFrameIndex - data->frameIndex;
+    long framesToCalc, i;
+    int finished;
 
+    if (framesLeft < framesPerBuffer) {
+        framesToCalc = framesLeft;
+        finished = paComplete;
+    }
+    else {
+        framesToCalc = framesPerBuffer;
+        finished = paContinue;
+    }
+    if (inputBuffer == NULL) {
+        for (i = 0; i < framesToCalc; i++) {
+            *wptr++ = SAMPLE_SILENCE;
+            if (NUM_CHANNELS == 2) { *wptr++ = SAMPLE_SILENCE; }
+        }
+    }
+    else {
+        for (i = 0; i < framesToCalc; i++) {
+            *wptr++ = *rptr++;
+            if (NUM_CHANNELS == 2) { *wptr++ = *rptr++; }
+        }
+    }
+    data->frameIndex += framesToCalc;
+    return finished;
+}
 
 class pa_recorder {
 private:
     PaStream* stream;
     PaTestData data;
+public:
     char* buffer;
     int size;
-
-public: 
     pa_recorder() {
         PaStreamParameters inputParameters;
         WAV_HEADER wav;
@@ -91,43 +125,3 @@ public:
     }
 
 };
-
-
-static int recordCallback(const void *inputBuffer, void *outputBuffer,
-                        unsigned long framesPerBuffer,
-                        const PaStreamCallbackTimeInfo* timeInfo,
-                        PaStreamCallbackFlags statusFlags,
-                        void *userData)
-{
-    PaTestData *data = (PaTestData*)userData;
-    const C_SAMPLE_TYPE *rptr = (const C_SAMPLE_TYPE*)inputBuffer;
-    C_SAMPLE_TYPE *wptr = &data->recordedSamples[data->frameIndex];
-    unsigned long framesLeft = data->maxFrameIndex - data->frameIndex;
-    long framesToCalc, i;
-    int finished;
-
-    if(framesLeft < framesPerBuffer) {
-        framesToCalc = framesLeft;
-        finished = paComplete;
-    }
-    else {
-        framesToCalc = framesPerBuffer;
-        finished = paContinue;
-    }
-    if(inputBuffer == NULL) {
-        for(i = 0; i < framesToCalc; i++) {
-            *wptr++ = SAMPLE_SILENCE;
-            if(NUM_CHANNELS == 2) { *wptr++ = SAMPLE_SILENCE; }
-        }
-    }
-    else {
-        for(i = 0; i < framesToCalc; i++) {
-            *wptr++ = *rptr++;
-            if(NUM_CHANNELS == 2) { *wptr++ = *rptr++; }
-        }
-    }
-    data->frameIndex += framesToCalc;
-    return finished;
-}
-
-

@@ -1,0 +1,41 @@
+[0.078s] Invoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': c:\opt\ros\foxy\x64\Scripts\cmake.EXE C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2 -DCMAKE_INSTALL_PREFIX=C:\Users\mimii\Documents\GitHub\Speech\install
+[0.188s] -- Selecting Windows SDK version 10.0.20348.0 to target Windows 10.0.22000.
+[0.219s] -- Found ament_cmake: 0.9.9 (C:/opt/ros/foxy/x64/share/ament_cmake/cmake)
+[0.281s] -- Using PYTHON_EXECUTABLE: C:/opt/ros/foxy/x64/python.exe
+[0.844s] -- Found rclcpp: 2.4.0 (C:/opt/ros/foxy/x64/share/rclcpp/cmake)
+[0.953s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.969s] -- Found rosidl_adapter: 1.2.1 (C:/opt/ros/foxy/x64/share/rosidl_adapter/cmake)
+[1.719s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.828s] -- Found rmw_implementation_cmake: 1.0.3 (C:/opt/ros/foxy/x64/share/rmw_implementation_cmake/cmake)
+[1.844s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.000s] -- Found std_msgs: 2.0.4 (C:/opt/ros/foxy/x64/share/std_msgs/cmake)
+[2.188s] -- Configuring done
+[2.359s] -- Generating done
+[2.359s] -- Build files have been written to: C:/Users/mimii/Documents/GitHub/Speech/build/speech_ros2
+[2.375s] Invoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': c:\opt\ros\foxy\x64\Scripts\cmake.EXE C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2 -DCMAKE_INSTALL_PREFIX=C:\Users\mimii\Documents\GitHub\Speech\install
+[2.375s] Invoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': CL=/MP c:\opt\ros\foxy\x64\Scripts\cmake.EXE --build C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release
+[2.563s] Microsoft (R) Build Engine version 16.11.2+f32259642 for .NET Framework
+[2.563s] Copyright (C) Microsoft Corporation. All rights reserved.
+[2.563s] 
+[3.047s]   publisher_member_function.cpp
+[4.219s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\transcribe_api.hpp(10,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[4.219s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(18,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[4.219s] C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2\src\pa_recorder.hpp(34,16): warning C5208: unnamed class used in typedef name cannot declare members other than non-static data members, member enumerations, or member classes [C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\talker.vcxproj]
+[5.844s]   talker.vcxproj -> C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2\Release\talker.exe
+[5.891s] Invoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': CL=/MP c:\opt\ros\foxy\x64\Scripts\cmake.EXE --build C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release
+[6.000s] Invoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': c:\opt\ros\foxy\x64\Scripts\cmake.EXE --install C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release
+[6.094s] -- Installing: C:/Users/mimii/Documents/GitHub/Speech/install/lib/speech_ros2/talker.exe
+[6.094s] -- Up-to-date: C:/Users/mimii/Documents/GitHub/Speech/install/share/ament_index/resource_index/package_run_dependencies/speech_ros2
+[6.094s] -- Installing: C:/Users/mimii/Documents/GitHub/Speech/install/share/ament_index/resource_index/parent_prefix_path/speech_ros2
+[6.094s] -- Up-to-date: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/environment/ament_prefix_path.bat
+[6.094s] -- Installing: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/environment/ament_prefix_path.dsv
+[6.094s] -- Up-to-date: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/environment/path.bat
+[6.094s] -- Installing: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/environment/path.dsv
+[6.094s] -- Up-to-date: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/local_setup.bat
+[6.094s] -- Installing: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/local_setup.dsv
+[6.109s] -- Installing: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/package.dsv
+[6.109s] -- Up-to-date: C:/Users/mimii/Documents/GitHub/Speech/install/share/ament_index/resource_index/packages/speech_ros2
+[6.109s] -- Up-to-date: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/cmake/speech_ros2Config.cmake
+[6.109s] -- Up-to-date: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/cmake/speech_ros2Config-version.cmake
+[6.109s] -- Up-to-date: C:/Users/mimii/Documents/GitHub/Speech/install/share/speech_ros2/package.xml
+[6.109s] Invoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': c:\opt\ros\foxy\x64\Scripts\cmake.EXE --install C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release
