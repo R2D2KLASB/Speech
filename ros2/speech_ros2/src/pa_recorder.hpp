@@ -106,7 +106,6 @@ public:
         Pa_OpenStream(&stream, &inputParameters, NULL, SAMPLE_RATE, BUFFER_SIZE, paClipOff, recordCallback, &data);
     }
 
-
     void record() {
         data.frameIndex = 0;
 
