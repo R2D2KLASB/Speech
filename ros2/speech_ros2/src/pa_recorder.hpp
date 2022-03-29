@@ -37,12 +37,61 @@ typedef struct {
     C_SAMPLE_TYPE   *recordedSamples;
 } PaTestData;
 
-typedef struct {
-    PaStream *stream;
+
+
+class pa_recorder {
+private:
+    PaStream* stream;
     PaTestData data;
     char* buffer;
     int size;
-} RECORDER;
+
+public: 
+    pa_recorder() {
+        PaStreamParameters inputParameters;
+        WAV_HEADER wav;
+        int numBytes;
+
+        data.maxFrameIndex = NUM_SECONDS * SAMPLE_RATE * NUM_CHANNELS;
+        numBytes = data.maxFrameIndex * sizeof(C_SAMPLE_TYPE);
+        data.recordedSamples = (C_SAMPLE_TYPE*)malloc(numBytes);
+        size = sizeof(wav) + numBytes;
+
+        wav.chunkSize = numBytes + sizeof(WAV_HEADER) - 8;
+        wav.subchunk2Size = numBytes + sizeof(WAV_HEADER) - 44;
+
+        buffer = new char[sizeof(wav) + numBytes];
+        memcpy(buffer, &wav, sizeof(wav));
+
+        inputParameters.device = Pa_GetDefaultInputDevice();
+        inputParameters.channelCount = NUM_CHANNELS;
+        inputParameters.sampleFormat = PA_SAMPLE_TYPE;
+        inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultLowInputLatency;
+        inputParameters.hostApiSpecificStreamInfo = NULL;
+
+        Pa_OpenStream(&stream, &inputParameters, NULL, SAMPLE_RATE, BUFFER_SIZE, paClipOff, recordCallback, &data);
+    }
+
+
+    void record() {
+        data.frameIndex = 0;
+
+        Pa_StartStream(stream);
+        while (Pa_IsStreamActive(stream)) {
+            std::cout << "recording. . .\n";
+            Pa_Sleep(1000);
+        }
+        memcpy(&buffer[sizeof(WAV_HEADER)], data.recordedSamples, size);
+        Pa_StopStream(stream);
+    }
+
+    ~pa_recorder() {
+        free(data.recordedSamples);
+        free(buffer);
+    }
+
+};
+
 
 static int recordCallback(const void *inputBuffer, void *outputBuffer,
                         unsigned long framesPerBuffer,
@@ -81,44 +130,4 @@ static int recordCallback(const void *inputBuffer, void *outputBuffer,
     return finished;
 }
 
-void init_recorder(RECORDER* handle) {
-    PaStreamParameters inputParameters;
-    WAV_HEADER wav;
-    int numBytes;
 
-    handle->data.maxFrameIndex = NUM_SECONDS * SAMPLE_RATE * NUM_CHANNELS;
-    numBytes = handle->data.maxFrameIndex * sizeof(C_SAMPLE_TYPE);
-    handle->data.recordedSamples = (C_SAMPLE_TYPE*)malloc(numBytes);
-    handle->size = sizeof(wav) + numBytes;
-
-    wav.chunkSize = numBytes + sizeof(WAV_HEADER) - 8;
-    wav.subchunk2Size = numBytes + sizeof(WAV_HEADER) - 44;
-
-    handle->buffer = new char[sizeof(wav) + numBytes];
-    memcpy(handle->buffer, &wav, sizeof(wav));
-
-    inputParameters.device = Pa_GetDefaultInputDevice();
-    inputParameters.channelCount = NUM_CHANNELS;
-    inputParameters.sampleFormat = PA_SAMPLE_TYPE;
-    inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultLowInputLatency;
-    inputParameters.hostApiSpecificStreamInfo = NULL;
-
-    Pa_OpenStream(&handle->stream, &inputParameters, NULL, SAMPLE_RATE, BUFFER_SIZE, paClipOff, recordCallback, &handle->data);
-};
-
-void record(RECORDER* handle) {
-    handle->data.frameIndex = 0;
-
-    Pa_StartStream(handle->stream);
-    while(Pa_IsStreamActive(handle->stream)) {
-        std::cout << "recording. . .\n";
-        Pa_Sleep(1000);
-    }
-    memcpy(&handle->buffer[sizeof(WAV_HEADER)], handle->data.recordedSamples, handle->size);
-    Pa_StopStream(handle->stream);
-}
-
-void free_recorder(RECORDER* handle) {
-    free(handle->data.recordedSamples);
-    free(handle->buffer);
-}

@@ -26,14 +26,14 @@ public:
     getToken(&token);
 
     Pa_Initialize();
-    init_recorder(&handle);
+    //init_recorder(&handle);
     send_transcription();
     send_transcription();
     Pa_Terminate();
   }
 private:
   void send_transcription() {
-    record(&handle);
+    rec.record();
     auto message = std_msgs::msg::String();
     message.data = transcribeAudio(&token, handle.buffer, handle.size);
     RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
@@ -42,6 +42,7 @@ private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
   RECORDER handle;
   TOKEN token;
+  pa_recorder rec;
 };
 
 int main(int argc, char * argv[]) {
