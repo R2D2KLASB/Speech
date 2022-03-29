@@ -1,0 +1,7 @@
+[0.000000] (-) TimerEvent: {}
+[0.000000] (speech_ros2) JobQueued: {'identifier': 'speech_ros2', 'dependencies': OrderedDict()}
+[0.015000] (speech_ros2) JobStarted: {'identifier': 'speech_ros2'}
+[0.078000] (speech_ros2) JobProgress: {'identifier': 'speech_ros2', 'progress': 'cmake'}
+[0.078000] (speech_ros2) StderrLine: {'line': b'Traceback (most recent call last):\n  File "c:\\opt\\ros\\foxy\\x64\\lib\\site-packages\\colcon_core\\executor\\__init__.py", line 91, in __call__\n    rc = await self.task(*args, **kwargs)\n  File "c:\\opt\\ros\\foxy\\x64\\lib\\site-packages\\colcon_core\\task\\__init__.py", line 93, in __call__\n    return await task_method(*args, **kwargs)\n  File "c:\\opt\\ros\\foxy\\x64\\lib\\site-packages\\colcon_ros\\task\\ament_cmake\\build.py", line 59, in build\n    rc = await extension.build(\n  File "c:\\opt\\ros\\foxy\\x64\\lib\\site-packages\\colcon_cmake\\task\\cmake\\build.py", line 87, in build\n    rc = await self._reconfigure(args, env)\n  File "c:\\opt\\ros\\foxy\\x64\\lib\\site-packages\\colcon_cmake\\task\\cmake\\build.py", line 153, in _reconfigure\n    raise RuntimeError(\nRuntimeError: VisualStudioVersion is not set, please run within a Visual Studio Command Prompt.\n'}
+[0.078000] (speech_ros2) JobEnded: {'identifier': 'speech_ros2', 'rc': 1}
+[0.094000] (-) EventReactorShutdown: {}
