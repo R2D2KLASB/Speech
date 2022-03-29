@@ -1,0 +1,6 @@
+Invoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': c:\opt\ros\foxy\x64\Scripts\cmake.EXE C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2 -DCMAKE_INSTALL_PREFIX=C:\Users\mimii\Documents\GitHub\Speech\install
+Invoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': c:\opt\ros\foxy\x64\Scripts\cmake.EXE C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2 -DCMAKE_INSTALL_PREFIX=C:\Users\mimii\Documents\GitHub\Speech\install
+Invoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': CL=/MP c:\opt\ros\foxy\x64\Scripts\cmake.EXE --build C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release
+Invoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': CL=/MP c:\opt\ros\foxy\x64\Scripts\cmake.EXE --build C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release
+Invoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': c:\opt\ros\foxy\x64\Scripts\cmake.EXE --install C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release
+Invoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': c:\opt\ros\foxy\x64\Scripts\cmake.EXE --install C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release

@@ -21,9 +21,10 @@
 
 class MinimalPublisher: public rclcpp::Node {
 public:
-  MinimalPublisher(): Node("minimal_publisher"), rec(pa_recorder()) {
+  MinimalPublisher(): Node("minimal_publisher"), rec(pa_recorder()) , token(transcribe()) {
     publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
-    getToken(&token);
+    //getToken(&token);
+    token.getToken();
 
     send_transcription();
     send_transcription();
@@ -33,12 +34,13 @@ private:
   void send_transcription() {
     rec.record();
     auto message = std_msgs::msg::String();
-    message.data = transcribeAudio(&token, rec.buffer, rec.size);
+    message.data = token.transcribeAudio( rec.buffer, rec.size);
     RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
     publisher_->publish(message);
   }
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
-  TOKEN token;
+  //TOKEN token;
+  transcribe token;
   pa_recorder rec;
 };
 

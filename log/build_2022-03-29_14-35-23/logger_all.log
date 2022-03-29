@@ -1,0 +1,128 @@
+[1.050s] [34mcolcon[0m [1;30mDEBUG[0m [32mCommand line arguments: ['c:\\opt\\ros\\foxy\\x64\\Scripts\\colcon', 'build', '--merge-install', '--packages-select', 'speech_ros2', '--event-handlers', 'console_cohesion+'][0m
+[1.051s] [34mcolcon[0m [1;30mDEBUG[0m [32mParsed command line arguments: Namespace(ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=['console_cohesion+'], executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x0000018CE4678460>>, merge_install=True, metas=['./colcon.meta'], packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=['speech_ros2'], packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=12, paths=None, symlink_install=False, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x0000018CE4678460>, verb_name='build', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x0000018CE4678910>)[0m
+[1.139s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) check parameters
+[1.139s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) check parameters
+[1.139s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) check parameters
+[1.139s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) check parameters
+[1.139s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) discover
+[1.139s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) discover
+[1.139s] [34mcolcon.colcon_core.package_discovery[0m [1;30mINFO[0m Crawling recursively for packages in 'C:\Users\mimii\Documents\GitHub\Speech'
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore'
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore_ament_install'
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_pkg']
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_pkg'
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_meta']
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_meta'
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ros']
+[1.140s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ros'
+[1.156s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['cmake', 'python']
+[1.156s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'cmake'
+[1.156s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python'
+[1.156s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['python_setup_py']
+[1.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python_setup_py'
+[1.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extensions ['ignore', 'ignore_ament_install']
+[1.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extension 'ignore'
+[1.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) ignored
+[1.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extensions ['ignore', 'ignore_ament_install']
+[1.158s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extension 'ignore'
+[1.158s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) ignored
+[1.159s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extensions ['ignore', 'ignore_ament_install']
+[1.159s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extension 'ignore'
+[1.159s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) ignored
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extensions ['ignore', 'ignore_ament_install']
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extension 'ignore'
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extension 'ignore_ament_install'
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extensions ['colcon_pkg']
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extension 'colcon_pkg'
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extensions ['colcon_meta']
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extension 'colcon_meta'
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extensions ['ros']
+[1.160s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extension 'ros'
+[1.161s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extensions ['cmake', 'python']
+[1.161s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extension 'cmake'
+[1.161s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extension 'python'
+[1.161s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extensions ['python_setup_py']
+[1.161s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2) by extension 'python_setup_py'
+[1.161s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extensions ['ignore', 'ignore_ament_install']
+[1.161s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extension 'ignore'
+[1.162s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extension 'ignore_ament_install'
+[1.162s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extensions ['colcon_pkg']
+[1.162s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extension 'colcon_pkg'
+[1.162s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extensions ['colcon_meta']
+[1.162s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extension 'colcon_meta'
+[1.162s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extensions ['ros']
+[1.162s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(ros2\speech_ros2) by extension 'ros'
+[1.166s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'ros2\speech_ros2' with type 'ros.ament_cmake' and name 'speech_ros2'[0m
+[1.166s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) using defaults
+[1.166s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) discover
+[1.166s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) using defaults
+[1.166s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) discover
+[1.166s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) using defaults
+[1.199s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'cmake_args' from command line to 'None'
+[1.199s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'cmake_target' from command line to 'None'
+[1.199s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.200s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'cmake_clean_cache' from command line to 'False'
+[1.200s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'cmake_clean_first' from command line to 'False'
+[1.200s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'cmake_force_configure' from command line to 'False'
+[1.200s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'ament_cmake_args' from command line to 'None'
+[1.200s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'catkin_cmake_args' from command line to 'None'
+[1.200s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'speech_ros2' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.200s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'speech_ros2' with the following arguments: {'ament_cmake_args': None, 'build_base': 'C:\\Users\\mimii\\Documents\\GitHub\\Speech\\build\\speech_ros2', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': 'C:\\Users\\mimii\\Documents\\GitHub\\Speech\\install', 'merge_install': True, 'path': 'C:\\Users\\mimii\\Documents\\GitHub\\Speech\\ros2\\speech_ros2', 'symlink_install': False, 'test_result_base': None}[0m
+[1.203s] [34mcolcon.colcon_core.executor[0m [1;30mINFO[0m Executing jobs using 'parallel' executor
+[1.238s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete[0m
+[1.238s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in 'C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2' with build type 'ament_cmake'
+[1.239s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in 'C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2'
+[1.254s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_core.shell.sh': Not used on Windows systems
+[1.254s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.350s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': c:\opt\ros\foxy\x64\Scripts\cmake.EXE C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2 -DCMAKE_INSTALL_PREFIX=C:\Users\mimii\Documents\GitHub\Speech\install[0m
+[5.063s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': c:\opt\ros\foxy\x64\Scripts\cmake.EXE C:\Users\mimii\Documents\GitHub\Speech\ros2\speech_ros2 -DCMAKE_INSTALL_PREFIX=C:\Users\mimii\Documents\GitHub\Speech\install[0m
+[5.066s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': CL=/MP c:\opt\ros\foxy\x64\Scripts\cmake.EXE --build C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release[0m
+[11.211s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': CL=/MP c:\opt\ros\foxy\x64\Scripts\cmake.EXE --build C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release[0m
+[11.387s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2': c:\opt\ros\foxy\x64\Scripts\cmake.EXE --install C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release[0m
+[11.581s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(speech_ros2)
+[11.584s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in 'C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2' returned '0': c:\opt\ros\foxy\x64\Scripts\cmake.EXE --install C:\Users\mimii\Documents\GitHub\Speech\build\speech_ros2 --config Release[0m
+[11.601s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install' for CMake module files
+[11.605s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install' for CMake config files
+[11.606s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('speech_ros2', 'cmake_prefix_path')
+[11.614s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\hook\cmake_prefix_path.ps1'
+[11.616s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\hook\cmake_prefix_path.bat'
+[11.618s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\hook\cmake_prefix_path.dsv'
+[11.620s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\bin'
+[11.620s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\bin'
+[11.620s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\Scripts'
+[11.620s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\lib\pkgconfig\speech_ros2.pc'
+[11.621s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\Lib\site-packages'
+[11.629s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\package.ps1'
+[11.631s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\package.bat'
+[11.633s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\package.dsv'
+[11.635s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(C:\Users\mimii\Documents\GitHub\Speech\install\share\colcon-core\packages\speech_ros2)
+[11.645s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(speech_ros2)
+[11.658s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install' for CMake module files
+[11.661s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install' for CMake config files
+[11.664s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('speech_ros2', 'cmake_prefix_path')
+[11.673s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\hook\cmake_prefix_path.ps1'
+[11.674s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\hook\cmake_prefix_path.bat'
+[11.676s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\hook\cmake_prefix_path.dsv'
+[11.678s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\bin'
+[11.678s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\bin'
+[11.678s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\Scripts'
+[11.678s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\lib\pkgconfig\speech_ros2.pc'
+[11.678s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\mimii\Documents\GitHub\Speech\install\Lib\site-packages'
+[11.693s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\package.ps1'
+[11.696s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\package.bat'
+[11.699s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor 'C:\Users\mimii\Documents\GitHub\Speech\install\share\speech_ros2\package.dsv'
+[11.701s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(C:\Users\mimii\Documents\GitHub\Speech\install\share\colcon-core\packages\speech_ros2)
+[11.703s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete finished with '0'[0m
+[11.703s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoining thread[0m
+[11.730s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.notify2': 'notify2' not found
+[11.730s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.notify_send': Not used on non-Linux systems
+[11.731s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[11.731s] [34mcolcon.colcon_notification.desktop_notification[0m [1;30mINFO[0m Sending desktop notification using 'win32'
+[16.822s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoined thread[0m
+[16.831s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script 'C:\Users\mimii\Documents\GitHub\Speech\install\local_setup.ps1'
+[16.834s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module 'C:\Users\mimii\Documents\GitHub\Speech\install\_local_setup_util_ps1.py'
+[16.837s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script 'C:\Users\mimii\Documents\GitHub\Speech\install\setup.ps1'
+[16.848s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script 'C:\Users\mimii\Documents\GitHub\Speech\install\local_setup.bat'
+[16.850s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module 'C:\Users\mimii\Documents\GitHub\Speech\install\_local_setup_util_bat.py'
+[16.852s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script 'C:\Users\mimii\Documents\GitHub\Speech\install\setup.bat'

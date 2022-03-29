@@ -23,7 +23,6 @@ function _colcon_prefix_chain_powershell_source_script {
 
 # source chained prefixes
 _colcon_prefix_chain_powershell_source_script "c:\opt\ros\foxy\x64\local_setup.ps1"
-_colcon_prefix_chain_powershell_source_script "C:\Windows\System32\install\\local_setup.ps1"
 _colcon_prefix_chain_powershell_source_script "c:\opt\ros\foxy\x64\\local_setup.ps1"
 _colcon_prefix_chain_powershell_source_script "C:\Users\mimii\Documents\GitHub\Speech\install\\local_setup.ps1"
 
