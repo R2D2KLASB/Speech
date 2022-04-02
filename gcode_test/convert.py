@@ -1,10 +1,16 @@
 import sys
 
 with open(sys.argv[1], "r") as a_file, open("gcode_struct.txt", "a") as new_file:
-    output = "{"
-    for line in a_file:
+    output = ""
+    for idx, line in enumerate(a_file):
         if len(line.strip()) == 1:
-            new_file.write(f"{line.strip()}\n\n")
+            if idx > 4:
+                output = output[:-2] + "},\n\n"
+                output += f"{line.strip()}\n\n"
+                output += "{"
+            else:
+                output += f"{line.strip()}\n\n"
+                output += "{"
         elif line.strip()[0:3] == "G00":
             x = line.strip().find('X')
             y = line.strip().find('Y')
