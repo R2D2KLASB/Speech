@@ -12,13 +12,13 @@ size_t writeCallback(char* contents, size_t size, size_t nmemb, void* userp) {
     return size * nmemb;
 }
 
-class transcribe {
+class transcriptionAPI {
 private:
     time_point<steady_clock> issueTime;
     int expiryTime = 60000000;
     std::string token;
 public:
-    transcribe() {
+    transcriptionAPI() {
         getToken();
     }
 
@@ -56,10 +56,10 @@ public:
 
     std::string transcribeAudio(char* buffer, int size) {
         struct curl_slist* chunk = NULL;
-        std::string transcription;
+        std::string transcription, auth;
         checkToken();
-        std::string auth = "Authorization: Bearer " + token;
-        
+
+        auth = "Authorization: Bearer " + token;
         chunk = curl_slist_append(chunk, auth.c_str());
         chunk = curl_slist_append(chunk, "Content-type: audio/wav; codec=audio/pcm; samplerate=16000");
 
@@ -77,8 +77,6 @@ public:
 
         return transcription;
     }
-
 };
-
 
 #endif // transcribe_api

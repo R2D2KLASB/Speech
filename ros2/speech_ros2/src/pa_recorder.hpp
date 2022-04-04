@@ -1,9 +1,12 @@
+#ifndef pa_recorder
+#define pa_recorder
+
 #include <portaudio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <iostream>
 
-#include "transcribe_api.hpp"
+#include "transcription_api.hpp"
 
 #define SAMPLE_SILENCE  (0) // (0.0f) for float
 #define PA_SAMPLE_TYPE  paInt16
@@ -74,14 +77,14 @@ static int recordCallback(const void* inputBuffer, void* outputBuffer,
     return finished;
 }
 
-class pa_recorder {
+class paRecorder {
 private:
     PaStream* stream;
     PaTestData data;
 public:
     char* buffer;
     int size;
-    pa_recorder() {
+    paRecorder() {
         PaStreamParameters inputParameters;
         WAV_HEADER wav;
         int numBytes;
@@ -118,9 +121,10 @@ public:
         Pa_StopStream(stream);
     }
 
-    ~pa_recorder() {
+    ~paRecorder() {
         free(data.recordedSamples);
         free(buffer);
     }
-
 };
+
+#endif // pa_recorder

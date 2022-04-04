@@ -16,38 +16,35 @@
 #include <std_msgs/msg/string.hpp>
 #include <portaudio.h>
 
-#include "transcribe_api.hpp"
+#include "transcription_api.hpp"
 #include "pa_recorder.hpp"
 
 class MinimalPublisher: public rclcpp::Node {
 public:
-  MinimalPublisher(): Node("minimal_publisher"), rec(pa_recorder()) , token(transcribe()) {
-    publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
-    //getToken(&token);
-    token.getToken();
-
-    send_transcription();
-    send_transcription();
-    Pa_Terminate();
-  }
+    MinimalPublisher(): Node("minimal_publisher") {
+        publisher = this->create_publisher<std_msgs::msg::String>("topic", 10);
+        token.getToken();
+        transcribeAndPublish();
+        transcribeAndPublish();
+        Pa_Terminate();
+    }
 private:
-  void send_transcription() {
-    rec.record();
-    auto message = std_msgs::msg::String();
-    message.data = token.transcribeAudio( rec.buffer, rec.size);
-    RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
-    publisher_->publish(message);
-  }
-  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
-  //TOKEN token;
-  transcribe token;
-  pa_recorder rec;
+    void transcribeAndPublish() {
+        rec.record();
+        auto message = std_msgs::msg::String();
+        message.data = token.transcribeAudio(rec.buffer, rec.size);
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+        publisher->publish(message);
+    }
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher;
+    transcriptionAPI token;
+    paRecorder rec;
 };
 
 int main(int argc, char * argv[]) {
-  Pa_Initialize();
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<MinimalPublisher>());
-  rclcpp::shutdown();
-  return 0;
+    Pa_Initialize();
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<MinimalPublisher>());
+    rclcpp::shutdown();
+    return 0;
 }
