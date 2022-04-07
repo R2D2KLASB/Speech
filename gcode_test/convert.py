@@ -6,10 +6,10 @@ with open(sys.argv[1], "r") as a_file, open("gcode_struct.txt", "a") as new_file
         if len(line.strip()) == 1:
             if idx > 4:
                 output = output[:-2] + "},\n\n"
-                output += f"{line.strip()}\n\n"
+                output += f"//{line.strip()}\n\n"
                 output += "{"
             else:
-                output += f"{line.strip()}\n\n"
+                output += f"//{line.strip()}\n\n"
                 output += "{"
         elif line.strip()[0:3] == "G00":
             x = line.strip().find('X')
