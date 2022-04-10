@@ -2095,7 +2095,7 @@ std::vector<std::vector<xy>> gcodeVector = {{},
 
                                             //s
 
-                                            {{0, 17.5, "G00"},
+                                            {{0, 13.88, "G00"},
                                             {9.090907, 28, "G01"},
                                             {13.63636, 35, "G01"},
                                             {13.63636, 28, "G01"},
@@ -2364,7 +2364,7 @@ std::vector<std::vector<xy>> gcodeVector = {{},
                                             {41.66666, 0, "G01"},
                                             {47.22222, 8.333328, "G01"},
                                             {50, 33.33333, "G01"},
-                                            {50, 50, "G01"}},
+                                            {50, 50, "G01"}}
                                            };
 
 std::string stringToGcode(const std::string& input){
@@ -2373,16 +2373,18 @@ std::string stringToGcode(const std::string& input){
   for(unsigned int i = 0; i < input.size(); i++){
       int place = i * 50;
       if(input[i] == ' '){
-        continue;
+          continue;
       }
       for(unsigned int j = 0; j < gcodeVector[input[i]-32].size(); j++){
+          float x = (gcodeVector[input[i]-32][j].x + place) * 100;
+          if(j == 0 && gcodeVector[input[i]-32][j].instruction != "G00"){
+              gcode += "G00 X" + std::to_string(place*100) + " Y" +  std::to_string(0) + "\n";
+          }
           if(gcodeVector[input[i]-32][j].instruction == "G00"){
-              float x = gcodeVector[input[i]-32][j].x + place;
-              gcode += "G00 X" + std::to_string(x*100) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*100) + "\n";
+              gcode += "G00 X" + std::to_string(x) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*100) + "\n";
           }
           else{
-              float x = gcodeVector[input[i]-32][j].x + place;
-              gcode += "G01 X" + std::to_string(x*100) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*100) + "\n";
+              gcode += "G01 X" + std::to_string(x) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*100) + "\n";
           }
       }
   }
@@ -2395,6 +2397,6 @@ std::string stringToGcode(const std::string& input){
 int main(){
   // std::string test = stringToGcode("ik ben ook een klant");
   // std::string test = stringToGcode("kaas");
-  std::string test = stringToGcode("En daar gaan we nu aachter komen!");
+  std::string test = stringToGcode("ks");
   std::cout << test << std::endl;
 }
