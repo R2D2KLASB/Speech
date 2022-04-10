@@ -1,4 +1,0 @@
-c:\opt\ros\foxy\x64\setup.bat
-colcon build --merge-install --packages-select speech_ros2 --event-handlers console_cohesion+
-call install/setup.bat
-ros2 run speech_ros2 talker
