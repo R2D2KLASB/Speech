@@ -1,0 +1,12 @@
+follow the following installation guide https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Binary.html
+
+sudo apt install python3-colcon-common-extensions libssl-dev				// install ros2 build tools and ssl for cmake
+git clone https://github.com/PortAudio/portaudio.git					// clone the latest portaudio source files
+cmake . -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/home/ubuntu/portaudio/install	// generate build files
+make && make install									// build portaudio and install
+
+~/ros2_foxy/ros2-linux/setup.bash				// source the ros2 environment
+colcon build --merge-install --packages-select speech_ros2	// build the speech node
+call install/setup.bat						// ???
+ros2 run speech_ros2 talker					// run the speech node
+
