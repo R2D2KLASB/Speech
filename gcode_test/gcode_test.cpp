@@ -2366,7 +2366,12 @@ std::vector<std::vector<xy>> gcodeVector = {{},
                                             {50, 33.33333, "G01"},
                                             {50, 50, "G01"}}
                                            };
-
+/**
+ * @brief Converts text string to gcode
+ * @param It needs a string of regular text.
+ * @details it converts a text input to the equivalent Gcode. Starting with G21 (mm) and G90 (absolute position)
+ * @return returns a string of Gcode
+ */
 std::string stringToGcode(const std::string& input){
   std::string gcode = "G21\n"
                       "G90\n";
