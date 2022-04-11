@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -2372,37 +2373,76 @@ std::vector<std::vector<xy>> gcodeVector = {{},
  * @details it converts a text input to the equivalent Gcode.
  * @return returns a string of Gcode
  */
-std::string stringToGcode(const std::string& input){
-  std::string gcode = "";
-  for(unsigned int i = 0; i < input.size(); i++){
-      int place = i * 50;
-      if(input[i] == ' '){
-          continue;
-      }
-      for(unsigned int j = 0; j < gcodeVector[input[i]-32].size(); j++){
-          float x = (gcodeVector[input[i]-32][j].x + place) * 20;
-          if(j == 0 && gcodeVector[input[i]-32][j].instruction != "G00"){
-              gcode += "G0 X" + std::to_string(place*20) + " Y" +  std::to_string(0) + "\n";
-          }
-          if(gcodeVector[input[i]-32][j].instruction == "G00"){
-              gcode += "G0 X" + std::to_string(x) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*20) + "\n";
-          }
-          else{
-              gcode += "G1 X" + std::to_string(x) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*20) + "\n";
-          }
-      }
-  }
-  gcode += "G0 X0 Y0\n";
+ std::string stringToGcode(const std::string& input){
+     int size = 20;
+     std::vector<int> spaces;
+     std::vector<int> enters;
+     for(unsigned int i = 0; i < input.size(); i++){
+         if(input[i] == ' '){
+            spaces.push_back(i);
+        }
+    }
+    spaces.push_back(input.size());
+    int enterLength = (30000 - (size * 50)) / (size * 50);
+    int newEnter = enterLength;
+    for(unsigned int i = 0; i < spaces.size(); i++){
+        if(spaces[i] > newEnter){
+            enters.push_back(spaces[i-1]);
+            newEnter = spaces[i-1] + enterLength;
+        }
+    }
 
-  return gcode;
+    std::string gcode = "";
+    int index = 0;
+    int placeY = enters.size() * (70 * size);
+    if(placeY > 25000 - (size * 50)){
+        placeY = 25000 - (size * 50);
+    }
+    for(unsigned int i = 0; i < input.size(); i++){
+        if(i == enters[0]){
+            placeY -= 70 * size;
+            if(placeY < 0){
+                break;
+            }
+            enters.erase(enters.begin());
+            index = 0;
+            i++;
+        }
+
+        int spacing = index * 50;
+        index++;
+        if(input[i] == ' '){
+            continue;
+        }
+
+        for(unsigned int j = 0; j < gcodeVector[input[i]-32].size(); j++){
+            int x = (gcodeVector[input[i]-32][j].x + spacing) * size;
+            if(x >= 30000){
+                placeY -= 70 * size;
+                index = 0;
+                continue;
+            }
+            int y = (gcodeVector[input[i]-32][j].y * size) + placeY;
+            if(j == 0 && gcodeVector[input[i]-32][j].instruction != "G00"){
+                // gcode += "G0 X" + std::to_string(spacing*size) + " Y" +  std::to_string(placeY) + "\n";
+                gcode += "Plot.draw((" + std::to_string(spacing*size) + ", " + std::to_string(placeY) + "), 0);\n";
+            }
+            if(gcodeVector[input[i]-32][j].instruction == "G00"){
+                // gcode += "G0 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
+                gcode += "Plot.draw((" + std::to_string(x) + ", " + std::to_string(y) + "), 0);\n";
+            }
+            else{
+                // gcode += "G1 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
+                gcode += "Plot.draw((" + std::to_string(x) + ", " + std::to_string(y) + "), 1);\n";
+            }
+        }
+    }
+    return gcode;
 }
 
-// 30000 * 25000
-
-
 int main(){
-  // std::string test = stringToGcode("ik ben ook een klant");
-  // std::string test = stringToGcode("kaas");
-  std::string test = stringToGcode("gafajapaqay");
-  std::cout << test << std::endl;
+  std::string test = stringToGcode("I purchased a baby clown from the Russian terrorist black market. The efficiency with which he paired the socks in the drawer was quite admirable.");
+  // std::cout << test << std::endl;
+  std::ofstream myfile("new_gcode.txt", std::ofstream::trunc);
+  myfile << test;
 }
