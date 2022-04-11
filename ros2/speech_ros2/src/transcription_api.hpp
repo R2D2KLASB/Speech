@@ -7,21 +7,41 @@
 
 using namespace std::chrono;
 
+/**
+ * @brief
+ * @param contents
+ * @param size
+ * @param nmemb
+ * @param userp
+ * @details
+ * @return
+ */
 size_t writeCallback(char* contents, size_t size, size_t nmemb, void* userp) {
     ((std::string*)userp)->append((char*)contents, size * nmemb);
     return size * nmemb;
 }
 
+/**
+ * @brief transcription API class
+ */
 class transcriptionAPI {
 private:
     time_point<steady_clock> issueTime;
     int expiryTime = 60000000;
     std::string token;
 public:
+    /**
+     * @brief constructor for transcription API
+     * @details gets the token from the API
+     */
     transcriptionAPI() {
         getToken();
     }
 
+    /**
+     * @brief gets the token for the Curl API
+     * @details gets the API token to be able to convert speech to txt
+     */
     void getToken() {
         std::string _token;
         struct curl_slist* chunk = NULL;
@@ -45,6 +65,9 @@ public:
         token = _token;
     }
 
+    /**
+     * @brief checks the token
+     */
     void checkToken() {
         time_point<steady_clock> end = steady_clock::now();
         long long deltaTime = duration_cast<microseconds>(end - issueTime).count();
@@ -54,6 +77,13 @@ public:
         }
     }
 
+    /**
+     * @brief transcribes the audio to text
+     * @param buffer character buffer
+     * @param size int size of the audio
+     * @details 
+     * @return returns a text string
+     */
     std::string transcribeAudio(char* buffer, int size) {
         struct curl_slist* chunk = NULL;
         std::string transcription, auth;

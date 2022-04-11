@@ -40,6 +40,17 @@ typedef struct {
     C_SAMPLE_TYPE   *recordedSamples;
 } PaTestData;
 
+/**
+ * @brief
+ * @param inputBuffer
+ * @param outputBuffer
+ * @param framesPerBuffer
+ * @param timeInfo
+ * @param statusFlags
+ * @param userData
+ * @details
+ * @return
+ */
 static int recordCallback(const void* inputBuffer, void* outputBuffer,
     unsigned long framesPerBuffer,
     const PaStreamCallbackTimeInfo* timeInfo,
@@ -77,6 +88,10 @@ static int recordCallback(const void* inputBuffer, void* outputBuffer,
     return finished;
 }
 
+/**
+ * @brief Class for the paRecorder
+ * @details sets up the microphone for recording
+ */
 class paRecorder {
 private:
     PaStream* stream;
@@ -84,6 +99,11 @@ private:
 public:
     char* buffer;
     int size;
+
+    /**
+     * @brief Constructor for the paRecorder
+     * @details sets everything ready for the recording
+     */
     paRecorder() {
         PaStreamParameters inputParameters;
         WAV_HEADER wav;
@@ -108,7 +128,10 @@ public:
 
         Pa_OpenStream(&stream, &inputParameters, NULL, SAMPLE_RATE, BUFFER_SIZE, paClipOff, recordCallback, &data);
     }
-
+    /**
+     * @brief records using the microphone
+     * @details records a voice and puts the recording in a memory buffer
+     */
     void record() {
         data.frameIndex = 0;
 
