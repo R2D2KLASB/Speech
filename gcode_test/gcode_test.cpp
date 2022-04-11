@@ -2369,39 +2369,40 @@ std::vector<std::vector<xy>> gcodeVector = {{},
 /**
  * @brief Converts text string to gcode
  * @param It needs a string of regular text.
- * @details it converts a text input to the equivalent Gcode. Starting with G21 (mm) and G90 (absolute position)
+ * @details it converts a text input to the equivalent Gcode.
  * @return returns a string of Gcode
  */
 std::string stringToGcode(const std::string& input){
-  std::string gcode = "G21\n"
-                      "G90\n";
+  std::string gcode = "";
   for(unsigned int i = 0; i < input.size(); i++){
       int place = i * 50;
       if(input[i] == ' '){
           continue;
       }
       for(unsigned int j = 0; j < gcodeVector[input[i]-32].size(); j++){
-          float x = (gcodeVector[input[i]-32][j].x + place) * 100;
+          float x = (gcodeVector[input[i]-32][j].x + place) * 20;
           if(j == 0 && gcodeVector[input[i]-32][j].instruction != "G00"){
-              gcode += "G00 X" + std::to_string(place*100) + " Y" +  std::to_string(0) + "\n";
+              gcode += "G0 X" + std::to_string(place*20) + " Y" +  std::to_string(0) + "\n";
           }
           if(gcodeVector[input[i]-32][j].instruction == "G00"){
-              gcode += "G00 X" + std::to_string(x) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*100) + "\n";
+              gcode += "G0 X" + std::to_string(x) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*20) + "\n";
           }
           else{
-              gcode += "G01 X" + std::to_string(x) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*100) + "\n";
+              gcode += "G1 X" + std::to_string(x) + " Y" +  std::to_string(gcodeVector[input[i]-32][j].y*20) + "\n";
           }
       }
   }
-  gcode += "G00 X0 Y0\n";
+  gcode += "G0 X0 Y0\n";
 
   return gcode;
 }
+
+// 30000 * 25000
 
 
 int main(){
   // std::string test = stringToGcode("ik ben ook een klant");
   // std::string test = stringToGcode("kaas");
-  std::string test = stringToGcode("ks");
+  std::string test = stringToGcode("gafajapaqay");
   std::cout << test << std::endl;
 }
