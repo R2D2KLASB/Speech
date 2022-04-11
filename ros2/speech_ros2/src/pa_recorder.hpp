@@ -18,6 +18,9 @@
 #define AUDIO_FORMAT    1
 #define NUM_SECONDS     5
 
+/**
+ * @brief WAV header allowing playback of raw audio samples recorded
+ */
 typedef struct {
     uint8_t     chunkID[4]      = {'R', 'I', 'F', 'F'};
     uint32_t    chunkSize;      // size of audio + sizeof(WAV_HEADER) - 8
@@ -34,22 +37,25 @@ typedef struct {
     uint32_t    subchunk2Size;  // size of audio + sizeof(WAV_HEADER) - 44
 } WAV_HEADER;
 
+/**
+ * @brief contains the recording buffer and its necessary information
+ */
 typedef struct {
-    int             frameIndex = 0;
-    int             maxFrameIndex;
-    C_SAMPLE_TYPE   *recordedSamples;
+    int             frameIndex = 0;	/**< current position in the buffer */
+    int             maxFrameIndex;	/**< last position in the buffer */
+    C_SAMPLE_TYPE   *recordedSamples;	/**< buffer containing recorded samples */
 } PaTestData;
 
 /**
- * @brief
- * @param inputBuffer
- * @param outputBuffer
- * @param framesPerBuffer
- * @param timeInfo
- * @param statusFlags
- * @param userData
- * @details
- * @return
+ * @brief called periodically by PA to record microphone
+ * @param inputBuffer, microphone input audio samples
+ * @param outputBuffer, not used
+ * @param framesPerBuffer, amount of audio samples each buffer contains
+ * @param timeInfo, not used
+ * @param statusFlags, not used
+ * @param userData, buffer each input buffer is recorded to
+ * @details this function gets called periodically with a microphone input buffer, and saves the buffers to our recording buffer
+ * @return status code so portaudio knows to stop calling this function or continue
  */
 static int recordCallback(const void* inputBuffer, void* outputBuffer,
     unsigned long framesPerBuffer,
@@ -89,20 +95,19 @@ static int recordCallback(const void* inputBuffer, void* outputBuffer,
 }
 
 /**
- * @brief Class for the paRecorder
- * @details sets up the microphone for recording
+ * @brief class for recording the microphone and saving it to a buffer
+ * @details opens a handle to a PaStream allowing multiple recordings
  */
 class paRecorder {
 private:
-    PaStream* stream;
-    PaTestData data;
+    PaStream* stream; /**< PortAudio microphone input handle */
+    PaTestData data; /**< buffer the raw audio samples get recorded to */
 public:
-    char* buffer;
-    int size;
-
+    char* buffer; /**< final buffer containing playable audio recording */
+    int size; /**< size of buffer */
     /**
-     * @brief Constructor for the paRecorder
-     * @details sets everything ready for the recording
+     * @brief opens a PaStream with the system default microphone
+     * @details reserves memory for the WAV_HEADER and buffer with the appropriate size, also opens a PaStream with the system default microphone
      */
     paRecorder() {
         PaStreamParameters inputParameters;
@@ -129,12 +134,11 @@ public:
         Pa_OpenStream(&stream, &inputParameters, NULL, SAMPLE_RATE, BUFFER_SIZE, paClipOff, recordCallback, &data);
     }
     /**
-     * @brief records using the microphone
-     * @details records a voice and puts the recording in a memory buffer
+     * @brief starts the recording, blocking
+     * @details resets the frameIndex and waits for NUM_SECONDS of recording, then adds the wav header to the buffer 
      */
     void record() {
         data.frameIndex = 0;
-
         Pa_StartStream(stream);
         while (Pa_IsStreamActive(stream)) {
             std::cout << "recording. . .\n";
@@ -143,7 +147,10 @@ public:
         memcpy(&buffer[sizeof(WAV_HEADER)], data.recordedSamples, size);
         Pa_StopStream(stream);
     }
-
+    /**
+     * @brief frees up the memory
+     * @details frees up the memory for data and buffer 
+     */
     ~paRecorder() {
         free(data.recordedSamples);
         free(buffer);
@@ -151,3 +158,4 @@ public:
 };
 
 #endif // pa_recorder
+

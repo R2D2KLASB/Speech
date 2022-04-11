@@ -8,13 +8,7 @@
 using namespace std::chrono;
 
 /**
- * @brief
- * @param contents
- * @param size
- * @param nmemb
- * @param userp
- * @details
- * @return
+ * @brief allows us to recieve the response of CURL into a string
  */
 size_t writeCallback(char* contents, size_t size, size_t nmemb, void* userp) {
     ((std::string*)userp)->append((char*)contents, size * nmemb);
@@ -22,25 +16,25 @@ size_t writeCallback(char* contents, size_t size, size_t nmemb, void* userp) {
 }
 
 /**
- * @brief transcription API class
+ * @brief class for sending audio to MS STT and recieving transcription
  */
 class transcriptionAPI {
 private:
-    time_point<steady_clock> issueTime;
-    int expiryTime = 60000000;
-    std::string token;
+    time_point<steady_clock> issueTime; /**< timestamp the token got issued */
+    int expiryTime = 60000000;		/**< how long the token is valid in microseconds */
+    std::string token;			/**< the token itself */
 public:
     /**
      * @brief constructor for transcription API
-     * @details gets the token from the API
+     * @details initializes the class by getting a token
      */
     transcriptionAPI() {
         getToken();
     }
 
     /**
-     * @brief gets the token for the Curl API
-     * @details gets the API token to be able to convert speech to txt
+     * @brief issues a new token from MS API
+     * @details gets a new token and sets the timestamp to the current time
      */
     void getToken() {
         std::string _token;
@@ -66,7 +60,7 @@ public:
     }
 
     /**
-     * @brief checks the token
+     * @brief checks if the token has expired and issues a new one if so
      */
     void checkToken() {
         time_point<steady_clock> end = steady_clock::now();
@@ -79,10 +73,10 @@ public:
 
     /**
      * @brief transcribes the audio to text
-     * @param buffer character buffer
-     * @param size int size of the audio
-     * @details 
-     * @return returns a text string
+     * @param buffer, buffer containing playable audio file
+     * @param size, size of the input buffer
+     * @details sends the buffer to the MS STT and waits for the transcription
+     * @return returns a string with json containing the transcription
      */
     std::string transcribeAudio(char* buffer, int size) {
         struct curl_slist* chunk = NULL;
@@ -110,3 +104,4 @@ public:
 };
 
 #endif // transcribe_api
+
