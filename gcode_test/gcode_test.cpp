@@ -2425,15 +2425,15 @@ std::vector<std::vector<xy>> gcodeVector = {{},
             int y = (gcodeVector[input[i]-32][j].y * size) + placeY;
             if(j == 0 && gcodeVector[input[i]-32][j].instruction != "G00"){
                 // gcode += "G0 X" + std::to_string(spacing*size) + " Y" +  std::to_string(placeY) + "\n";
-                gcode += "Plot.draw((" + std::to_string(spacing*size) + ", " + std::to_string(placeY) + "), 0);\n";
+                gcode += "Plot.draw({" + std::to_string(spacing*size) + ", " + std::to_string(placeY) + "}, 0);\n";
             }
             if(gcodeVector[input[i]-32][j].instruction == "G00"){
                 // gcode += "G0 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
-                gcode += "Plot.draw((" + std::to_string(x) + ", " + std::to_string(y) + "), 0);\n";
+                gcode += "Plot.draw({" + std::to_string(x) + ", " + std::to_string(y) + "}, 0);\n";
             }
             else{
                 // gcode += "G1 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
-                gcode += "Plot.draw((" + std::to_string(x) + ", " + std::to_string(y) + "), 1);\n";
+                gcode += "Plot.draw({" + std::to_string(x) + ", " + std::to_string(y) + "}, 1);\n";
             }
         }
     }
