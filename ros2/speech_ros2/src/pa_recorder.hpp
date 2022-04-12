@@ -70,6 +70,11 @@ static int recordCallback(const void* inputBuffer, void* outputBuffer,
     long framesToCalc, i;
     int finished;
 
+    // supress unused variable warnings
+    (void)outputBuffer;
+    (void)timeInfo;
+    (void)statusFlags;
+
     if (framesLeft < framesPerBuffer) {
         framesToCalc = framesLeft;
         finished = paComplete;
