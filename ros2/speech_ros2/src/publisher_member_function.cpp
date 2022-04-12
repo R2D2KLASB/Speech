@@ -40,10 +40,9 @@ private:
 	std::cout << transcription << std::endl;
 
 	if(transcription != "Transcription failed") {
-	    std::cout << stringToGcode(transcription);
-	    //message.data = stringToGcode(transcription);
-            //RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
-            //publisher->publish(message);
+	    message.data = stringToGcode(transcription);
+            RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+            publisher->publish(message);
 	}
     }
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher;
