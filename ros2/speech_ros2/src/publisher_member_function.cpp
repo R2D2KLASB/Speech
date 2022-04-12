@@ -18,6 +18,7 @@
 
 #include "transcription_api.hpp"
 #include "pa_recorder.hpp"
+##include "string_to_gcode.hpp"
 
 class MinimalPublisher: public rclcpp::Node {
 public:
@@ -32,7 +33,7 @@ private:
     void transcribeAndPublish() {
         rec.record();
         auto message = std_msgs::msg::String();
-        message.data = token.transcribeAudio(rec.buffer, rec.size);
+        message.data = stringToGcode(token.transcribeAudio(rec.buffer, rec.size));
         RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
         publisher->publish(message);
     }
@@ -48,4 +49,3 @@ int main(int argc, char * argv[]) {
     rclcpp::shutdown();
     return 0;
 }
-

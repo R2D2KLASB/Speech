@@ -4,6 +4,7 @@
 #include <curl/curl.h>
 #include <string>
 #include <chrono>
+#include <json.hpp>
 
 using namespace std::chrono;
 
@@ -99,9 +100,10 @@ public:
         curl_easy_cleanup(curl);
         curl_slist_free_all(chunk);
 
-        return transcription;
+        nlohmann::json displayText = nlohmann::json::parse(transcription);
+
+        return displayText["DisplayText"].get<std::string>();
     }
 };
 
 #endif // transcribe_api
-
