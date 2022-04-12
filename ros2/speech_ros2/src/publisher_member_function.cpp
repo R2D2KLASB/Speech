@@ -18,24 +18,33 @@
 
 #include "transcription_api.hpp"
 #include "pa_recorder.hpp"
-##include "string_to_gcode.hpp"
+#include "string_to_gcode.hpp"
 
 class MinimalPublisher: public rclcpp::Node {
 public:
     MinimalPublisher(): Node("minimal_publisher") {
         publisher = this->create_publisher<std_msgs::msg::String>("topic", 10);
         token.getToken();
+
         transcribeAndPublish();
         transcribeAndPublish();
         Pa_Terminate();
     }
 private:
     void transcribeAndPublish() {
-        rec.record();
         auto message = std_msgs::msg::String();
-        message.data = stringToGcode(token.transcribeAudio(rec.buffer, rec.size));
-        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
-        publisher->publish(message);
+	std::string transcription;
+
+	rec.record();
+	transcription = token.transcribeAudio(rec.buffer, rec.size);
+	std::cout << transcription << std::endl;
+
+	if(transcription != "Transcription failed") {
+	    std::cout << stringToGcode(transcription);
+	    //message.data = stringToGcode(transcription);
+            //RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+            //publisher->publish(message);
+	}
     }
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher;
     transcriptionAPI token;

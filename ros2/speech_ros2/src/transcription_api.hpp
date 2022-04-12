@@ -4,7 +4,8 @@
 #include <curl/curl.h>
 #include <string>
 #include <chrono>
-#include <json.hpp>
+
+#include "json.hpp"
 
 using namespace std::chrono;
 
@@ -81,7 +82,7 @@ public:
      */
     std::string transcribeAudio(char* buffer, int size) {
         struct curl_slist* chunk = NULL;
-        std::string transcription, auth;
+        std::string transcription = "", auth;
         checkToken();
 
         auth = "Authorization: Bearer " + token;
@@ -100,9 +101,11 @@ public:
         curl_easy_cleanup(curl);
         curl_slist_free_all(chunk);
 
-        nlohmann::json displayText = nlohmann::json::parse(transcription);
-
-        return displayText["DisplayText"].get<std::string>();
+	nlohmann::json obj = nlohmann::json::parse(transcription);
+	if(obj["RecognitionStatus"].get<std::string>() == "Success") {
+	    return obj["DisplayText"].get<std::string>();
+	}
+	return "Transcription failed";
     }
 };
 
