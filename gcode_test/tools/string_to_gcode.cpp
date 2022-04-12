@@ -2399,14 +2399,16 @@ std::vector<std::vector<xy>> gcodeVector = {{},
         placeY = 25000 - (size * 50);
     }
     for(unsigned int i = 0; i < input.size(); i++){
-        if(i == enters[0]){
-            placeY -= 70 * size;
-            if(placeY < 0){
-                break;
+        if(!enters.empty()){
+            if(i == enters[0]){
+                placeY -= 70 * size;
+                if(placeY < 0){
+                    break;
+                }
+                enters.erase(enters.begin());
+                index = 0;
+                i++;
             }
-            enters.erase(enters.begin());
-            index = 0;
-            i++;
         }
 
         int spacing = index * 50;
