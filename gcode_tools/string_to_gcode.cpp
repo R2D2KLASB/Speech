@@ -1622,7 +1622,7 @@ std::vector<std::vector<xy>> gcodeVector = {{},
                                             {0, 0, "G01"},
                                             {50, 0, "G01"}},
 
-                                            //\
+                                            //backslash
 
                                             {{0, 50, "G00"},
                                             {15.55555, 0, "G01"}},
@@ -2373,7 +2373,7 @@ std::vector<std::vector<xy>> gcodeVector = {{},
  * @details it converts a text input to the equivalent Gcode.
  * @return returns a string of Gcode
  */
- std::string stringToGcode(const std::string& input){
+ std::string stringToGcode(std::string input){
      int size = 20;
      std::vector<int> spaces;
      std::vector<int> enters;
@@ -2398,7 +2398,7 @@ std::vector<std::vector<xy>> gcodeVector = {{},
     if(placeY > 25000 - (size * 50)){
         placeY = 25000 - (size * 50);
     }
-    for(unsigned int i = 0; i < input.size(); i++){
+    for(int i = 0; i < (int)input.size(); i++){
         if(!enters.empty()){
             if(i == enters[0]){
                 placeY -= 70 * size;
@@ -2416,6 +2416,11 @@ std::vector<std::vector<xy>> gcodeVector = {{},
         if(input[i] == ' '){
             continue;
         }
+        else if((unsigned)input[i]-32 > gcodeVector.size()){
+            input[i] = '?';
+            input.erase(i+1, 1);
+        }
+
 
         for(unsigned int j = 0; j < gcodeVector[input[i]-32].size(); j++){
             int x = (gcodeVector[input[i]-32][j].x + spacing) * size;
@@ -2439,12 +2444,14 @@ std::vector<std::vector<xy>> gcodeVector = {{},
             }
         }
     }
+    std::cout << input << std::endl;
     gcode += "G28\n";
     return gcode;
 }
 
 int main(){
-  std::string test = stringToGcode("I purchased a baby clown from the Russian terrorist black market. The efficiency with which he paired the socks in the drawer was quite admirable.");
+  // std::string test = stringToGcode("I purchased a baby clown from the Russian terrorist black market. The efficiency with which he paired the socks in the drawer was quite admirable.");
+  std::string test = stringToGcode("Geïntereseerd, Tweeën");
   std::ofstream myfile("new_gcode.txt", std::ofstream::trunc);
   myfile << test;
 }
