@@ -15,8 +15,8 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <portaudio.h>
-#include <tiny_gpio.h>
 
+#include "tiny_gpio.h"
 #include "transcription_api.hpp"
 #include "pa_recorder.hpp"
 #include "string_to_gcode.hpp"
@@ -25,41 +25,42 @@ class MinimalPublisher: public rclcpp::Node {
 public:
     MinimalPublisher(): Node("minimal_publisher") {
         publisher = this->create_publisher<std_msgs::msg::String>("topic", 10);
-        token.getToken();
-        int button = 18;
+	auto message = std_msgs::msg::String();
+        std::string transcription;
+	token.getToken();
+	int button = 18;
         int led = 23;
-        gpioSetMode(button, PI_INPUT);
+
+	gpioInitialise();
+	gpioSetMode(button, PI_INPUT);
         gpioSetMode(led, PI_OUTPUT);
-        for(;;){
-            if(gpioRead(button)){
-                gpioWrite(led, 1);
-                record();
-                while(recording()){
-                    std::cout << "recording. . .\n";
-                    Pa_Sleep(1000);
-                }
-                gpioWrite(led, 0);
-            }
-        }
-        transcribeAndPublish();
-        transcribeAndPublish();
+
+	while(true) {
+	    if(gpioRead(button)) {
+		RCLCPP_INFO_STREAM(get_logger(), "Recording started");
+		gpioWrite(led, 1);
+	        rec.record();
+		gpioWrite(led, 0);
+		RCLCPP_INFO_STREAM(get_logger(), "Recording finished");
+		transcription = token.transcribeAudio(rec.buffer, rec.size);
+		if(transcription != "Transcription failed") {
+                    message.data = stringToGcode(transcription);
+                    RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+                    publisher->publish(message);
+                } else {
+		    RCLCPP_INFO_STREAM(get_logger(), "Transcription failed :(");
+		    gpioWrite(led, 1); Pa_Sleep(500);
+		    gpioWrite(led, 0); Pa_Sleep(500);
+                    gpioWrite(led, 1); Pa_Sleep(500);
+                    gpioWrite(led, 0); Pa_Sleep(500);
+                    gpioWrite(led, 1); Pa_Sleep(500);
+                    gpioWrite(led, 0); Pa_Sleep(500);
+		}
+	    }
+	}
         Pa_Terminate();
     }
 private:
-    void transcribeAndPublish() {
-        auto message = std_msgs::msg::String();
-	std::string transcription;
-
-	rec.record();
-	transcription = token.transcribeAudio(rec.buffer, rec.size);
-	std::cout << transcription << std::endl;
-
-	if(transcription != "Transcription failed") {
-	    message.data = stringToGcode(transcription);
-            RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
-            publisher->publish(message);
-	}
-    }
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher;
     transcriptionAPI token;
     paRecorder rec;

@@ -2372,7 +2372,7 @@ std::vector<std::vector<xy>> gcodeVector = {{},
  * @details it converts a text input to the equivalent Gcode.
  * @return returns a string of Gcode
  */
- std::string stringToGcode(const std::string input){
+ std::string stringToGcode(std::string input){
      int size = 20;
      std::vector<int> spaces;
      std::vector<int> enters;

@@ -34,7 +34,7 @@
 unsigned piModel;
 unsigned piRev;
 
-static volatile uint32_t  *gpioReg = MAP_FAILED;
+static volatile uint32_t *gpioReg = (volatile uint32_t*)MAP_FAILED;
 
 #define PI_BANK (gpio>>5)
 #define PI_BIT  (1<<(gpio&0x1F))
@@ -211,15 +211,3 @@ int gpioInitialise(void)
    return 0;
 }
 
-int main() {
-   if (gpioInitialise() < 0) return 1;
-   gpioSetMode(17, PI_OUTPUT);
-
-   for (int i = 0; i < 10; i++) {
-      gpioWrite(17, 1);
-      sleep(1);
-      gpioWrite(17, 0);
-      sleep(1);
-   }
-   return 0;
-}

@@ -23,3 +23,7 @@ pcm.mic {
     pcm "hw:<card number>,<device number>"
   }
 }
+
+// to give ubuntu access to GPIO without root
+sudo chown ubuntu /dev/gpiomem
+sudo chmod g+rw /dev/gpiomem

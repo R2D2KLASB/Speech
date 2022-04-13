@@ -145,12 +145,9 @@ public:
     void record() {
         data.frameIndex = 0;
         Pa_StartStream(stream);
+        while (Pa_IsStreamActive(stream)) Pa_Sleep(100);
         memcpy(&buffer[sizeof(WAV_HEADER)], data.recordedSamples, size);
         Pa_StopStream(stream);
-    }
-
-    bool recording(){
-      return Pa_IsStreamActive(stream);
     }
     /**
      * @brief frees up the memory
