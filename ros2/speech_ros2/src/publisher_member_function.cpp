@@ -24,12 +24,13 @@
 class MinimalPublisher: public rclcpp::Node {
 public:
     MinimalPublisher(): Node("minimal_publisher") {
-        publisher = this->create_publisher<std_msgs::msg::String>("topic", 10);
 	auto message = std_msgs::msg::String();
         std::string transcription;
-	token.getToken();
 	int button = 18;
         int led = 23;
+
+	publisher = this->create_publisher<std_msgs::msg::String>("topic", 10);
+	token.getToken();
 
 	gpioInitialise();
 	gpioSetMode(button, PI_INPUT);
@@ -37,24 +38,21 @@ public:
 
 	while(true) {
 	    if(gpioRead(button)) {
-		RCLCPP_INFO_STREAM(get_logger(), "Recording started");
+		RCLCPP_INFO(get_logger(), "Recording started");
 		gpioWrite(led, 1);
 	        rec.record();
 		gpioWrite(led, 0);
-		RCLCPP_INFO_STREAM(get_logger(), "Recording finished");
+		RCLCPP_INFO(get_logger(), "Recording finished");
 		transcription = token.transcribeAudio(rec.buffer, rec.size);
 		if(transcription != "Transcription failed") {
+		    RCLCPP_INFO(get_logger(), "Publishing: '%s'", transcription.c_str());
                     message.data = stringToGcode(transcription);
-                    RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
                     publisher->publish(message);
                 } else {
-		    RCLCPP_INFO_STREAM(get_logger(), "Transcription failed :(");
-		    gpioWrite(led, 1); Pa_Sleep(500);
-		    gpioWrite(led, 0); Pa_Sleep(500);
-                    gpioWrite(led, 1); Pa_Sleep(500);
-                    gpioWrite(led, 0); Pa_Sleep(500);
-                    gpioWrite(led, 1); Pa_Sleep(500);
-                    gpioWrite(led, 0); Pa_Sleep(500);
+		    RCLCPP_INFO(get_logger(), "Transcription failed :(");
+		    gpioWrite(led, 1); Pa_Sleep(500); gpioWrite(led, 0); Pa_Sleep(500);
+                    gpioWrite(led, 1); Pa_Sleep(500); gpioWrite(led, 0); Pa_Sleep(500);
+                    gpioWrite(led, 1); Pa_Sleep(500); gpioWrite(led, 0); Pa_Sleep(500);
 		}
 	    }
 	}
