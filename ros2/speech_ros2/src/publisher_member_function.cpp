@@ -15,6 +15,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <portaudio.h>
+#include <tiny_gpio.h>
 
 #include "transcription_api.hpp"
 #include "pa_recorder.hpp"
@@ -25,7 +26,21 @@ public:
     MinimalPublisher(): Node("minimal_publisher") {
         publisher = this->create_publisher<std_msgs::msg::String>("topic", 10);
         token.getToken();
-
+        int button = 18;
+        int led = 23;
+        gpioSetMode(button, PI_INPUT);
+        gpioSetMode(led, PI_OUTPUT);
+        for(;;){
+            if(gpioRead(button)){
+                gpioWrite(led, 1);
+                record();
+                while(recording()){
+                    std::cout << "recording. . .\n";
+                    Pa_Sleep(1000);
+                }
+                gpioWrite(led, 0);
+            }
+        }
         transcribeAndPublish();
         transcribeAndPublish();
         Pa_Terminate();

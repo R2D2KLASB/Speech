@@ -140,21 +140,21 @@ public:
     }
     /**
      * @brief starts the recording, blocking
-     * @details resets the frameIndex and waits for NUM_SECONDS of recording, then adds the wav header to the buffer 
+     * @details resets the frameIndex and waits for NUM_SECONDS of recording, then adds the wav header to the buffer
      */
     void record() {
         data.frameIndex = 0;
         Pa_StartStream(stream);
-        while (Pa_IsStreamActive(stream)) {
-            std::cout << "recording. . .\n";
-            Pa_Sleep(1000);
-        }
         memcpy(&buffer[sizeof(WAV_HEADER)], data.recordedSamples, size);
         Pa_StopStream(stream);
     }
+
+    bool recording(){
+      return Pa_IsStreamActive(stream);
+    }
     /**
      * @brief frees up the memory
-     * @details frees up the memory for data and buffer 
+     * @details frees up the memory for data and buffer
      */
     ~paRecorder() {
         free(data.recordedSamples);
@@ -163,4 +163,3 @@ public:
 };
 
 #endif // pa_recorder
-

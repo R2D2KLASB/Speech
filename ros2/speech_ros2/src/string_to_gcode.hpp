@@ -2415,6 +2415,9 @@ std::vector<std::vector<xy>> gcodeVector = {{},
         if(input[i] == ' '){
             continue;
         }
+        else if(input[i]-32 > gcodeVector.size()-1){
+            input[i] = '?';
+        }
 
         for(unsigned int j = 0; j < gcodeVector[input[i]-32].size(); j++){
             int x = (gcodeVector[input[i]-32][j].x + spacing) * size;
