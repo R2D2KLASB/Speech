@@ -2425,15 +2425,16 @@ std::vector<std::vector<xy>> gcodeVector = {{},
             }
             int y = (gcodeVector[input[i]-32][j].y * size) + placeY;
             if(j == 0 && gcodeVector[input[i]-32][j].instruction != "G00"){
-                gcode += "G0 X" + std::to_string(spacing*size) + " Y" +  std::to_string(placeY) + "\n";
+                gcode += "G00 X" + std::to_string(spacing*size) + " Y" +  std::to_string(placeY) + "\n";
             }
             if(gcodeVector[input[i]-32][j].instruction == "G00"){
-                gcode += "G0 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
+                gcode += "G00 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
             }
             else{
-                gcode += "G1 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
+                gcode += "G01 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
             }
         }
     }
+    gcode += "G28\n";
     return gcode;
 }
