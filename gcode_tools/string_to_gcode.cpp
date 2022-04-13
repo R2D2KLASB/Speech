@@ -238,13 +238,13 @@ std::vector<std::vector<xy>> gcodeVector = {{},
 
                                             //,
 
-                                            {{33.33334, 16.66667, "G00"},
-                                            {16.66667, 20.83334, "G01"},
-                                            {33.33334, 25, "G01"},
-                                            {50, 20.83334, "G01"},
-                                            {50, 16.66667, "G01"},
-                                            {33.33334, 8.333334, "G01"},
-                                            {0, 0, "G01"}},
+                                            {{6.666668, 3.333334, "G00"},
+                                            {3.333334, 4.166668, "G01"},
+                                            {6.666668, 5.000000, "G01"},
+                                            {10.000000, 4.166668, "G01"},
+                                            {10.000000, 3.333334, "G01"},
+                                            {6.666668, 1.666667, "G01"},
+                                            {0.000000, 0.000000, "G01"}},
 
                                             //-
 
@@ -253,11 +253,11 @@ std::vector<std::vector<xy>> gcodeVector = {{},
 
                                             //.
 
-                                            {{25, 25, "G00"},
-                                            {0, 12.5, "G01"},
-                                            {25, 0, "G01"},
-                                            {50.00001, 12.5, "G01"},
-                                            {25, 25, "G01"}},
+                                            {{5.000000, 5.000000, "G00"},
+                                            {0.000000, 2.500000, "G01"},
+                                            {5.000000, 0.000000, "G01"},
+                                            {10.000002, 2.500000, "G01"},
+                                            {5.000000, 5.000000, "G01"}},
 
                                             ///
 
@@ -2451,7 +2451,7 @@ std::vector<std::vector<xy>> gcodeVector = {{},
 
 int main(){
   // std::string test = stringToGcode("I purchased a baby clown from the Russian terrorist black market. The efficiency with which he paired the socks in the drawer was quite admirable.");
-  std::string test = stringToGcode("Geïntereseerd, Tweeën");
+  std::string test = stringToGcode("a.a,");
   std::ofstream myfile("new_gcode.txt", std::ofstream::trunc);
   myfile << test;
 }

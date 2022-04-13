@@ -237,13 +237,13 @@ std::vector<std::vector<xy>> gcodeVector = {{},
 
                                             //,
 
-                                            {{33.33334, 16.66667, "G00"},
-                                            {16.66667, 20.83334, "G01"},
-                                            {33.33334, 25, "G01"},
-                                            {50, 20.83334, "G01"},
-                                            {50, 16.66667, "G01"},
-                                            {33.33334, 8.333334, "G01"},
-                                            {0, 0, "G01"}},
+                                            {{6.666668, 3.333334, "G00"},
+                                            {3.333334, 4.166668, "G01"},
+                                            {6.666668, 5.000000, "G01"},
+                                            {10.000000, 4.166668, "G01"},
+                                            {10.000000, 3.333334, "G01"},
+                                            {6.666668, 1.666667, "G01"},
+                                            {0.000000, 0.000000, "G01"}},
 
                                             //-
 
@@ -252,11 +252,11 @@ std::vector<std::vector<xy>> gcodeVector = {{},
 
                                             //.
 
-                                            {{25, 25, "G00"},
-                                            {0, 12.5, "G01"},
-                                            {25, 0, "G01"},
-                                            {50.00001, 12.5, "G01"},
-                                            {25, 25, "G01"}},
+                                            {{5.000000, 5.000000, "G00"},
+                                            {0.000000, 2.500000, "G01"},
+                                            {5.000000, 0.000000, "G01"},
+                                            {10.000002, 2.500000, "G01"},
+                                            {5.000000, 5.000000, "G01"}},
 
                                             ///
 
@@ -2430,20 +2430,16 @@ std::vector<std::vector<xy>> gcodeVector = {{},
             }
             int y = (gcodeVector[input[i]-32][j].y * size) + placeY;
             if(j == 0 && gcodeVector[input[i]-32][j].instruction != "G00"){
-                gcode += "G00 X" + std::to_string(spacing*size) + " Y" +  std::to_string(placeY) + "\n";
-                // gcode += "Plot.draw({" + std::to_string(spacing*size) + ", " + std::to_string(placeY) + "}, 0);\n";
+                gcode += "G0 X" + std::to_string(spacing*size) + " Y" +  std::to_string(placeY) + "\n";
             }
             if(gcodeVector[input[i]-32][j].instruction == "G00"){
-                gcode += "G00 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
-                // gcode += "Plot.draw({" + std::to_string(x) + ", " + std::to_string(y) + "}, 0);\n";
+                gcode += "G0 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
             }
             else{
-                gcode += "G01 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
-                // gcode += "Plot.draw({" + std::to_string(x) + ", " + std::to_string(y) + "}, 1);\n";
+                gcode += "G1 X" + std::to_string(x) + " Y" +  std::to_string(y) + "\n";
             }
         }
     }
-    std::cout << input << std::endl;
-    gcode += "G28\n";
+    gcode += "G28";
     return gcode;
 }
