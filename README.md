@@ -42,16 +42,14 @@ Before you can run the speech node you have to set your mic as the default input
         }
 5. Give the user acces to GPIO.
     > sudo chown ubuntu /dev/gpiomem
-    
-    > sudo chmod g+rw /dev/gpiomem
 
 # Build & Run <a name="Build&Run"></a>
 1. Clone this repository.
 2. Move to speech_ros2 and source the ros2 environment with:
-    > ~/ros2_foxy/ros2-linux/setup.bash
+    > . ~/ros2_foxy/ros2-linux/setup.bash
 3. Now build the speech node with: 
     > colcon build --merge-install --packages-select speech_ros2
 4. Run the setup files:
-    > call install/setup.bash
+    > . install/setup.bash
 5. Now you can run the speech node with:
     > ros2 run speech_ros2 talker
