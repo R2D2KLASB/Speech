@@ -23,8 +23,10 @@ Voor de codestandaard, klik [hier](https://github.com/R2D2KLASB/Info/blob/main/C
 # Preparation
 Before you can run the speech node you have to set your mic as the default input device and give the use permissions to use gpio.
 
-1. Firstly run the command:
-    > arecord -1
+1. Firstly run the commands:
+    > sudo apt install alsa-utils
+    
+    > arecord -l
 2. You will be presented with a list of devices, remember the **card number** and the **device number** of the device you want to use.
 3. Open a new file with:
     > nano ~/.asoundrc
