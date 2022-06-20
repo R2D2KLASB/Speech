@@ -71,13 +71,38 @@ void setCircle(Canvas *canvas, xy midpoint, int radius, rgb color = rgb{255,255,
     }
 }
 
-void ripple(Canvas *canvas, xy midpoint, int radius, rgb color, rgb bg){
+void ripple(Canvas *canvas, xy midpoint, int startradius, rgb color, rgb bg){
     for(unsigned int i = 0; i < 71; i++){
-        usleep(100000);
+        usleep(500000);
         if(i){
-            setCircle(canvas, midpoint, radius + i -1, bg);
+            setCircle(canvas, midpoint, startradius + i -1, bg);
         }
-        setCircle(canvas, midpoint, radius + i, color);
+        setCircle(canvas, midpoint, startradius + i, color);
+    }
+}
+
+void setLine(Canvas *canvas, xy startpoint, unsigned int length, bool horizontal = true, rgb color = rgb{255,255,255}){
+    for(unsigned int i = 0; i < length; i++){
+        if(horizontal){
+            canvas->SetPixel(startpoint.x + i, startpoint.y, color.r, color.g, color.b);
+        }else{
+            canvas->SetPixel(startpoint.x, startpoint.y + i, color.r, color.g, color.b);
+        }
+    }
+}
+
+void setSquare(Canvas *canvas, xy startpoint, int size, bool filled = false, rgb color = rgb{255,255,255}){
+    if(filled){
+        for(unsigned int i = 0; i < size; i++){
+            setLine(canvas, xy{startpoint.x, startpoint.y + i}, size);
+        }
+    }else{
+        setLine(canvas, startpoint, size);
+        setLine(canvas, xy{startpoint.x, startpoint.y+size-1}, size);
+        setLine(canvas, startpoint, size, false);
+        setLine(canvas, xy{startpoint.x+size-1, startpoint.y}, size, false);
+        canvas->SetPixel(5, 5, 255, 0, 0);
+        canvas->SetPixel(3, 3, 255, 165, 0);
     }
     for(;;){
        if(interrupt_received){
@@ -91,8 +116,8 @@ int main() {
   RGBMatrix::Options my_defaults;
   my_defaults.hardware_mapping = "regular";  // or e.g. "adafruit-hat" or "adafruit-hat-pwm"
   my_defaults.chain_length = 1;
-  my_defaults.rows = 32;
-  my_defaults.cols = 64;
+  my_defaults.rows = 16;
+  my_defaults.cols = 32;
   my_defaults.show_refresh_rate = true;
   my_defaults.disable_hardware_pulsing = 1;
   rgb_matrix::RuntimeOptions runtime_defaults;
@@ -112,8 +137,11 @@ int main() {
   signal(SIGTERM, InterruptHandler);
   signal(SIGINT, InterruptHandler);
 
+
+
   draw(canvas);
-  ripple(canvas, xy{0, 0}, 0, rgb{255,0,0}, rgb{0,0,255});
+  setSquare(canvas, xy{0, 0}, 12);
+  // ripple(canvas, xy{5, 5}, 0, rgb{255,0,0}, rgb{0,0,255});
 
   delete canvas;   // Make sure to delete it in the end.
 }
