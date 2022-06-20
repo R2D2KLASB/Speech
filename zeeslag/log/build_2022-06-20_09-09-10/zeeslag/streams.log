@@ -1,0 +1,58 @@
+[0.088s] Invoking command in '/home/ubuntu/Speech/zeeslag/build/zeeslag': /usr/bin/cmake /home/ubuntu/Speech/zeeslag/zeeslag -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Speech/zeeslag/install/zeeslag
+[0.347s] -- The C compiler identification is GNU 9.4.0
+[0.574s] -- The CXX compiler identification is GNU 9.4.0
+[0.593s] -- Check for working C compiler: /usr/bin/cc
+[0.887s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.890s] -- Detecting C compiler ABI info
+[1.188s] -- Detecting C compiler ABI info - done
+[1.230s] -- Detecting C compile features
+[1.231s] -- Detecting C compile features - done
+[1.241s] -- Check for working CXX compiler: /usr/bin/c++
+[1.568s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[1.573s] -- Detecting CXX compiler ABI info
+[1.905s] -- Detecting CXX compiler ABI info - done
+[1.949s] -- Detecting CXX compile features
+[1.950s] -- Detecting CXX compile features - done
+[1.976s] -- Found ament_cmake: 0.9.9 (/home/ubuntu/ros2_foxy/ros2-linux/share/ament_cmake/cmake)
+[2.107s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[2.107s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[3.118s] -- Found ament_lint_auto: 0.9.6 (/home/ubuntu/ros2_foxy/ros2-linux/share/ament_lint_auto/cmake)
+[3.528s] -- Added test 'copyright' to check source files copyright and LICENSE
+[3.534s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.535s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/ubuntu/Speech/zeeslag/zeeslag/include>
+[3.535s] -- Configured cppcheck exclude dirs and/or files: 
+[3.541s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[3.541s] -- Configured cpplint exclude dirs and/or files: 
+[3.544s] -- Added test 'lint_cmake' to check CMake code style
+[3.550s] -- Added test 'uncrustify' to check C / C++ code style
+[3.551s] -- Configured uncrustify additional arguments: 
+[3.553s] -- Added test 'xmllint' to check XML markup files
+[3.567s] -- Configuring done
+[3.582s] -- Generating done
+[3.586s] -- Build files have been written to: /home/ubuntu/Speech/zeeslag/build/zeeslag
+[3.599s] Invoked command in '/home/ubuntu/Speech/zeeslag/build/zeeslag' returned '0': /usr/bin/cmake /home/ubuntu/Speech/zeeslag/zeeslag -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Speech/zeeslag/install/zeeslag
+[3.610s] Invoking command in '/home/ubuntu/Speech/zeeslag/build/zeeslag': /usr/bin/cmake --build /home/ubuntu/Speech/zeeslag/build/zeeslag -- -j3 -l3
+[3.774s] [35m[1mScanning dependencies of target listener[0m
+[3.820s] [ 50%] [32mBuilding CXX object CMakeFiles/listener.dir/src/listener.cpp.o[0m
+[3.955s] [100%] [32m[1mLinking CXX executable listener[0m
+[4.134s] [100%] Built target listener
+[4.175s] Invoked command in '/home/ubuntu/Speech/zeeslag/build/zeeslag' returned '0': /usr/bin/cmake --build /home/ubuntu/Speech/zeeslag/build/zeeslag -- -j3 -l3
+[4.335s] Invoking command in '/home/ubuntu/Speech/zeeslag/build/zeeslag': /usr/bin/cmake --install /home/ubuntu/Speech/zeeslag/build/zeeslag
+[4.370s] -- Install configuration: ""
+[4.371s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/lib/zeeslag/listener
+[4.372s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/package_run_dependencies/zeeslag
+[4.374s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/parent_prefix_path/zeeslag
+[4.375s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/ament_prefix_path.sh
+[4.376s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/ament_prefix_path.dsv
+[4.378s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/path.sh
+[4.379s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/path.dsv
+[4.380s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.bash
+[4.381s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.sh
+[4.382s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.zsh
+[4.383s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.dsv
+[4.384s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/package.dsv
+[4.385s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/packages/zeeslag
+[4.386s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/cmake/zeeslagConfig.cmake
+[4.387s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/cmake/zeeslagConfig-version.cmake
+[4.388s] -- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/package.xml
+[4.396s] Invoked command in '/home/ubuntu/Speech/zeeslag/build/zeeslag' returned '0': /usr/bin/cmake --install /home/ubuntu/Speech/zeeslag/build/zeeslag

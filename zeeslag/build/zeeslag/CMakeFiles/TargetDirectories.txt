@@ -1,0 +1,10 @@
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/install/strip.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/install/local.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/edit_cache.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/test.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/install.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/list_install_components.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/listener.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/zeeslag_uninstall.dir
+/home/ubuntu/Speech/zeeslag/build/zeeslag/CMakeFiles/uninstall.dir
