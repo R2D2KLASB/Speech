@@ -16,20 +16,21 @@ class PublishingSubscriber: public rclcpp::Node {
   public:
     PublishingSubscriber(): Node("publishing_subscriber") {
       subscription_ = this->create_subscription<std_msgs::msg::String>("sub", 10, std::bind(&PublishingSubscriber::topic_callback, this, _1));
-      publisher_ = this->create_publisher<std_msgs::msg::String>("pub",10);
+      publisher_ = this->create_publisher<std_msgs::msg::String>("pub", 10);
 
       RGBMatrix::Options my_defaults;
       my_defaults.hardware_mapping = "regular";
       my_defaults.chain_length = 1;
       my_defaults.rows = 16;
       my_defaults.cols = 32;
-      my_defaults.show_refresh_rate = true;
+      my_defaults.show_refresh_rate = false;
       my_defaults.disable_hardware_pulsing = 1;
       my_defaults.parallel = 1;
       rgb_matrix::RuntimeOptions runtime_defaults;
       runtime_defaults.gpio_slowdown = 4;
 
       canvas = RGBMatrix::CreateFromOptions(my_defaults, runtime_defaults);
+      canvas->Fill(255,255,255);
     }
     ~PublishingSubscriber() {
       delete canvas;
@@ -40,8 +41,7 @@ class PublishingSubscriber: public rclcpp::Node {
       message.data = "I heard " + msg->data;
       RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
       publisher_->publish(message);
-
-      canvas->Fill(0,0,255);
+      canvas->Fill(0,0,0);
     }
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
