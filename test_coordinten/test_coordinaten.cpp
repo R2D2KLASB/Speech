@@ -1,4 +1,4 @@
-﻿// Copyright 2016 Open Source Robotics Foundation, Inc.
+// Copyright 2016 Open Source Robotics Foundation, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,13 +36,13 @@ public:
 		//gpioInitialise();
 		//gpioSetMode(button, PI_INPUT);
 		//    gpioSetMode(led, PI_OUTPUT);
+
 		std::map<std::string, std::string> map1_2 = { {"één","1"},
 													  {"├®├®n","1"},
 													  {"een","1"},
-													  //{"1","1"},
 													  {"twee","2"},
 													  {"2","2"},
-													  {"3","3"},
+													  {"1","1"},
 													  {"10", "10"}
 		};
 		while (true) {
@@ -57,82 +57,88 @@ public:
 				std::stringstream ss;
 				std::for_each(transcription.begin(), transcription.end(), [](char& c) {
 					c = ::tolower(c);
-					});
+				});
 
 				std::string find_letter = "letter";
 				std::string find_number = "nummer";
 
 				std::string number_move = "";
+				std::string number_move_temp = "";
 				char letter_move = ' ';
 				std::string letter_number_move = "";
 
 				int index_found_letter = transcription.find(find_letter);
 				int index_found_number = transcription.find(find_number);
-				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				//look in the map for 1,2 and 10
-				for (auto i : map1_2) {
-					int index_found_nummer = transcription.find(i.first);
-					
-					if (index_found_nummer != std::string::npos) {
-						number_move = i.second;
-						ss << "-------------------- nummer is:  " << number_move << "\n";
-					}
-				}
+
+
 				//  find letter and number
-				if (index_found_letter != std::string::npos && index_found_number != std::string::npos ) {
+				if (index_found_letter != std::string::npos && index_found_number != std::string::npos) {
+					int digits=0;
+					int space_index = 0;
+					//search "nummer" and check the number after it f map
+					for (int i = index_found_number + find_number.length() + 1; i < transcription.length(); i++) {
+						if (transcription[i] == ' ' || transcription[i] == '?' || transcription[i] == ',' || transcription[i] == '.') {
+							space_index = i;
+							break;
+						}
+					}
+					digits = space_index - (index_found_number + find_number.length() + 1);
+					number_move_temp = transcription.substr(index_found_number + find_number.length() + 1, digits);
 					
+					RCLCPP_INFO(get_logger(), "Publishing: '%s'", number_move_temp.c_str());
+					message.data = stringToGcode(number_move_temp);
+					publisher->publish(message);
+					
+					//look in the map for 1,2 and 10
+					for (auto i : map1_2) {
+						int index_found_nummer = number_move_temp.find(i.first);
+						if (index_found_nummer != std::string::npos) {
+							number_move = i.second;
+							ss << "-------------------- nummer is:  " << number_move << "\n";
+						}
+					}
+
 					// if number wasn't found in map
 					if (number_move == "") {
-						int digits;
-						int space_index = 0;
-						for (int i = index_found_number + find_number.length() + 1; i < transcription.length(); i++) {
-							if (transcription[i] == ' ' || transcription[i] > '9' || transcription[i] < '0') {
+						 digits = 0;
+						 space_index = 0;
+						for (int i = 0; i < number_move.length(); i++) {
+							if (number_move_temp[i] > '9' || number_move_temp[i] < '0') {
 								space_index = i;
 								break;
 							}
 						}
 						digits = space_index - (index_found_number + find_number.length() + 1);
-						number_move = transcription.substr(index_found_number + find_number.length() + 1 ,digits);
+						number_move = transcription.substr(index_found_number + find_number.length() + 1, digits);
 					}
 
 					// find letter
 					letter_move = transcription[index_found_letter + find_letter.length() + 1];
 
 					//add letter and number toegather
-					letter_number_move = letter_number_move + letter_move + number_move;				
+					letter_number_move += letter_move + number_move;
+					int NMove = std::stoi(number_move); // convert string of a number to integer.
+
+					//check the number and the letter if they were in range.
+					if (NMove > 10 || NMove < 1 || letter_move < 'a' || letter_move > 'j') {
+						ss << "Try again!";
+					}
+					else {
+						if (letter_number_move != "") { ss << "i found " << letter_number_move; }
+						else { ss << "SOMETHING WENT WRONG!"; }
+					}
 				}
 				else { //nothing found
 					ss << "failed letter or number";
 				}
-				
-				int NMove = std::stoi(number_move); // convert string of a number to integer.
 
-				//check the number and the letter if they were in range.
-				if (NMove > 10 || NMove < 1 || letter_move < 'a' || letter_move > 'j' ) { 
-					ss << "Try again!";
-				}
-				else {
-					if(letter_number_move != ""){ss << "i found " << letter_number_move;}
-					else { ss << "SOMETHING WENT WRONG!"; }
-				}
-
-				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//if game 
-				ss << "\n" << "-----" << transcription << "-----";// << "\n";
+				ss << "\n" << "----- " << transcription << " -----";// << "\n";
 				transcription = "";
 				transcription.append(ss.str());
 				RCLCPP_INFO(get_logger(), "Publishing: '%s'", transcription.c_str());
 				message.data = stringToGcode(transcription);
 				publisher->publish(message);
-
-				//if printen
-				//{
-				//RCLCPP_INFO(get_logger(), "Publishing: '%s'", transcription.c_str());
-				//	message.data = stringToGcode(transcription);
-				//	publisher->publish(message);
-				//}	
-
-				
 			}
 			else {
 				RCLCPP_INFO(get_logger(), "Transcription failed :(");
@@ -157,24 +163,3 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-
-
-
-
-
-
-
-
-//if (transcription != "Transcription failed") {
-//	RCLCPP_INFO(get_logger(), "Publishing: '%s'", transcription.c_str());
-//	message.data = stringToGcode(transcription);
-//	publisher->publish(message);
-	//std::string find_letter = "Letter";
-	//std::string find_number = "nummer";
-	//int index_found_letter  = transcription.find(find_letter);
-	//int index_found_number = transcription.find(find_number);
-	//if (index_found_letter != std::string::npos ) {
-	//	char letter_number_move = transcription[index_found_letter + find_letter.length() + 1];
-	//	RCLCPP_INFO(get_logger(), "Publishing: '%s'", letter_number_move);
-	//}
-//}
