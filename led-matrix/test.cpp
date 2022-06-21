@@ -17,8 +17,8 @@ int main() {
   RGBMatrix::Options my_defaults;
   my_defaults.hardware_mapping = "regular";  // or e.g. "adafruit-hat" or "adafruit-hat-pwm"
   my_defaults.chain_length = 1;
-  my_defaults.rows = 32;
-  my_defaults.cols = 64;
+  my_defaults.rows = 16;
+  my_defaults.cols = 32;
   my_defaults.show_refresh_rate = true;
   my_defaults.disable_hardware_pulsing = 1;
   // my_defaults.parallel = 2;
@@ -38,9 +38,12 @@ int main() {
   Animations matrix(canvas);
 
   matrix.draw();
-  matrix.setSquare(xy{0, 0}, 5);
-  matrix.miss(xy{5,5});
-  matrix.miss(xy{32,16});
+  matrix.setSquare(xy{0, 0}, 12);
+  for(;;){
+      matrix.miss(xy{5,5});
+      matrix.miss(xy{16,8}); 
+  }
+
 
 
   delete canvas;   // Make sure to delete it in the end.

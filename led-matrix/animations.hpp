@@ -37,8 +37,10 @@ public:
 
     void setCircle(xy midpoint, int radius, rgb color = rgb{255,255,255}){
         //Using the Mid-Point drawing algorithm.
-        midpoint.x += 1;
-        midpoint.y += 1;
+
+
+        // midpoint.x += 1;
+        // midpoint.y += 1;
         int x = radius, y = 0;
 
         canvas->SetPixel(x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
