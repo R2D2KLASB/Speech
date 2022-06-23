@@ -40,11 +40,13 @@ public:
 		std::map<std::string, std::string> map1_2 = { {"één","1"},
 													  {"├®├®n","1"},
 													  {"een","1"},
-													  {"twee","2"},
-													  {"2","2"},
-													  {"1","1"},
-													  {"10", "10"}
+													  {"twee","2"}
+													  //{"2","2"},
+													  //{"1","1"},
+													  //{"10", "10"}
 		};
+
+		std::string allowed_numbers[14] = { "één","├®├®n","een","twee","1","2","3","4","5","6","7","8","9","10" };
 		while (true) {
 			//if(gpioRead(button)) { 
 			RCLCPP_INFO(get_logger(), "Recording started");
@@ -85,54 +87,62 @@ public:
 					digits = space_index - (index_found_number + find_number.length() + 1);
 					number_move_temp = transcription.substr(index_found_number + find_number.length() + 1, digits);
 					
-					RCLCPP_INFO(get_logger(), "Publishing: '%s'", number_move_temp.c_str());
-					message.data = stringToGcode(number_move_temp);
-					publisher->publish(message);
 					
 					//look in the map for 1,2 and 10
 					for (auto i : map1_2) {
-						int index_found_nummer = number_move_temp.find(i.first);
-						if (index_found_nummer != std::string::npos) {
+						//int index_found_nummer = number_move_temp.find(i.first);
+						if (i.first == number_move_temp) {
 							number_move = i.second;
-							ss << "-------------------- nummer is:  " << number_move << "\n";
 						}
 					}
 
 					// if number wasn't found in map
 					if (number_move == "") {
-						 digits = 0;
-						 space_index = 0;
-						for (int i = 0; i < number_move.length(); i++) {
+						int not_digit = number_move_temp.length();
+						space_index = 0;
+						for (int i = 0; i < number_move_temp.length(); i++) {
 							if (number_move_temp[i] > '9' || number_move_temp[i] < '0') {
-								space_index = i;
+								not_digit = i;
 								break;
 							}
 						}
-						digits = space_index - (index_found_number + find_number.length() + 1);
-						number_move = transcription.substr(index_found_number + find_number.length() + 1, digits);
+
+						//it splits the numbers from letters
+						number_move = number_move_temp.substr(0, not_digit);
+						
+					}
+					// find letter
+					if (transcription[index_found_letter + find_letter.length()] == 's') {
+						letter_move = 'c';
+					} else {
+						letter_move = transcription[index_found_letter + find_letter.length() + 1];
+					}
+					
+
+					//add letter and number thogather
+
+					letter_number_move += letter_move + number_move;
+					//
+					bool out_of_number_range = true;
+					for (std::string i : allowed_numbers) {
+						if (number_move == i) {
+							out_of_number_range = false;
+						}
 					}
 
-					// find letter
-					letter_move = transcription[index_found_letter + find_letter.length() + 1];
-
-					//add letter and number toegather
-					letter_number_move += letter_move + number_move;
-					int NMove = std::stoi(number_move); // convert string of a number to integer.
-
 					//check the number and the letter if they were in range.
-					if (NMove > 10 || NMove < 1 || letter_move < 'a' || letter_move > 'j') {
-						ss << "Try again!";
+					if (out_of_number_range == true || letter_move < 'a' || letter_move > 'j') {
+						ss << "Try again!\n";
 					}
 					else {
 						if (letter_number_move != "") { ss << "i found " << letter_number_move; }
-						else { ss << "SOMETHING WENT WRONG!"; }
+						else { ss << "SOMETHING WENT WRONG!\n"; }
 					}
 				}
 				else { //nothing found
 					ss << "failed letter or number";
 				}
 
-				//if game 
 				ss << "\n" << "----- " << transcription << " -----";// << "\n";
 				transcription = "";
 				transcription.append(ss.str());
