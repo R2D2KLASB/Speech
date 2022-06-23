@@ -37,11 +37,20 @@ int main() {
 
   Animations matrix(canvas);
 
+ std::vector<std::vector<std::vector<int>>> boats = {{{0,0},{0,1},{0,2}},{{0,4},{1,4},{2,4},{3,4}}};
+
   matrix.draw();
-  matrix.setSquare(xy{0, 0}, 12);
+  matrix.setBoats(boats);
+  matrix.drawBoats();
+  // matrix.setSquare(xy{0, 0}, 12);
+  // matrix.hit(xy{26, 8});
+  // matrix.hit(xy{5, 5});
+  // for(;;){}
   for(;;){
-      matrix.miss(xy{5,5});
-      matrix.miss(xy{16,8}); 
+      matrix.hit(xy{26, 8});
+      matrix.hit(xy{5, 5});
+      matrix.miss(xy{6,5});
+      matrix.miss(xy{16,8});
   }
 
 
