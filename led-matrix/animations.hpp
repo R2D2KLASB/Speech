@@ -34,8 +34,11 @@ class Animations{
 public:
     /// @brief constructor for the animations
     /// @param canvas: canvas pointer
-    Animations(Canvas *canvas):
-        canvas(canvas){}
+    Animations(Canvas *canvas, serialib serial, xy coordinatesEnemy, xy coordinatesPlayer):
+        canvas(canvas),
+        serial(serial),
+        coordinatesEnemy(coordinatesEnemy),
+        coordinatesPlayer(coordinatesPlayer){}
 
         /// @brief makes the canvas blue
     void draw(){
@@ -54,11 +57,9 @@ public:
 
     /// @brief draws the boats on the canvas
     void drawBoats(){
-        // std::vector<int> begin = getBeginX();
-        std::vector<int> begin = {5, 5};
         for(unsigned int i = 0; i < boats.size(); i++){
             for(unsigned int j = 0; j < boats[i].size(); j++){
-                canvas->SetPixel(boats[i][j][0] + begin[0], boats[i][j][1] + begin[1], 0, 255, 0);
+                canvas->SetPixel(boats[i][j][0] + coordinatesEnemy.x, boats[i][j][1] + coordinatesEnemy.y, 0, 255, 0);
             }
         }
         for(unsigned int i = 0; i < shipData.size(); i++){
@@ -77,8 +78,6 @@ public:
     /// @param color by default 255,255,255.
     void setCircle(xy midpoint, int radius, rgb color = rgb{255,255,255}){
         //Using the Mid-Point drawing algorithm.
-        midpoint.x += 1;
-        midpoint.y += 1;
         int x = radius, y = 0;
 
         canvas->SetPixel(x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
@@ -132,11 +131,11 @@ public:
             }
             if (i - 3) {
                 setCircle(midpoint, startradius + i - 4, bg);
-                drawHitOrMiss();
+                drawBoats();
             }
             if (i - 6) {
                 setCircle(midpoint, startradius + i - 7, bg);
-                drawHitOrMiss();
+                drawBoats();
             }
             setCircle(midpoint, startradius + i, color);
             setCircle(midpoint, startradius + i - 3, color);
@@ -197,16 +196,16 @@ public:
     ///@param size size of the rectangle
     ///@param filled default false
     ///@param color default 255,255,255
-    void setSquare(xy startpoint, int size, bool filled = false, rgb color = rgb{255,255,255}){
+    void setSquare(xy startpoint, int size, rgb color = rgb{255,255,255}, bool filled = false){
         if(filled){
             for(unsigned int i = 0; i < size; i++){
-                setLine(xy{startpoint.x, startpoint.y + i}, size);
+                setLine(xy{startpoint.x, startpoint.y + i}, size, true, color);
             }
         } else {
-            setLine(startpoint, size);
-            setLine(xy{startpoint.x, startpoint.y + size - 1}, size);
-            setLine(startpoint, size, false);
-            setLine(xy{startpoint.x + size - 1, startpoint.y}, size, false);
+            setLine(startpoint, size, true, color);
+            setLine(xy{startpoint.x, startpoint.y + size - 1}, size, true, color);
+            setLine(startpoint, size, false, color);
+            setLine(xy{startpoint.x + size - 1, startpoint.y}, size, false, color);
         }
     }
 
@@ -217,38 +216,38 @@ public:
             int error = serial.readChar(&input, 1);
             switch (input) {
                 case '1':
-                    if (coordinates.y - 1 <= squareBeginY | sw == true) break;
-                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
-                    matrix.drawHitOrMiss();
-                    coordinates.y -= 1;
-                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    if (coordinatesEnemy.y - 1 <= squareBeginY | sw == true) break;
+                    canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
+                    this->drawBoats();
+                    coordinatesEnemy.y -= 1;
+                    canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 255, 0, 0);
                     sw = true;
                     break;
 
                 case '4':
-                    if (coordinates.x - 1 <= squareBeginX | sw == true) break;
-                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
-                    matrix.drawHitOrMiss();
-                    coordinates.x -= 1;
-                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    if (coordinatesEnemy.x - 1 <= squareBeginX | sw == true) break;
+                    canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
+                    this->drawBoats();
+                    coordinatesEnemy.x -= 1;
+                    canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 255, 0, 0);
                     sw = true;
                     break;
 
                 case '2':
-                    if (coordinates.y + 1 >= squareBeginY + squareLength - 1 | sw == true) break;
-                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
-                    matrix.drawHitOrMiss();
-                    coordinates.y += 1;
-                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    if (coordinatesEnemy.y + 1 >= squareBeginY + squareLength - 1 | sw == true) break;
+                    canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
+                    this->drawBoats();
+                    coordinatesEnemy.y += 1;
+                    canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 255, 0, 0);
                     sw = true;
                     break;
 
                 case '3':
-                    if (coordinates.x + 1 >= squareBeginX + squareLength - 1 | sw == true) break;
-                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
-                    matrix.drawHitOrMiss();
-                    coordinates.x += 1;
-                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    if (coordinatesEnemy.x + 1 >= squareBeginX + squareLength - 1 | sw == true) break;
+                    canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
+                    this->drawBoats();
+                    coordinatesEnemy.x += 1;
+                    canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 255, 0, 0);
                     sw = true;
                     break;
 
@@ -264,10 +263,14 @@ public:
         }
     }
 
+
 private:
     Canvas *canvas;
     std::vector <std::vector<unsigned int>> shipData = {};
     std::vector<std::vector<std::vector<int>>> boats;
+    serialib serial;
+    xy coordinatesEnemy;
+    xy coordinatesPlayer;
 };
 
 #endif //ANIMATIONS_HPP
