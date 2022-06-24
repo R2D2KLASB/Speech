@@ -6,10 +6,17 @@
 #include <led-matrix.h>
 #include <signal.h>
 #include <unistd.h>
+#include "serialib/lib/serialib.h"
+
+#define SERIAL_PORT "/dev/ttyACM0"
+#define Rows 16
+#define Cols 32
+#define squareBeginX 2
+#define squareBeginY 2
+#define squareLength 12
 
 using rgb_matrix::RGBMatrix;
 using rgb_matrix::Canvas;
-
 
 /// @brief struct for a x, y position, int
 struct xy{
@@ -57,11 +64,12 @@ public:
         for(unsigned int i = 0; i < shipData.size(); i++){
             if(shipData[i][2]){
                 canvas->SetPixel(shipData[i][0], shipData[i][1], 255, 165, 0);
-            }else{
+            } else {
                 canvas->SetPixel(shipData[i][0], shipData[i][1], 255, 255, 255);
             }
         }
     }
+
 
     /// @brief sets a circle om a xy.
     /// @param midpoint uses the xy struct to place a circle
@@ -69,29 +77,29 @@ public:
     /// @param color by default 255,255,255.
     void setCircle(xy midpoint, int radius, rgb color = rgb{255,255,255}){
         //Using the Mid-Point drawing algorithm.
+        midpoint.x += 1;
+        midpoint.y += 1;
         int x = radius, y = 0;
 
         canvas->SetPixel(x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
 
-        if (radius > 0){
+        if (radius > 0) {
             canvas->SetPixel(y + midpoint.x, x + midpoint.y, color.r, color.g, color.b);
             canvas->SetPixel(-x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
             canvas->SetPixel(midpoint.x, -x + midpoint.y, color.r, color.g, color.b);
         }
 
         int P = 1 - radius;
-        while (x > y)
-        {
+        while (x > y) {
             y++;
 
             if (P <= 0)
-                P = P + 2*y + 1;
-            else
-            {
+                P = P + 2 * y + 1;
+            else {
                 x--;
-                P = P + 2*y - 2*x + 1;
+                P = P + 2 * y - 2 * x + 1;
             }
-            if (x < y){
+            if (x < y) {
                 break;
             }
             canvas->SetPixel(x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
@@ -100,7 +108,7 @@ public:
             canvas->SetPixel(-x + midpoint.x, -y + midpoint.y, color.r, color.g, color.b);
 
 
-            if (x != y){
+            if (x != y) {
                 canvas->SetPixel(y + midpoint.x, x + midpoint.y, color.r, color.g, color.b);
                 canvas->SetPixel(-y + midpoint.x, x + midpoint.y, color.r, color.g, color.b);
                 canvas->SetPixel(y + midpoint.x, -x + midpoint.y, color.r, color.g, color.b);
@@ -108,6 +116,7 @@ public:
             }
         }
     }
+
 
     ///@brief makes a ripple effect
     ///@param midpoint uses the xy struct to place a circle
@@ -121,19 +130,20 @@ public:
                 this->setCircle(midpoint, startradius + i -1, bg);
                 this->drawBoats();
             }
-            if(i - 3){
-                this->setCircle(midpoint, startradius + i - 4, bg);
-                this->drawBoats();
+            if (i - 3) {
+                setCircle(midpoint, startradius + i - 4, bg);
+                drawHitOrMiss();
             }
-            if(i - 6){
-                this->setCircle(midpoint, startradius + i - 7, bg);
-                this->drawBoats();
+            if (i - 6) {
+                setCircle(midpoint, startradius + i - 7, bg);
+                drawHitOrMiss();
             }
-            this->setCircle(midpoint, startradius + i, color);
-            this->setCircle(midpoint, startradius + i - 3, color);
-            this->setCircle(midpoint, startradius + i - 6, color);
+            setCircle(midpoint, startradius + i, color);
+            setCircle(midpoint, startradius + i - 3, color);
+            setCircle(midpoint, startradius + i - 6, color);
         }
     }
+
 
     ///@brief puts a line on the matrix
     ///@param startpoint using the xy struct sets startpoint of a line
@@ -144,19 +154,21 @@ public:
         for(unsigned int i = 0; i < length; i++){
             if(horizontal){
                 canvas->SetPixel(startpoint.x + i, startpoint.y, color.r, color.g, color.b);
-            }else{
+            } else {
                 canvas->SetPixel(startpoint.x, startpoint.y + i, color.r, color.g, color.b);
             }
         }
     }
+
 
     ///@brief draws ripple animation.
     ///@details draws the missed animation. Also stores the it miss in the shipData
     ///@param position using xy struct starts the miss animation on the matrix
     void miss(xy position){
         shipData.push_back({position.x, position.y, 0});
-        this->ripple(position, 0, rgb{47,141,255}, rgb{0,0,255});
+        this->ripple(position, 0, rgb{137, 209, 254}, rgb{0, 0, 255});
     }
+
 
     ///@brief draws the hit animation.
     ///@details draws the hit explosion. Also stores the hit in the shipData
@@ -190,19 +202,71 @@ public:
             for(unsigned int i = 0; i < size; i++){
                 setLine(xy{startpoint.x, startpoint.y + i}, size);
             }
-        }else{
+        } else {
             setLine(startpoint, size);
-            setLine(xy{startpoint.x, startpoint.y+size-1}, size);
+            setLine(xy{startpoint.x, startpoint.y + size - 1}, size);
             setLine(startpoint, size, false);
-            setLine(xy{startpoint.x+size-1, startpoint.y}, size, false);
-            canvas->SetPixel(5, 5, 255, 0, 0);
-            canvas->SetPixel(3, 3, 255, 165, 0);
+            setLine(xy{startpoint.x + size - 1, startpoint.y}, size, false);
+        }
+    }
+
+    void handleInput() {
+        char input = -1;
+        bool sw = false;
+        for (;;) {
+            int error = serial.readChar(&input, 1);
+            switch (input) {
+                case '1':
+                    if (coordinates.y - 1 <= squareBeginY | sw == true) break;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
+                    matrix.drawHitOrMiss();
+                    coordinates.y -= 1;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    sw = true;
+                    break;
+
+                case '4':
+                    if (coordinates.x - 1 <= squareBeginX | sw == true) break;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
+                    matrix.drawHitOrMiss();
+                    coordinates.x -= 1;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    sw = true;
+                    break;
+
+                case '2':
+                    if (coordinates.y + 1 >= squareBeginY + squareLength - 1 | sw == true) break;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
+                    matrix.drawHitOrMiss();
+                    coordinates.y += 1;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    sw = true;
+                    break;
+
+                case '3':
+                    if (coordinates.x + 1 >= squareBeginX + squareLength - 1 | sw == true) break;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
+                    matrix.drawHitOrMiss();
+                    coordinates.x += 1;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    sw = true;
+                    break;
+
+                case '0':
+                    ///TODO fire functie
+                    sw = true;
+                    break;
+
+                case '8':
+                    sw = false;
+                    break;
+            }
         }
     }
 
 private:
     Canvas *canvas;
-    std::vector<std::vector<unsigned int>> shipData;
+    std::vector <std::vector<unsigned int>> shipData = {};
     std::vector<std::vector<std::vector<int>>> boats;
 };
 

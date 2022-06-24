@@ -8,6 +8,6 @@ include_directories(/home/ubuntu/rpi-rgb-led-matrix/include)
 file(GLOB_RECURSE RGB_HEADER_FILES /home/ubuntu/rpi-rgb-led-matrix/include/*.h)
 file(GLOB_RECURSE RGB_SRC_FILES /home/ubuntu/rpi-rgb-led-matrix/lib/*.c*)
 
-add_executable(matrix test.cpp animations.hpp ${RGB_SRC_FILES} ${RGB_HEADER_FILES})
+add_executable(matrix main.cpp animations.hpp serialib/lib/serialib.cpp ${RGB_SRC_FILES} ${RGB_HEADER_FILES})
 
 target_link_libraries(matrix pthread)
