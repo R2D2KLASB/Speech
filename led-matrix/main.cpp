@@ -19,14 +19,6 @@ using rgb_matrix::Canvas;
 #define squareBeginY 2
 #define squareLength 12
 
-void drawBoard(Animations &matrix, unsigned int beginPointX, unsigned int beginPointY, unsigned int length){
-	matrix.setLine({beginPointX+length-1, beginPointY+1}, length, false);
-	matrix.setLine({beginPointX, beginPointY}, length);
-	matrix.setLine({beginPointX, beginPointY}, length, false);
-	matrix.setLine({beginPointX, length}, length);
-	return;
-}
-
 std::vector<int> getFieldBeginCordinate(){
  	return {squareBeginX+1, squareBeginY+1};
 }
@@ -49,7 +41,7 @@ int main() {
   // user to minimize a potential security attack surface.
   // runtime_defaults.drop_privileges = 1;
   Canvas *canvas = RGBMatrix::CreateFromOptions(my_defaults, runtime_defaults);
-  xy cordinates{squareBeginX + 1, squareBeginY + 1};
+  xy coordinates{squareBeginX + 1, squareBeginY + 1};
   serialib serial;
   char errorOpening = serial.openDevice(SERIAL_PORT, 9600);
   //if(errorOpening != 1){
@@ -63,7 +55,6 @@ int main() {
 
   Animations matrix(canvas);
   matrix.draw();
-  //drawBoard(matrix, 2, 2, 12);
   matrix.setSquare({squareBeginX, squareBeginY}, squareLength);
   matrix.setSquare({18, 2}, 12);
   matrix.drawHitOrMiss();
@@ -73,36 +64,60 @@ int main() {
 	int error = serial.readChar(&input, 1);
 	switch(input){
 		case '1':
-			if(cordinates.y - 1 <= squareBeginY | sw == true )break;
-			canvas->SetPixel(cordinates.x, cordinates.y, 0,0,255);
+			if(coordinates
+	.y - 1 <= squareBeginY | sw == true )break;
+			canvas->SetPixel(coordinates
+	.x, coordinates
+	.y, 0,0,255);
 			matrix.drawHitOrMiss();
-			cordinates.y -= 1;
-			canvas->SetPixel(cordinates.x, cordinates.y, 255,0,0);
+			coordinates
+	.y -= 1;
+			canvas->SetPixel(coordinates
+	.x, coordinates
+	.y, 255,0,0);
 			sw = true;
 			break;
 
 		case '4':
-			if(cordinates.x - 1 <= squareBeginX | sw == true)break;
-			canvas->SetPixel(cordinates.x, cordinates.y, 0,0,255);
+			if(coordinates
+	.x - 1 <= squareBeginX | sw == true)break;
+			canvas->SetPixel(coordinates
+	.x, coordinates
+	.y, 0,0,255);
 			matrix.drawHitOrMiss();
-			cordinates.x -= 1;
-			canvas->SetPixel(cordinates.x, cordinates.y, 255,0,0);
+			coordinates
+	.x -= 1;
+			canvas->SetPixel(coordinates
+	.x, coordinates
+	.y, 255,0,0);
 			sw = true;
 			break;
 		case '2':
-			if(cordinates.y + 1 >= squareBeginY + squareLength - 1 | sw == true)break;
-			canvas->SetPixel(cordinates.x, cordinates.y, 0,0,255);
+			if(coordinates
+	.y + 1 >= squareBeginY + squareLength - 1 | sw == true)break;
+			canvas->SetPixel(coordinates
+	.x, coordinates
+	.y, 0,0,255);
 			matrix.drawHitOrMiss();
-			cordinates.y += 1;
-			canvas->SetPixel(cordinates.x, cordinates.y, 255,0,0);
+			coordinates
+	.y += 1;
+			canvas->SetPixel(coordinates
+	.x, coordinates
+	.y, 255,0,0);
 			sw = true;
 			break;
 		case '3':
-			if(cordinates.x + 1 >= squareBeginX + squareLength - 1 | sw == true)break;
-			canvas->SetPixel(cordinates.x, cordinates.y, 0,0,255);
+			if(coordinates
+	.x + 1 >= squareBeginX + squareLength - 1 | sw == true)break;
+			canvas->SetPixel(coordinates
+	.x, coordinates
+	.y, 0,0,255);
 			matrix.drawHitOrMiss();
-			cordinates.x += 1;
-			canvas->SetPixel(cordinates.x, cordinates.y, 255,0,0);
+			coordinates
+	.x += 1;
+			canvas->SetPixel(coordinates
+	.x, coordinates
+	.y, 255,0,0);
 			sw = true;
 			break;
 
