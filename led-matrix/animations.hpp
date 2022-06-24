@@ -28,6 +28,7 @@ public:
 
     void setBoats(std::vector<std::vector<std::vector<int>>> ships){
         boats = ships;
+        this->drawBoats();
     }
 
 
@@ -92,7 +93,7 @@ public:
 
 
     void ripple(xy midpoint, int startradius, rgb color, rgb bg){
-        for(unsigned int i = 0; i < 43; i++){
+        for(unsigned int i = 0; i < 44; i++){
             usleep(90000);
             if(i){
                 this->setCircle(midpoint, startradius + i -1, bg);
