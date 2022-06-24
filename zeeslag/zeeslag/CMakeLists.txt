@@ -14,13 +14,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
-include_directories(/home/ubuntu/rpi-rgb-led-matrix/lib)
-include_directories(/home/ubuntu/rpi-rgb-led-matrix/include)
-file(GLOB_RECURSE RGB_HEADER_FILES /home/ubuntu/rpi-rgb-led-matrix/include/*.h)
-file(GLOB_RECURSE RGB_SRC_FILES /home/ubuntu/rpi-rgb-led-matrix/lib/*.c*)
-
-add_executable(listener src/listener.cpp ${RGB_SRC_FILES} ${RGB_HEADER_FILES})
-ament_target_dependencies(listener rclcpp std_msgs)
-install(TARGETS listener DESTINATION lib/${PROJECT_NAME})
+add_executable(matrixrelay src/matrixrelay.cpp)
+ament_target_dependencies(matrixrelay rclcpp std_msgs)
+install(TARGETS matrixrelay DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
