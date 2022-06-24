@@ -4,38 +4,46 @@
 #include <led-matrix.h>
 #include <signal.h>
 #include <unistd.h>
+#include "serialib/lib/serialib.h"
+
+#define SERIAL_PORT "/dev/ttyACM0"
+#define Rows 16
+#define Cols 32
+#define squareBeginX 2
+#define squareBeginY 2
+#define squareLength 12
 
 using rgb_matrix::RGBMatrix;
 using rgb_matrix::Canvas;
 
-struct xy{
+struct xy {
     unsigned int x, y;
 };
 
-struct rgb{
+struct rgb {
     uint8_t r, g, b;
 };
 
-class Animations{
+class Animations {
 public:
-    Animations(Canvas *canvas):
-        canvas(canvas){}
+    Animations(Canvas *canvas) :
+            canvas(canvas) {}
 
-    void draw(){
-        canvas->Fill(0,0,255);
+    void draw() {
+        canvas->Fill(0, 0, 255);
     }
 
-    void drawHitOrMiss(){
-        for(unsigned int i = 0; i < shipData.size(); i++){
-            if(shipData[i][2] == 1){
+    void drawHitOrMiss() {
+        for (unsigned int i = 0; i < shipData.size(); i++) {
+            if (shipData[i][2] == 1) {
                 canvas->SetPixel(shipData[i][0], shipData[i][1], 255, 165, 0);
-            }else{
+            } else {
                 canvas->SetPixel(shipData[i][0], shipData[i][1], 255, 255, 255);
-        	}
-	}
+            }
+        }
     }
 
-    void setCircle(xy midpoint, int radius, rgb color = rgb{255,255,255}){
+    void setCircle(xy midpoint, int radius, rgb color = rgb{255, 255, 255}) {
         //Using the Mid-Point drawing algorithm.
         midpoint.x += 1;
         midpoint.y += 1;
@@ -43,25 +51,23 @@ public:
 
         canvas->SetPixel(x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
 
-        if (radius > 0){
+        if (radius > 0) {
             canvas->SetPixel(y + midpoint.x, x + midpoint.y, color.r, color.g, color.b);
             canvas->SetPixel(-x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
             canvas->SetPixel(midpoint.x, -x + midpoint.y, color.r, color.g, color.b);
         }
 
         int P = 1 - radius;
-        while (x > y)
-        {
+        while (x > y) {
             y++;
 
             if (P <= 0)
-                P = P + 2*y + 1;
-            else
-            {
+                P = P + 2 * y + 1;
+            else {
                 x--;
-                P = P + 2*y - 2*x + 1;
+                P = P + 2 * y - 2 * x + 1;
             }
-            if (x < y){
+            if (x < y) {
                 break;
             }
             canvas->SetPixel(x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
@@ -70,7 +76,7 @@ public:
             canvas->SetPixel(-x + midpoint.x, -y + midpoint.y, color.r, color.g, color.b);
 
 
-            if (x != y){
+            if (x != y) {
                 canvas->SetPixel(y + midpoint.x, x + midpoint.y, color.r, color.g, color.b);
                 canvas->SetPixel(-y + midpoint.x, x + midpoint.y, color.r, color.g, color.b);
                 canvas->SetPixel(y + midpoint.x, -x + midpoint.y, color.r, color.g, color.b);
@@ -80,18 +86,18 @@ public:
     }
 
 
-    void ripple(xy midpoint, int startradius, rgb color, rgb bg){
-        for(unsigned int i = 0; i < 43; i++){
+    void ripple(xy midpoint, int startradius, rgb color, rgb bg) {
+        for (unsigned int i = 0; i < 43; i++) {
             usleep(150000);
-            if(i){
-                setCircle(midpoint, startradius + i -1, bg);
+            if (i) {
+                setCircle(midpoint, startradius + i - 1, bg);
                 drawHitOrMiss();
             }
-            if(i - 3){
+            if (i - 3) {
                 setCircle(midpoint, startradius + i - 4, bg);
                 drawHitOrMiss();
             }
-            if(i - 6){
+            if (i - 6) {
                 setCircle(midpoint, startradius + i - 7, bg);
                 drawHitOrMiss();
             }
@@ -101,37 +107,91 @@ public:
         }
     }
 
-    void setLine(xy startpoint, unsigned int length, bool horizontal = true, rgb color = rgb{255,255,255}){
-        for(unsigned int i = 0; i < length; i++){
-            if(horizontal){
+    void setLine(xy startpoint, unsigned int length, bool horizontal = true, rgb color = rgb{255, 255, 255}) {
+        for (unsigned int i = 0; i < length; i++) {
+            if (horizontal) {
                 canvas->SetPixel(startpoint.x + i, startpoint.y, color.r, color.g, color.b);
-            }else{
+            } else {
                 canvas->SetPixel(startpoint.x, startpoint.y + i, color.r, color.g, color.b);
             }
         }
     }
 
-    void miss(xy position){
+    void miss(xy position) {
         shipData.push_back({position.x, position.y, 0});
-        this->ripple(position, 0, rgb{137,209,254}, rgb{0,0,255});
+        this->ripple(position, 0, rgb{137, 209, 254}, rgb{0, 0, 255});
     }
 
-    void setSquare(xy startpoint, int size, bool filled = false, rgb color = rgb{255,255,255}){
-        if(filled){
-            for(unsigned int i = 0; i < size; i++){
+    void setSquare(xy startpoint, int size, bool filled = false, rgb color = rgb{255, 255, 255}) {
+        if (filled) {
+            for (unsigned int i = 0; i < size; i++) {
                 setLine(xy{startpoint.x, startpoint.y + i}, size);
             }
-        }else{
+        } else {
             setLine(startpoint, size);
-            setLine(xy{startpoint.x, startpoint.y+size-1}, size);
+            setLine(xy{startpoint.x, startpoint.y + size - 1}, size);
             setLine(startpoint, size, false);
-            setLine(xy{startpoint.x+size-1, startpoint.y}, size, false);
+            setLine(xy{startpoint.x + size - 1, startpoint.y}, size, false);
+        }
+    }
+
+    void handleInput() {
+        char input = -1;
+        bool sw = false;
+        for (;;) {
+            int error = serial.readChar(&input, 1);
+            switch (input) {
+                case '1':
+                    if (coordinates.y - 1 <= squareBeginY | sw == true) break;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
+                    matrix.drawHitOrMiss();
+                    coordinates.y -= 1;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    sw = true;
+                    break;
+
+                case '4':
+                    if (coordinates.x - 1 <= squareBeginX | sw == true) break;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
+                    matrix.drawHitOrMiss();
+                    coordinates.x -= 1;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    sw = true;
+                    break;
+
+                case '2':
+                    if (coordinates.y + 1 >= squareBeginY + squareLength - 1 | sw == true) break;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
+                    matrix.drawHitOrMiss();
+                    coordinates.y += 1;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    sw = true;
+                    break;
+
+                case '3':
+                    if (coordinates.x + 1 >= squareBeginX + squareLength - 1 | sw == true) break;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 0, 0, 255);
+                    matrix.drawHitOrMiss();
+                    coordinates.x += 1;
+                    canvas->SetPixel(coordinates.x, coordinates.y, 255, 0, 0);
+                    sw = true;
+                    break;
+
+                case '0':
+                    ///TODO fire functie
+                    sw = true;
+                    break;
+
+                case '8':
+                    sw = false;
+                    break;
+            }
         }
     }
 
 private:
     Canvas *canvas;
-    std::vector<std::vector<unsigned int>> shipData = {{4, 8, 1}, {5, 8, 1}, {6, 8, 0}};
+    std::vector <std::vector<unsigned int>> shipData = {{4, 8, 1}, {5, 8, 1}, {6, 8, 0}};
 };
 
 #endif //ANIMATIONS_HPP
