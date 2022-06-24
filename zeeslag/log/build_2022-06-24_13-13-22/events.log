@@ -1,0 +1,245 @@
+[0.000000] (-) TimerEvent: {}
+[0.000954] (zeeslag) JobQueued: {'identifier': 'zeeslag', 'dependencies': OrderedDict()}
+[0.001928] (zeeslag) JobStarted: {'identifier': 'zeeslag'}
+[0.086142] (zeeslag) JobProgress: {'identifier': 'zeeslag', 'progress': 'cmake'}
+[0.089431] (zeeslag) JobProgress: {'identifier': 'zeeslag', 'progress': 'build'}
+[0.093639] (zeeslag) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ubuntu/Speech/zeeslag/build/zeeslag', '--', '-j3', '-l3'], 'cwd': '/home/ubuntu/Speech/zeeslag/build/zeeslag', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('SSH_CLIENT', '192.168.4.1 44864 22'), ('XDG_SESSION_TYPE', 'tty'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ubuntu/ros2_foxy/ros2-linux/opt/yaml_cpp_vendor/lib:/home/ubuntu/ros2_foxy/ros2-linux/opt/rviz_ogre_vendor/lib:/home/ubuntu/ros2_foxy/ros2-linux/lib'), ('MOTD_SHOWN', 'pam'), ('HOME', '/home/ubuntu'), ('OLDPWD', '/home/ubuntu/Speech/zeeslag/socket'), ('SSH_TTY', '/dev/pts/2'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLCON_PREFIX_PATH', '/home/ubuntu/Speech/zeeslag/install:/home/ubuntu/ros2_foxy/ros2-linux'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'ubuntu'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/ubuntu/ros2_foxy/ros2-linux/lib/aarch64-linux-gnu/pkgconfig:/home/ubuntu/ros2_foxy/ros2-linux/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '4'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/ubuntu/.local/bin:/home/ubuntu/ros2_foxy/ros2-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/home/ubuntu/Speech/zeeslag/install/zeeslag:/home/ubuntu/ros2_foxy/ros2-linux'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/ubuntu/Speech/zeeslag/build/zeeslag'), ('SSH_CONNECTION', '192.168.4.1 44864 192.168.4.64 22'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/ubuntu/ros2_foxy/ros2-linux/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ubuntu/Speech/zeeslag/install/zeeslag:/home/ubuntu/ros2_foxy/ros2-linux')]), 'shell': False}
+[0.099023] (-) TimerEvent: {}
+[0.204159] (-) TimerEvent: {}
+[0.289724] (zeeslag) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target matrixrelay\x1b[0m\n'}
+[0.304266] (-) TimerEvent: {}
+[0.405000] (-) TimerEvent: {}
+[0.434219] (zeeslag) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/matrixrelay.dir/src/matrixrelay.cpp.o\x1b[0m\n'}
+[0.505198] (-) TimerEvent: {}
+[0.606086] (-) TimerEvent: {}
+[0.707323] (-) TimerEvent: {}
+[0.808014] (-) TimerEvent: {}
+[0.908687] (-) TimerEvent: {}
+[1.009436] (-) TimerEvent: {}
+[1.110160] (-) TimerEvent: {}
+[1.210919] (-) TimerEvent: {}
+[1.311648] (-) TimerEvent: {}
+[1.412416] (-) TimerEvent: {}
+[1.513180] (-) TimerEvent: {}
+[1.613910] (-) TimerEvent: {}
+[1.714676] (-) TimerEvent: {}
+[1.815460] (-) TimerEvent: {}
+[1.916171] (-) TimerEvent: {}
+[2.016884] (-) TimerEvent: {}
+[2.117632] (-) TimerEvent: {}
+[2.218370] (-) TimerEvent: {}
+[2.319128] (-) TimerEvent: {}
+[2.419839] (-) TimerEvent: {}
+[2.520577] (-) TimerEvent: {}
+[2.621292] (-) TimerEvent: {}
+[2.722073] (-) TimerEvent: {}
+[2.822896] (-) TimerEvent: {}
+[2.923624] (-) TimerEvent: {}
+[3.024359] (-) TimerEvent: {}
+[3.125074] (-) TimerEvent: {}
+[3.225812] (-) TimerEvent: {}
+[3.326548] (-) TimerEvent: {}
+[3.427312] (-) TimerEvent: {}
+[3.528022] (-) TimerEvent: {}
+[3.628740] (-) TimerEvent: {}
+[3.729479] (-) TimerEvent: {}
+[3.830203] (-) TimerEvent: {}
+[3.930913] (-) TimerEvent: {}
+[4.031628] (-) TimerEvent: {}
+[4.132337] (-) TimerEvent: {}
+[4.233101] (-) TimerEvent: {}
+[4.333820] (-) TimerEvent: {}
+[4.434556] (-) TimerEvent: {}
+[4.535328] (-) TimerEvent: {}
+[4.636035] (-) TimerEvent: {}
+[4.736906] (-) TimerEvent: {}
+[4.837702] (-) TimerEvent: {}
+[4.938488] (-) TimerEvent: {}
+[5.039360] (-) TimerEvent: {}
+[5.140182] (-) TimerEvent: {}
+[5.240899] (-) TimerEvent: {}
+[5.341624] (-) TimerEvent: {}
+[5.442381] (-) TimerEvent: {}
+[5.543138] (-) TimerEvent: {}
+[5.643867] (-) TimerEvent: {}
+[5.744594] (-) TimerEvent: {}
+[5.845317] (-) TimerEvent: {}
+[5.946069] (-) TimerEvent: {}
+[6.046836] (-) TimerEvent: {}
+[6.147565] (-) TimerEvent: {}
+[6.248294] (-) TimerEvent: {}
+[6.349024] (-) TimerEvent: {}
+[6.449779] (-) TimerEvent: {}
+[6.550523] (-) TimerEvent: {}
+[6.651301] (-) TimerEvent: {}
+[6.752022] (-) TimerEvent: {}
+[6.852743] (-) TimerEvent: {}
+[6.953501] (-) TimerEvent: {}
+[7.054238] (-) TimerEvent: {}
+[7.154924] (-) TimerEvent: {}
+[7.255624] (-) TimerEvent: {}
+[7.356350] (-) TimerEvent: {}
+[7.457088] (-) TimerEvent: {}
+[7.557832] (-) TimerEvent: {}
+[7.658600] (-) TimerEvent: {}
+[7.759349] (-) TimerEvent: {}
+[7.860069] (-) TimerEvent: {}
+[7.960827] (-) TimerEvent: {}
+[8.061662] (-) TimerEvent: {}
+[8.162414] (-) TimerEvent: {}
+[8.263179] (-) TimerEvent: {}
+[8.363907] (-) TimerEvent: {}
+[8.464655] (-) TimerEvent: {}
+[8.565449] (-) TimerEvent: {}
+[8.666212] (-) TimerEvent: {}
+[8.766909] (-) TimerEvent: {}
+[8.867624] (-) TimerEvent: {}
+[8.968365] (-) TimerEvent: {}
+[9.069148] (-) TimerEvent: {}
+[9.169879] (-) TimerEvent: {}
+[9.270632] (-) TimerEvent: {}
+[9.371383] (-) TimerEvent: {}
+[9.472122] (-) TimerEvent: {}
+[9.572847] (-) TimerEvent: {}
+[9.673565] (-) TimerEvent: {}
+[9.774299] (-) TimerEvent: {}
+[9.875122] (-) TimerEvent: {}
+[9.975868] (-) TimerEvent: {}
+[10.076624] (-) TimerEvent: {}
+[10.177352] (-) TimerEvent: {}
+[10.278112] (-) TimerEvent: {}
+[10.378868] (-) TimerEvent: {}
+[10.479586] (-) TimerEvent: {}
+[10.580360] (-) TimerEvent: {}
+[10.681321] (-) TimerEvent: {}
+[10.782056] (-) TimerEvent: {}
+[10.882840] (-) TimerEvent: {}
+[10.983840] (-) TimerEvent: {}
+[11.084581] (-) TimerEvent: {}
+[11.185287] (-) TimerEvent: {}
+[11.286076] (-) TimerEvent: {}
+[11.386877] (-) TimerEvent: {}
+[11.487639] (-) TimerEvent: {}
+[11.588491] (-) TimerEvent: {}
+[11.689421] (-) TimerEvent: {}
+[11.790178] (-) TimerEvent: {}
+[11.890918] (-) TimerEvent: {}
+[11.991777] (-) TimerEvent: {}
+[12.092904] (-) TimerEvent: {}
+[12.194242] (-) TimerEvent: {}
+[12.295006] (-) TimerEvent: {}
+[12.395722] (-) TimerEvent: {}
+[12.496457] (-) TimerEvent: {}
+[12.597224] (-) TimerEvent: {}
+[12.697961] (-) TimerEvent: {}
+[12.798711] (-) TimerEvent: {}
+[12.899488] (-) TimerEvent: {}
+[13.000230] (-) TimerEvent: {}
+[13.100978] (-) TimerEvent: {}
+[13.201715] (-) TimerEvent: {}
+[13.302444] (-) TimerEvent: {}
+[13.403194] (-) TimerEvent: {}
+[13.503909] (-) TimerEvent: {}
+[13.604601] (-) TimerEvent: {}
+[13.705354] (-) TimerEvent: {}
+[13.806118] (-) TimerEvent: {}
+[13.906921] (-) TimerEvent: {}
+[14.007673] (-) TimerEvent: {}
+[14.108424] (-) TimerEvent: {}
+[14.209174] (-) TimerEvent: {}
+[14.309940] (-) TimerEvent: {}
+[14.410689] (-) TimerEvent: {}
+[14.511474] (-) TimerEvent: {}
+[14.612188] (-) TimerEvent: {}
+[14.712913] (-) TimerEvent: {}
+[14.813646] (-) TimerEvent: {}
+[14.914389] (-) TimerEvent: {}
+[15.015182] (-) TimerEvent: {}
+[15.115911] (-) TimerEvent: {}
+[15.216630] (-) TimerEvent: {}
+[15.317895] (-) TimerEvent: {}
+[15.418674] (-) TimerEvent: {}
+[15.519466] (-) TimerEvent: {}
+[15.620194] (-) TimerEvent: {}
+[15.720931] (-) TimerEvent: {}
+[15.821684] (-) TimerEvent: {}
+[15.922367] (-) TimerEvent: {}
+[16.023134] (-) TimerEvent: {}
+[16.123862] (-) TimerEvent: {}
+[16.224585] (-) TimerEvent: {}
+[16.325342] (-) TimerEvent: {}
+[16.426080] (-) TimerEvent: {}
+[16.526873] (-) TimerEvent: {}
+[16.627583] (-) TimerEvent: {}
+[16.728309] (-) TimerEvent: {}
+[16.829062] (-) TimerEvent: {}
+[16.929772] (-) TimerEvent: {}
+[17.030522] (-) TimerEvent: {}
+[17.131249] (-) TimerEvent: {}
+[17.231981] (-) TimerEvent: {}
+[17.332708] (-) TimerEvent: {}
+[17.433472] (-) TimerEvent: {}
+[17.534230] (-) TimerEvent: {}
+[17.634955] (-) TimerEvent: {}
+[17.735687] (-) TimerEvent: {}
+[17.836415] (-) TimerEvent: {}
+[17.937165] (-) TimerEvent: {}
+[18.037902] (-) TimerEvent: {}
+[18.138720] (-) TimerEvent: {}
+[18.239956] (-) TimerEvent: {}
+[18.341022] (-) TimerEvent: {}
+[18.441842] (-) TimerEvent: {}
+[18.542591] (-) TimerEvent: {}
+[18.643352] (-) TimerEvent: {}
+[18.744083] (-) TimerEvent: {}
+[18.844889] (-) TimerEvent: {}
+[18.945658] (-) TimerEvent: {}
+[19.046376] (-) TimerEvent: {}
+[19.147096] (-) TimerEvent: {}
+[19.247795] (-) TimerEvent: {}
+[19.348558] (-) TimerEvent: {}
+[19.449389] (-) TimerEvent: {}
+[19.550307] (-) TimerEvent: {}
+[19.651332] (-) TimerEvent: {}
+[19.752330] (-) TimerEvent: {}
+[19.794080] (zeeslag) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable matrixrelay\x1b[0m\n'}
+[19.852580] (-) TimerEvent: {}
+[19.953340] (-) TimerEvent: {}
+[20.054470] (-) TimerEvent: {}
+[20.155879] (-) TimerEvent: {}
+[20.257207] (-) TimerEvent: {}
+[20.358570] (-) TimerEvent: {}
+[20.459350] (-) TimerEvent: {}
+[20.560205] (-) TimerEvent: {}
+[20.661243] (-) TimerEvent: {}
+[20.762317] (-) TimerEvent: {}
+[20.863007] (-) TimerEvent: {}
+[20.864872] (zeeslag) StdoutLine: {'line': b'[100%] Built target matrixrelay\n'}
+[20.904685] (zeeslag) CommandEnded: {'returncode': 0}
+[20.963293] (-) TimerEvent: {}
+[21.024682] (zeeslag) JobProgress: {'identifier': 'zeeslag', 'progress': 'install'}
+[21.063676] (-) TimerEvent: {}
+[21.066892] (zeeslag) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ubuntu/Speech/zeeslag/build/zeeslag'], 'cwd': '/home/ubuntu/Speech/zeeslag/build/zeeslag', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('SSH_CLIENT', '192.168.4.1 44864 22'), ('XDG_SESSION_TYPE', 'tty'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ubuntu/ros2_foxy/ros2-linux/opt/yaml_cpp_vendor/lib:/home/ubuntu/ros2_foxy/ros2-linux/opt/rviz_ogre_vendor/lib:/home/ubuntu/ros2_foxy/ros2-linux/lib'), ('MOTD_SHOWN', 'pam'), ('HOME', '/home/ubuntu'), ('OLDPWD', '/home/ubuntu/Speech/zeeslag/socket'), ('SSH_TTY', '/dev/pts/2'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLCON_PREFIX_PATH', '/home/ubuntu/Speech/zeeslag/install:/home/ubuntu/ros2_foxy/ros2-linux'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'ubuntu'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/ubuntu/ros2_foxy/ros2-linux/lib/aarch64-linux-gnu/pkgconfig:/home/ubuntu/ros2_foxy/ros2-linux/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '4'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/ubuntu/.local/bin:/home/ubuntu/ros2_foxy/ros2-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/home/ubuntu/Speech/zeeslag/install/zeeslag:/home/ubuntu/ros2_foxy/ros2-linux'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/ubuntu/Speech/zeeslag/build/zeeslag'), ('SSH_CONNECTION', '192.168.4.1 44864 192.168.4.64 22'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/ubuntu/ros2_foxy/ros2-linux/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ubuntu/Speech/zeeslag/install/zeeslag:/home/ubuntu/ros2_foxy/ros2-linux')]), 'shell': False}
+[21.106950] (zeeslag) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[21.108298] (zeeslag) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/lib/zeeslag/matrixrelay\n'}
+[21.122953] (zeeslag) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Speech/zeeslag/install/zeeslag/lib/zeeslag/matrixrelay" to ""\n'}
+[21.123589] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/package_run_dependencies/zeeslag\n'}
+[21.124061] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/parent_prefix_path/zeeslag\n'}
+[21.124493] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/ament_prefix_path.sh\n'}
+[21.124918] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/ament_prefix_path.dsv\n'}
+[21.125339] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/path.sh\n'}
+[21.125763] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/path.dsv\n'}
+[21.126170] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.bash\n'}
+[21.126592] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.sh\n'}
+[21.127134] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.zsh\n'}
+[21.127565] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.dsv\n'}
+[21.127924] (zeeslag) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/package.dsv\n'}
+[21.128742] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/packages/zeeslag\n'}
+[21.129329] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/cmake/zeeslagConfig.cmake\n'}
+[21.129850] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/cmake/zeeslagConfig-version.cmake\n'}
+[21.130230] (zeeslag) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/package.xml\n'}
+[21.135060] (zeeslag) CommandEnded: {'returncode': 0}
+[21.163836] (-) TimerEvent: {}
+[21.264880] (-) TimerEvent: {}
+[21.336937] (zeeslag) JobEnded: {'identifier': 'zeeslag', 'rc': 0}
+[21.340592] (-) EventReactorShutdown: {}

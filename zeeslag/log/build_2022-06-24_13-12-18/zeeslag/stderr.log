@@ -1,0 +1,4 @@
+[01m[K/home/ubuntu/Speech/zeeslag/zeeslag/src/matrixrelay.cpp:[m[K In member function ‘[01m[Kvoid MatrixRelay::topic_callback(std_msgs::msg::String_<std::allocator<void> >::SharedPtr) const[m[K’:
+[01m[K/home/ubuntu/Speech/zeeslag/zeeslag/src/matrixrelay.cpp:57:11:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kvalread[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   57 |       int [01;35m[Kvalread[m[K;
+      |           [01;35m[K^~~~~~~[m[K

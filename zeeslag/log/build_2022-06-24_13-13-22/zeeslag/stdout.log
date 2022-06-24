@@ -1,0 +1,22 @@
+[35m[1mScanning dependencies of target matrixrelay[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/matrixrelay.dir/src/matrixrelay.cpp.o[0m
+[100%] [32m[1mLinking CXX executable matrixrelay[0m
+[100%] Built target matrixrelay
+-- Install configuration: ""
+-- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/lib/zeeslag/matrixrelay
+-- Set runtime path of "/home/ubuntu/Speech/zeeslag/install/zeeslag/lib/zeeslag/matrixrelay" to ""
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/package_run_dependencies/zeeslag
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/parent_prefix_path/zeeslag
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/ament_prefix_path.sh
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/path.sh
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/environment/path.dsv
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.bash
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.sh
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.zsh
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/local_setup.dsv
+-- Installing: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/package.dsv
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/ament_index/resource_index/packages/zeeslag
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/cmake/zeeslagConfig.cmake
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/cmake/zeeslagConfig-version.cmake
+-- Up-to-date: /home/ubuntu/Speech/zeeslag/install/zeeslag/share/zeeslag/package.xml

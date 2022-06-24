@@ -1,0 +1,6 @@
+Invoking command in '/home/ubuntu/Speech/zeeslag/build/zeeslag': /usr/bin/cmake /home/ubuntu/Speech/zeeslag/zeeslag -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Speech/zeeslag/install/zeeslag
+Invoked command in '/home/ubuntu/Speech/zeeslag/build/zeeslag' returned '0': /usr/bin/cmake /home/ubuntu/Speech/zeeslag/zeeslag -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Speech/zeeslag/install/zeeslag
+Invoking command in '/home/ubuntu/Speech/zeeslag/build/zeeslag': /usr/bin/cmake --build /home/ubuntu/Speech/zeeslag/build/zeeslag -- -j3 -l3
+Invoked command in '/home/ubuntu/Speech/zeeslag/build/zeeslag' returned '0': /usr/bin/cmake --build /home/ubuntu/Speech/zeeslag/build/zeeslag -- -j3 -l3
+Invoking command in '/home/ubuntu/Speech/zeeslag/build/zeeslag': /usr/bin/cmake --install /home/ubuntu/Speech/zeeslag/build/zeeslag
+Invoked command in '/home/ubuntu/Speech/zeeslag/build/zeeslag' returned '0': /usr/bin/cmake --install /home/ubuntu/Speech/zeeslag/build/zeeslag

@@ -20,16 +20,12 @@ class MatrixRelay: public rclcpp::Node {
       subscription_ = this->create_subscription<std_msgs::msg::String>("topic", 10, std::bind(&MatrixRelay::topic_callback, this, _1));
       publisher_ = this->create_publisher<std_msgs::msg::String>("matrix_output", 10);
       addrlen = sizeof(address);
-
       int opt = 1;
 
-      // Creating socket file descriptor
       if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
         perror("socket failed");
         exit(EXIT_FAILURE);
       }
-
-      // Forcefully attaching socket to the port 8080
       if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
         perror("setsockopt");
         exit(EXIT_FAILURE);
@@ -37,8 +33,6 @@ class MatrixRelay: public rclcpp::Node {
       address.sin_family = AF_INET;
       address.sin_addr.s_addr = INADDR_ANY;
       address.sin_port = htons(PORT);
-
-      // Forcefully attaching socket to the port 8080
       if (bind(server_fd, (struct sockaddr*)&address, sizeof(address)) < 0) {
         perror("bind failed");
         exit(EXIT_FAILURE);
@@ -60,12 +54,9 @@ class MatrixRelay: public rclcpp::Node {
     void topic_callback(const std_msgs::msg::String::SharedPtr msg) const {
       auto message = std_msgs::msg::String();
       char buffer[1024] = { 0 };
-      int valread;
 
       send(new_socket, msg->data.c_str(), strlen(msg->data.c_str()), 0);
-      RCLCPP_INFO(this->get_logger(), "sent: '%s'", msg->data.c_str());
-
-      valread = read(new_socket, buffer, 1024);
+      read(new_socket, buffer, 1024);
       RCLCPP_INFO(this->get_logger(), "recieved: '%s'", &buffer);
 
       message.data = buffer;

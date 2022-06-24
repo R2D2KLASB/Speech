@@ -1,0 +1,4 @@
+source;share/zeeslag/local_setup.bash
+source;share/zeeslag/local_setup.dsv
+source;share/zeeslag/local_setup.sh
+source;share/zeeslag/local_setup.zsh
