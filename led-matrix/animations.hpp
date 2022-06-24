@@ -11,8 +11,10 @@
 #define SERIAL_PORT "/dev/ttyACM0"
 #define Rows 16
 #define Cols 32
-#define squareBeginX 2
-#define squareBeginY 2
+#define squareEnemyBeginX 2
+#define squareEnemyBeginY 2
+#define squarePlayerBeginX 18
+#define squarePlayerBeginY 2
 #define squareLength 12
 
 using rgb_matrix::RGBMatrix;
@@ -213,10 +215,10 @@ public:
         char input = -1;
         bool sw = false;
         for (;;) {
-            int error = serial.readChar(&input, 1);
+            serial.readChar(&input, 1);
             switch (input) {
                 case '1':
-                    if (coordinatesEnemy.y - 1 <= squareBeginY | sw == true) break;
+                    if (coordinatesEnemy.y - 1 <= squareEnemyBeginY | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
                     coordinatesEnemy.y -= 1;
@@ -225,7 +227,7 @@ public:
                     break;
 
                 case '4':
-                    if (coordinatesEnemy.x - 1 <= squareBeginX | sw == true) break;
+                    if (coordinatesEnemy.x - 1 <= squareEnemyBeginX | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
                     coordinatesEnemy.x -= 1;
@@ -234,7 +236,7 @@ public:
                     break;
 
                 case '2':
-                    if (coordinatesEnemy.y + 1 >= squareBeginY + squareLength - 1 | sw == true) break;
+                    if (coordinatesEnemy.y + 1 >= squareEnemyBeginY + squareLength - 1 | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
                     coordinatesEnemy.y += 1;
@@ -243,7 +245,7 @@ public:
                     break;
 
                 case '3':
-                    if (coordinatesEnemy.x + 1 >= squareBeginX + squareLength - 1 | sw == true) break;
+                    if (coordinatesEnemy.x + 1 >= squareEnemyBeginX + squareLength - 1 | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
                     coordinatesEnemy.x += 1;
@@ -253,6 +255,7 @@ public:
 
                 case '0':
                     ///TODO fire functie
+
                     sw = true;
                     break;
 
