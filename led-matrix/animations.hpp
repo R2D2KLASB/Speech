@@ -1,3 +1,5 @@
+/// @file this is the animation script for the led martix.
+
 #ifndef ANIMATIONS_HPP
 #define ANIMATIONS_HPP
 
@@ -8,30 +10,42 @@
 using rgb_matrix::RGBMatrix;
 using rgb_matrix::Canvas;
 
+
+/// @brief struct for a x, y position, int
 struct xy{
     unsigned int x, y;
 };
 
+/// @brief struct for rgb values, uint8_t
 struct rgb{
     uint8_t r, g, b;
 };
 
+/// @brief animation class
+/// @details makes the animations on a led matix. It uses circles and lines to do so.
 class Animations{
 public:
+    /// @brief constructor for the animations
+    /// @param canvas: canvas pointer
     Animations(Canvas *canvas):
         canvas(canvas){}
 
+        /// @brief makes the canvas blue
     void draw(){
         canvas->Fill(0,0,255);
         // canvas->Fill(255,255,255);
     }
 
+    ///@brief Puts the ships into boats
+    /// @param ships: will be put into boats
+    /// details puts ships into the boats variable, so it's stored in the class
     void setBoats(std::vector<std::vector<std::vector<int>>> ships){
         boats = ships;
         this->drawBoats();
     }
 
 
+    /// @brief draws the boats on the canvas
     void drawBoats(){
         // std::vector<int> begin = getBeginX();
         std::vector<int> begin = {5, 5};
@@ -49,6 +63,10 @@ public:
         }
     }
 
+    /// @brief sets a circle om a xy.
+    /// @param midpoint uses the xy struct to place a circle
+    /// @param radius the size of the circle
+    /// @param color by default 255,255,255.
     void setCircle(xy midpoint, int radius, rgb color = rgb{255,255,255}){
         //Using the Mid-Point drawing algorithm.
         int x = radius, y = 0;
@@ -91,9 +109,13 @@ public:
         }
     }
 
-
+    ///@brief makes a ripple effect
+    ///@param midpoint uses the xy struct to place a circle
+    ///@param startradius radius to start the first ripple, will increase over time
+    ///@param color color after the ripple, to reset the color.
+    ///@param bg color of the ripple
     void ripple(xy midpoint, int startradius, rgb color, rgb bg){
-        for(unsigned int i = 0; i < 44; i++){
+        for(unsigned int i = 0; i < 43; i++){
             usleep(90000);
             if(i){
                 this->setCircle(midpoint, startradius + i -1, bg);
@@ -113,6 +135,11 @@ public:
         }
     }
 
+    ///@brief puts a line on the matrix
+    ///@param startpoint using the xy struct sets startpoint of a line
+    ///@param length the length of a line.
+    ///@param horizontal default true
+    ///@param color default 255,255,255
     void setLine(xy startpoint, unsigned int length, bool horizontal = true, rgb color = rgb{255,255,255}){
         for(unsigned int i = 0; i < length; i++){
             if(horizontal){
@@ -123,11 +150,17 @@ public:
         }
     }
 
+    ///@brief draws ripple animation.
+    ///@details draws the missed animation. Also stores the it miss in the shipData
+    ///@param position using xy struct starts the miss animation on the matrix
     void miss(xy position){
         shipData.push_back({position.x, position.y, 0});
         this->ripple(position, 0, rgb{47,141,255}, rgb{0,0,255});
     }
 
+    ///@brief draws the hit animation.
+    ///@details draws the hit explosion. Also stores the hit in the shipData
+    ///@param position using xy struct starts the hit animation on the matrix
     void hit(xy position){
         shipData.push_back({position.x, position.y, 1});
         for(unsigned int i = 0; i <= 2; i++){
@@ -140,13 +173,18 @@ public:
             usleep(99999);
             this->setCircle(position, i-1, rgb{255,165,0});
         }
-        for(unsigned int i = 3; i > 0; i--){
+        for(unsigned int i = 4; i > 0; i--){
             usleep(299999);
             this->setCircle(position, i, rgb{0,0,255});
         }
         this->drawBoats();
     }
 
+    ///@brief draws a rectangle
+    ///@param startpoint leftunderside of the rectangle
+    ///@param size size of the rectangle
+    ///@param filled default false
+    ///@param color default 255,255,255
     void setSquare(xy startpoint, int size, bool filled = false, rgb color = rgb{255,255,255}){
         if(filled){
             for(unsigned int i = 0; i < size; i++){
