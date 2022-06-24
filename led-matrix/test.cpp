@@ -21,7 +21,7 @@ int main() {
   my_defaults.cols = 32;
   my_defaults.show_refresh_rate = true;
   my_defaults.disable_hardware_pulsing = 1;
-  // my_defaults.parallel = 2;
+  my_defaults.parallel = 2;
   rgb_matrix::RuntimeOptions runtime_defaults;
   runtime_defaults.gpio_slowdown = 4;
   // If you drop privileges, the root user you start the program with

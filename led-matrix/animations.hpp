@@ -139,7 +139,7 @@ public:
             usleep(99999);
             this->setCircle(position, i-1, rgb{255,165,0});
         }
-        for(unsigned int i = 4; i > 0; i--){
+        for(unsigned int i = 3; i > 0; i--){
             usleep(299999);
             this->setCircle(position, i, rgb{0,0,255});
         }
