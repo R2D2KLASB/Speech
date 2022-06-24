@@ -23,34 +23,22 @@ public:
 
     void draw(){
         canvas->Fill(0,0,255);
-        // canvas->Fill(255,255,255);
     }
 
-    void setBoats(std::vector<std::vector<std::vector<int>>> ships){
-        boats = ships;
-        this->drawBoats();
-    }
-
-
-    void drawBoats(){
-        // std::vector<int> begin = getBeginX();
-        std::vector<int> begin = {5, 5};
-        for(unsigned int i = 0; i < boats.size(); i++){
-            for(unsigned int j = 0; j < boats[i].size(); j++){
-                canvas->SetPixel(boats[i][j][0] + begin[0], boats[i][j][1] + begin[1], 0, 255, 0);
-            }
-        }
+    void drawHitOrMiss(){
         for(unsigned int i = 0; i < shipData.size(); i++){
-            if(shipData[i][2]){
+            if(shipData[i][2] == 1){
                 canvas->SetPixel(shipData[i][0], shipData[i][1], 255, 165, 0);
             }else{
                 canvas->SetPixel(shipData[i][0], shipData[i][1], 255, 255, 255);
-            }
-        }
+        	}
+	}
     }
 
     void setCircle(xy midpoint, int radius, rgb color = rgb{255,255,255}){
         //Using the Mid-Point drawing algorithm.
+        midpoint.x += 1;
+        midpoint.y += 1;
         int x = radius, y = 0;
 
         canvas->SetPixel(x + midpoint.x, y + midpoint.y, color.r, color.g, color.b);
@@ -93,23 +81,23 @@ public:
 
 
     void ripple(xy midpoint, int startradius, rgb color, rgb bg){
-        for(unsigned int i = 0; i < 44; i++){
-            usleep(90000);
+        for(unsigned int i = 0; i < 43; i++){
+            usleep(150000);
             if(i){
-                this->setCircle(midpoint, startradius + i -1, bg);
-                this->drawBoats();
+                setCircle(midpoint, startradius + i -1, bg);
+                drawHitOrMiss();
             }
             if(i - 3){
-                this->setCircle(midpoint, startradius + i - 4, bg);
-                this->drawBoats();
+                setCircle(midpoint, startradius + i - 4, bg);
+                drawHitOrMiss();
             }
             if(i - 6){
-                this->setCircle(midpoint, startradius + i - 7, bg);
-                this->drawBoats();
+                setCircle(midpoint, startradius + i - 7, bg);
+                drawHitOrMiss();
             }
-            this->setCircle(midpoint, startradius + i, color);
-            this->setCircle(midpoint, startradius + i - 3, color);
-            this->setCircle(midpoint, startradius + i - 6, color);
+            setCircle(midpoint, startradius + i, color);
+            setCircle(midpoint, startradius + i - 3, color);
+            setCircle(midpoint, startradius + i - 6, color);
         }
     }
 
@@ -125,26 +113,7 @@ public:
 
     void miss(xy position){
         shipData.push_back({position.x, position.y, 0});
-        this->ripple(position, 0, rgb{47,141,255}, rgb{0,0,255});
-    }
-
-    void hit(xy position){
-        shipData.push_back({position.x, position.y, 1});
-        for(unsigned int i = 0; i <= 2; i++){
-            this->setCircle(position, i);
-        }
-        for(unsigned int i = 1; i <= 3; i++){
-            this->setCircle(position, i, rgb{255,0,0});
-            usleep(99999);
-            this->setCircle(position, i-1);
-            usleep(99999);
-            this->setCircle(position, i-1, rgb{255,165,0});
-        }
-        for(unsigned int i = 3; i > 0; i--){
-            usleep(299999);
-            this->setCircle(position, i, rgb{0,0,255});
-        }
-        this->drawBoats();
+        this->ripple(position, 0, rgb{137,209,254}, rgb{0,0,255});
     }
 
     void setSquare(xy startpoint, int size, bool filled = false, rgb color = rgb{255,255,255}){
@@ -157,15 +126,12 @@ public:
             setLine(xy{startpoint.x, startpoint.y+size-1}, size);
             setLine(startpoint, size, false);
             setLine(xy{startpoint.x+size-1, startpoint.y}, size, false);
-            canvas->SetPixel(5, 5, 255, 0, 0);
-            canvas->SetPixel(3, 3, 255, 165, 0);
         }
     }
 
 private:
     Canvas *canvas;
-    std::vector<std::vector<unsigned int>> shipData;
-    std::vector<std::vector<std::vector<int>>> boats;
+    std::vector<std::vector<unsigned int>> shipData = {{4, 8, 1}, {5, 8, 1}, {6, 8, 0}};
 };
 
 #endif //ANIMATIONS_HPP

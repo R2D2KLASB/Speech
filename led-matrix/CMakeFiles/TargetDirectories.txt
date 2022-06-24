@@ -1,0 +1,3 @@
+/home/ubuntu/led-matrix/CMakeFiles/matrix.dir
+/home/ubuntu/led-matrix/CMakeFiles/edit_cache.dir
+/home/ubuntu/led-matrix/CMakeFiles/rebuild_cache.dir
