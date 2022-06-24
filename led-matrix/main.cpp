@@ -31,13 +31,14 @@ int main() {
     char errorOpening = serial.openDevice(SERIAL_PORT, 9600);
     std::vector<std::vector<std::vector<int>>> boats = {{{0,0},{0,1},{0,2}},{{0,4},{1,4},{2,4},{3,4}}};
 
-    Animations matrix(canvas, serial, xy{squareBeginX + 1, squareBeginY + 1}, xy{19, 3});
-    matrix.draw();
+    Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1});
+
     matrix.setBoats(boats);
-    matrix.setSquare({squareBeginX, squareBeginY}, squareLength, rgb{0,0,255});
-    matrix.setSquare({18, 2}, 12,  rgb{0,0,255});
-    usleep(1000000);
-    matrix.miss(xy{16,16});
-    for(;;){matrix.handleInput();}
+    for(;;){
+        usleep(1000000);
+        matrix.miss(xy{16,16});
+        matrix.hit(xy{5, 5});
+        // matrix.handleInput();
+    }
 
 }

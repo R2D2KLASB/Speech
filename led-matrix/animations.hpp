@@ -12,9 +12,9 @@
 #define Rows 16
 #define Cols 32
 #define squareEnemyBeginX 2
-#define squareEnemyBeginY 2
+#define squareEnemyBeginY 17
 #define squarePlayerBeginX 18
-#define squarePlayerBeginY 2
+#define squarePlayerBeginY 17
 #define squareLength 12
 
 using rgb_matrix::RGBMatrix;
@@ -40,7 +40,12 @@ public:
         canvas(canvas),
         serial(serial),
         coordinatesEnemy(coordinatesEnemy),
-        coordinatesPlayer(coordinatesPlayer){}
+        coordinatesPlayer(coordinatesPlayer)
+        {
+            matrix.draw();
+            matrix.setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
+            matrix.setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+        }
 
         /// @brief makes the canvas blue
     void draw(){
@@ -130,14 +135,20 @@ public:
             if(i){
                 this->setCircle(midpoint, startradius + i -1, bg);
                 this->drawBoats();
+                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
+                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
             }
             if (i - 3) {
                 setCircle(midpoint, startradius + i - 4, bg);
-                drawBoats();
+                this->drawBoats();
+                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
+                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
             }
             if (i - 6) {
                 setCircle(midpoint, startradius + i - 7, bg);
-                drawBoats();
+                this->drawBoats();
+                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
+                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
             }
             setCircle(midpoint, startradius + i, color);
             setCircle(midpoint, startradius + i - 3, color);
@@ -190,6 +201,8 @@ public:
             usleep(299999);
             this->setCircle(position, i, rgb{0,0,255});
         }
+        this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
+        this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
         this->drawBoats();
     }
 
