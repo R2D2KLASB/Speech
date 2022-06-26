@@ -42,9 +42,9 @@ public:
         coordinatesEnemy(coordinatesEnemy),
         coordinatesPlayer(coordinatesPlayer)
         {
-            matrix.draw();
-            matrix.setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
-            matrix.setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+            canvas.draw();
+            canvas.setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
+            canvas.setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
         }
 
         /// @brief makes the canvas blue
@@ -150,9 +150,9 @@ public:
                 this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
                 this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
             }
-            setCircle(midpoint, startradius + i, color);
-            setCircle(midpoint, startradius + i - 3, color);
-            setCircle(midpoint, startradius + i - 6, color);
+            this->setCircle(midpoint, startradius + i, color);
+            this->setCircle(midpoint, startradius + i - 3, color);
+            this->setCircle(midpoint, startradius + i - 6, color);
         }
     }
 
@@ -214,13 +214,13 @@ public:
     void setSquare(xy startpoint, int size, rgb color = rgb{255,255,255}, bool filled = false){
         if(filled){
             for(unsigned int i = 0; i < size; i++){
-                setLine(xy{startpoint.x, startpoint.y + i}, size, true, color);
+                this->setLine(xy{startpoint.x, startpoint.y + i}, size, true, color);
             }
         } else {
-            setLine(startpoint, size, true, color);
-            setLine(xy{startpoint.x, startpoint.y + size - 1}, size, true, color);
-            setLine(startpoint, size, false, color);
-            setLine(xy{startpoint.x + size - 1, startpoint.y}, size, false, color);
+            this->setLine(startpoint, size, true, color);
+            this->setLine(xy{startpoint.x, startpoint.y + size - 1}, size, true, color);
+            this->setLine(startpoint, size, false, color);
+            this->setLine(xy{startpoint.x + size - 1, startpoint.y}, size, false, color);
         }
     }
 
