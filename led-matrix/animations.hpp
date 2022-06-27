@@ -57,7 +57,7 @@ public:
     ///@brief Puts the ships into boats
     /// @param ships: will be put into boats
     /// details puts ships into the boats variable, so it's stored in the class
-    void setBoats(std::vector<std::vector<std::vector<int>>> ships){
+    void setBoats(std::vector<std::vector<int>> ships){
         boats = ships;
         this->drawBoats();
     }
@@ -66,9 +66,7 @@ public:
     /// @brief draws the boats on the canvas
     void drawBoats(){
         for(unsigned int i = 0; i < boats.size(); i++){
-            for(unsigned int j = 0; j < boats[i].size(); j++){
-                canvas->SetPixel(boats[i][j][0] + squarePlayerBeginX + 1, boats[i][j][1] + squarePlayerBeginY + 1, 0, 255, 0);
-            }
+            canvas->SetPixel(boats[i][0] + squarePlayerBeginX + 1, boats[i][1] + squarePlayerBeginY + 1, 0, 255, 0);
         }
         for(unsigned int i = 0; i < shipData.size(); i++){
             if(shipData[i][2]){
@@ -304,7 +302,7 @@ public:
 private:
     Canvas *canvas;
     std::vector <std::vector<unsigned int>> shipData = {};
-    std::vector<std::vector<std::vector<int>>> boats;
+    std::vector<std::vector<int>> boats;
     serialib &serial;
     xy coordinatesEnemy;
     xy coordinatesPlayer;
