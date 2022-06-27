@@ -7,13 +7,14 @@
 #include <signal.h>
 #include <unistd.h>
 #include "serialib/lib/serialib.h"
+#include "iostream"
 
 #define SERIAL_PORT "/dev/ttyACM0"
 #define Rows 16
 #define Cols 32
-#define squareEnemyBeginX 2
+#define squareEnemyBeginX 18
 #define squareEnemyBeginY 17
-#define squarePlayerBeginX 18
+#define squarePlayerBeginX 2
 #define squarePlayerBeginY 17
 #define squareLength 12
 
@@ -36,15 +37,15 @@ class Animations{
 public:
     /// @brief constructor for the animations
     /// @param canvas: canvas pointer
-    Animations(Canvas *canvas, serialib serial, xy coordinatesEnemy, xy coordinatesPlayer):
+    Animations(Canvas *canvas, serialib &serial, xy coordinatesEnemy, xy coordinatesPlayer):
         canvas(canvas),
         serial(serial),
         coordinatesEnemy(coordinatesEnemy),
         coordinatesPlayer(coordinatesPlayer)
         {
-            canvas.draw();
-            canvas.setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
-            canvas.setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+            this->draw();
+            this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
+            this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
         }
 
         /// @brief makes the canvas blue
@@ -66,7 +67,7 @@ public:
     void drawBoats(){
         for(unsigned int i = 0; i < boats.size(); i++){
             for(unsigned int j = 0; j < boats[i].size(); j++){
-                canvas->SetPixel(boats[i][j][0] + coordinatesEnemy.x, boats[i][j][1] + coordinatesEnemy.y, 0, 255, 0);
+                canvas->SetPixel(boats[i][j][0] + squarePlayerBeginX + 1, boats[i][j][1] + squarePlayerBeginY + 1, 0, 255, 0);
             }
         }
         for(unsigned int i = 0; i < shipData.size(); i++){
@@ -176,7 +177,14 @@ public:
     ///@brief draws ripple animation.
     ///@details draws the missed animation. Also stores the it miss in the shipData
     ///@param position using xy struct starts the miss animation on the matrix
-    void miss(xy position){
+    void miss(xy position, bool enemy){
+        if(enemy){
+            position.x += squareEnemyBeginX + 1;
+            position.y += squareEnemyBeginY + 1;
+        }else{
+            position.x += squarePlayerBeginX + 1;
+            position.y += squarePlayerBeginY + 1;
+        }
         shipData.push_back({position.x, position.y, 0});
         this->ripple(position, 0, rgb{137, 209, 254}, rgb{0, 0, 255});
     }
@@ -185,7 +193,14 @@ public:
     ///@brief draws the hit animation.
     ///@details draws the hit explosion. Also stores the hit in the shipData
     ///@param position using xy struct starts the hit animation on the matrix
-    void hit(xy position){
+    void hit(xy position, bool enemy){
+        if(enemy){
+            position.x += squareEnemyBeginX + 1;
+            position.y += squareEnemyBeginY + 1;
+        }else{
+            position.x += squarePlayerBeginX + 1;
+            position.y += squarePlayerBeginY + 1;
+        }
         shipData.push_back({position.x, position.y, 1});
         for(unsigned int i = 0; i <= 2; i++){
             this->setCircle(position, i);
@@ -228,9 +243,12 @@ public:
         char input = -1;
         bool sw = false;
         for (;;) {
+            // std::cout << "functie\n";
             serial.readChar(&input, 1);
+            // std::cout << input+'1' << std::endl;
             switch (input) {
                 case '1':
+                    std::cout << "test\n";
                     if (coordinatesEnemy.y - 1 <= squareEnemyBeginY | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
@@ -240,6 +258,7 @@ public:
                     break;
 
                 case '4':
+                    std::cout << "test2\n";
                     if (coordinatesEnemy.x - 1 <= squareEnemyBeginX | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
@@ -249,6 +268,7 @@ public:
                     break;
 
                 case '2':
+                    std::cout << "test3\n";
                     if (coordinatesEnemy.y + 1 >= squareEnemyBeginY + squareLength - 1 | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
@@ -258,6 +278,7 @@ public:
                     break;
 
                 case '3':
+                    std::cout << "test4\n";
                     if (coordinatesEnemy.x + 1 >= squareEnemyBeginX + squareLength - 1 | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
@@ -284,7 +305,7 @@ private:
     Canvas *canvas;
     std::vector <std::vector<unsigned int>> shipData = {};
     std::vector<std::vector<std::vector<int>>> boats;
-    serialib serial;
+    serialib &serial;
     xy coordinatesEnemy;
     xy coordinatesPlayer;
 };
