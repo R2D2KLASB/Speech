@@ -241,9 +241,7 @@ public:
         char input = -1;
         bool sw = false;
         for (;;) {
-            // std::cout << "functie\n";
             serial.readChar(&input, 1);
-            // std::cout << input+'1' << std::endl;
             switch (input) {
                 case '1':
                     std::cout << "test\n";
