@@ -7,7 +7,6 @@
 #include <signal.h>
 #include <unistd.h>
 #include "serialib/lib/serialib.h"
-#include "iostream"
 
 #define SERIAL_PORT "/dev/ttyACM0"
 #define Rows 16
@@ -38,17 +37,17 @@ public:
     /// @brief constructor for the animations
     /// @param canvas: canvas pointer
     Animations(Canvas *canvas, serialib &serial, xy coordinatesEnemy, xy coordinatesPlayer):
-        canvas(canvas),
-        serial(serial),
-        coordinatesEnemy(coordinatesEnemy),
-        coordinatesPlayer(coordinatesPlayer)
-        {
-            this->draw();
-            this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
-            this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
-        }
+            canvas(canvas),
+            serial(serial),
+            coordinatesEnemy(coordinatesEnemy),
+            coordinatesPlayer(coordinatesPlayer)
+    {
+        this->draw();
+        this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
+        this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+    }
 
-        /// @brief makes the canvas blue
+    /// @brief makes the canvas blue
     void draw(){
         canvas->Fill(0,0,255);
         // canvas->Fill(255,255,255);
@@ -244,7 +243,6 @@ public:
             serial.readChar(&input, 1);
             switch (input) {
                 case '1':
-                    std::cout << "test\n";
                     if (coordinatesEnemy.y - 1 <= squareEnemyBeginY | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
@@ -254,7 +252,6 @@ public:
                     break;
 
                 case '4':
-                    std::cout << "test2\n";
                     if (coordinatesEnemy.x - 1 <= squareEnemyBeginX | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
@@ -264,7 +261,6 @@ public:
                     break;
 
                 case '2':
-                    std::cout << "test3\n";
                     if (coordinatesEnemy.y + 1 >= squareEnemyBeginY + squareLength - 1 | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
@@ -274,7 +270,6 @@ public:
                     break;
 
                 case '3':
-                    std::cout << "test4\n";
                     if (coordinatesEnemy.x + 1 >= squareEnemyBeginX + squareLength - 1 | sw) break;
                     canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 0, 0, 255);
                     this->drawBoats();
@@ -284,7 +279,7 @@ public:
                     break;
 
                 case '0':
-                    ///TODO fire functie
+                    ///\TODO Fire Functie
 
                     sw = true;
                     break;
