@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "serialib/lib/serialib.h"
 
-#define SERIAL_PORT "/dev/ttyACM0"
+
 #define Rows 16
 #define Cols 32
 #define squareEnemyBeginX 18
