@@ -26,8 +26,10 @@ int main() {
     // std::vector<std::vector<int> boats2 = {{0,0},{0,1},{0,2},{0,4},{1,4},{2,4},{3,4}};
 
     Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1});
-    std::string command  = "miss";
+    std::string command;
     for(;;){
+        std::cout << "Geef commando:\n";
+        std::cin >> command;
         if(command == "boats"){
             std::vector<std::vector<int>> boats = {};
             std::string boten = "";
