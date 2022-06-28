@@ -67,6 +67,7 @@ int main() {
 
                 valread = read(sock, buffer, 1024);
                 printf("recieved: %s\n", buffer);
+		send(sock, hello, strlen(hello), 0);
 
 		if(command == "boats"){
 			std::vector<std::vector<int>> boats = {};

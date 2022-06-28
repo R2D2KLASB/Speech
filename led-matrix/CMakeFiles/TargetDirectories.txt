@@ -1,3 +1,0 @@
-/home/ubuntu/Speech/led-matrix/CMakeFiles/rebuild_cache.dir
-/home/ubuntu/Speech/led-matrix/CMakeFiles/edit_cache.dir
-/home/ubuntu/Speech/led-matrix/CMakeFiles/matrix.dir
