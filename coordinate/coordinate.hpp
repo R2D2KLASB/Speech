@@ -1,3 +1,9 @@
+/// @file
+///
+/// \brief
+/// coordinates
+/// \details
+/// 
 #ifndef coordinate
 #define coordinate
 
@@ -10,7 +16,12 @@
 
 #include <map>
 
-
+/// \brief
+/// Coordinate function
+/// \details
+/// This function takes two parameters of type transcriptionAPI and paRecorder, it uses Portaudio library to use the microphone and convert the audio to text using an API.
+/// The function returns a string of 2 characters a postion(A5 for example) if the API hears the postion currectly, And "Try again!" if not.
+///
 std::string Coordinate(transcriptionAPI & token, paRecorder & rec) {
 		token.getToken();
 		std::string transcription;
