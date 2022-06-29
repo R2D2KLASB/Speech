@@ -60,7 +60,7 @@ int main() {
         // std::vector<std::vector<int> boats2 = {{0,0},{0,1},{0,2},{0,4},{1,4},{2,4},{3,4}};
 
 	Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1});
-	std::string command;
+	//std::string command;
 	for(;;){
 		//std::cout << "Geef commando:\n";
 		//std::cin >> command;
@@ -69,7 +69,7 @@ int main() {
                 printf("recieved: %s\n", buffer);
 		send(sock, hello, strlen(hello), 0);
 
-		if(command == "boats"){
+		if(strcmp(buffer, "boats")){
 			std::vector<std::vector<int>> boats = {};
 			std::string boten = "";
 			std::cout  << "Geef boatposities:\n";
@@ -81,7 +81,7 @@ int main() {
 				boats.push_back(v);
 			}
 			matrix.setBoats(boats);
-		}else if(command == "hit"){
+		}else if(strcmp(buffer, "hit")){
 			xy position;
 			bool enemy;
 			std::string positie = "";
@@ -91,7 +91,7 @@ int main() {
 			position.y = int(positie[3] - '0');
 			enemy = int(positie[5] - '0');
 			matrix.hit(position, enemy);
-		}else if(command == "miss"){
+		}else if(strcmp(buffer, "miss")){
 			xy position;
 			bool enemy;
 			std::string positie = "";
@@ -101,7 +101,7 @@ int main() {
 			position.y = int(positie[3] - '0');
 			enemy = int(positie[5] - '0');
 			matrix.miss(position, enemy);
-		}else if(command == "getPos"){
+		}else if(strcmp(buffer, "getPos")){
 			matrix.handleInput();
 		}
 	}
