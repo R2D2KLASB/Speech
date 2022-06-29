@@ -65,41 +65,41 @@ int main() {
 		//std::cout << "Geef commando:\n";
 		//std::cin >> command;
 
-                valread = read(sock, buffer, 1024);
-                printf("recieved: %s\n", buffer);
+        valread = read(sock, buffer, 1024);
+        printf("recieved: %s\n", buffer);
 		send(sock, hello, strlen(hello), 0);
 
-		if(strcmp(buffer, "boats")){
+        if(strcmp(buffer, "boats")){
 			std::vector<std::vector<int>> boats = {};
-			std::string boten = "";
-			std::cout  << "Geef boatposities:\n";
-			std::cin >> boten;
-			for(unsigned int i = 2; i < boten.size(); i+=6){
+            std::string strBoats;
+            valread = read(sock, strBoats, 1024);
+            send(sock, hello, strlen(hello), 0);
+			for(unsigned int i = 2; i < strBoats.size(); i+=6){
 				std::vector<int> v = {};
-				v.push_back(int(boten[i] - '0'));
-				v.push_back(int(boten[i+2] - '0'));
+				v.push_back(int(strBoats[i] - '0'));
+				v.push_back(int(strBoats[i+2] - '0'));
 				boats.push_back(v);
 			}
 			matrix.setBoats(boats);
 		}else if(strcmp(buffer, "hit")){
 			xy position;
 			bool enemy;
-			std::string positie = "";
-			std::cout << "Geef hitlocatie:\n";
-			std::cin >> positie;
-			position.x = int(positie[1] - '0');
-			position.y = int(positie[3] - '0');
-			enemy = int(positie[5] - '0');
+            std::string strPosition;
+            valread = read(sock, strPosition, 1024);
+            send(sock, hello, strlen(hello), 0);
+			position.x = int(strPosition[1] - '0');
+			position.y = int(strPosition[3] - '0');
+			enemy = int(strPosition[5] - '0');
 			matrix.hit(position, enemy);
 		}else if(strcmp(buffer, "miss")){
 			xy position;
 			bool enemy;
-			std::string positie = "";
-			std::cout << "Geef misslocatie:\n";
-			std::cin >> positie;
-			position.x = int(positie[1] - '0');
-			position.y = int(positie[3] - '0');
-			enemy = int(positie[5] - '0');
+            std::string strPosition;
+            valread = read(sock, strPosition, 1024);
+            send(sock, hello, strlen(hello), 0);
+			position.x = int(strPosition[1] - '0');
+			position.y = int(strPosition[3] - '0');
+			enemy = int(strPosition[5] - '0');
 			matrix.miss(position, enemy);
 		}else if(strcmp(buffer, "getPos")){
 			matrix.handleInput();
