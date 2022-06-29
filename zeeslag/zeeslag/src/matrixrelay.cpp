@@ -17,8 +17,8 @@ using std::placeholders::_1;
 class MatrixRelay: public rclcpp::Node {
   public:
     MatrixRelay(): Node("matrix") {
-      subscription_ = this->create_subscription<std_msgs::msg::String>("topic", 10, std::bind(&MatrixRelay::topic_callback, this, _1));
-      publisher_ = this->create_publisher<std_msgs::msg::String>("matrix_output", 10);
+      subscription_ = this->create_subscription<std_msgs::msg::String>("game_info/intern/publish", 10, std::bind(&MatrixRelay::topic_callback, this, _1));
+      publisher_ = this->create_publisher<std_msgs::msg::String>("zeeslag_api", 10);
       addrlen = sizeof(address);
       int opt = 1;
 
@@ -45,6 +45,7 @@ class MatrixRelay: public rclcpp::Node {
         perror("accept");
         exit(EXIT_FAILURE);
       }
+      RCLCPP_INFO(this->get_logger(), "socket connected! listening for messages");
     }
     ~MatrixRelay() {
       close(new_socket);
@@ -52,16 +53,19 @@ class MatrixRelay: public rclcpp::Node {
     }
   private:
     void topic_callback(const std_msgs::msg::String::SharedPtr msg) const {
-      auto message = std_msgs::msg::String();
-      char buffer[1024] = { 0 };
+      char buffer[1024] = { '\0' };
+      strcpy((char*)&buffer, msg->data.c_str());
 
-      send(new_socket, msg->data.c_str(), strlen(msg->data.c_str()), 0);
+      int recieved = send(new_socket, msg->data.c_str(), 1024, 0);
+      RCLCPP_INFO(this->get_logger(), "recieved: '%s'", msg->data.c_str());
+
+      for(int i = 0; i < recieved; i++) buffer[i] = 0;
       read(new_socket, buffer, 1024);
-      RCLCPP_INFO(this->get_logger(), "recieved: '%s'", &buffer);
+      RCLCPP_INFO(this->get_logger(), "sent: '%s'", &buffer);
 
+      auto message = std_msgs::msg::String();
       message.data = buffer;
       publisher_->publish(message);
-      RCLCPP_INFO(this->get_logger(), "publishing: '%s'", message.data.c_str());
     }
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;

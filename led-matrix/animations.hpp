@@ -12,9 +12,9 @@
 #define Rows 16
 #define Cols 32
 #define squareEnemyBeginX 18
-#define squareEnemyBeginY 17
+#define squareEnemyBeginY 16
 #define squarePlayerBeginX 2
-#define squarePlayerBeginY 17
+#define squarePlayerBeginY 16
 #define squareLength 12
 
 using rgb_matrix::RGBMatrix;
