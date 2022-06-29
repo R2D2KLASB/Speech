@@ -71,35 +71,35 @@ int main() {
 
         if(strcmp(buffer, "boats")){
 			std::vector<std::vector<int>> boats = {};
-            std::string strBoats;
-            valread = read(sock, strBoats, 1024);
+            // std::string buffer;
+            valread = read(sock, buffer, 1024);
             send(sock, hello, strlen(hello), 0);
-			for(unsigned int i = 2; i < strBoats.size(); i+=6){
+			for(unsigned int i = 2; i < strlen(buffer); i+=6){
 				std::vector<int> v = {};
-				v.push_back(int(strBoats[i] - '0'));
-				v.push_back(int(strBoats[i+2] - '0'));
+				v.push_back(int(buffer[i] - '0'));
+				v.push_back(int(buffer[i+2] - '0'));
 				boats.push_back(v);
 			}
 			matrix.setBoats(boats);
 		}else if(strcmp(buffer, "hit")){
 			xy position;
 			bool enemy;
-            std::string strPosition;
-            valread = read(sock, strPosition, 1024);
+            // std::string buffer;
+            valread = read(sock, buffer, 1024);
             send(sock, hello, strlen(hello), 0);
-			position.x = int(strPosition[1] - '0');
-			position.y = int(strPosition[3] - '0');
-			enemy = int(strPosition[5] - '0');
+			position.x = int(buffer[1] - '0');
+			position.y = int(buffer[3] - '0');
+			enemy = int(buffer[5] - '0');
 			matrix.hit(position, enemy);
 		}else if(strcmp(buffer, "miss")){
 			xy position;
 			bool enemy;
-            std::string strPosition;
-            valread = read(sock, strPosition, 1024);
+            // std::string buffer;
+            valread = read(sock, buffer, 1024);
             send(sock, hello, strlen(hello), 0);
-			position.x = int(strPosition[1] - '0');
-			position.y = int(strPosition[3] - '0');
-			enemy = int(strPosition[5] - '0');
+			position.x = int(buffer[1] - '0');
+			position.y = int(buffer[3] - '0');
+			enemy = int(buffer[5] - '0');
 			matrix.miss(position, enemy);
 		}else if(strcmp(buffer, "getPos")){
 			matrix.handleInput();
