@@ -57,11 +57,11 @@ int main() {
 	for(;;) {
           read(sock, buffer, 1024);
           printf("recieved command: %s\n", buffer);
-	  send(sock, response, strlen(response), 0);
+	      send(sock, response, strlen(response), 0);
 
           if(strcmp(buffer, "boats") == 0) {
             std::vector<std::vector<int>> boats = {};
-            
+
             read(sock, buffer, 1024);
 	    printf("recieved data: %s\n", buffer);
             send(sock, response, strlen(response), 0);

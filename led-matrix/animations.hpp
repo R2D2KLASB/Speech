@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include "serialib/lib/serialib.h"
+#include <sstream>
 
 
 #define Rows 16
@@ -281,8 +282,8 @@ public:
 
                 case '0':
                     s<<'('<<coordinatesEnemy.x<<','<<coordinatesEnemy.y<<')';
-                    std::string str(s.str()); 
-                    return str;
+                    return std::string str(s.str());
+                    // return str;
 
                 case '8':
                     sw = false;
