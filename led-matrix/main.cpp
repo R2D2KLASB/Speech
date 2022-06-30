@@ -15,7 +15,7 @@ using rgb_matrix::Canvas;
 #define PORT 8080
 
 int main() {
-        int sock = 0, valread, client_fd;
+        int sock = 0, client_fd;
         struct sockaddr_in serv_addr;
         char buffer[1024] = { '\0' };
 	char* response = "ok";
@@ -55,13 +55,14 @@ int main() {
         Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1});
 
 	for(;;) {
-          valread = read(sock, buffer, 1024);
+          read(sock, buffer, 1024);
           printf("recieved command: %s\n", buffer);
 	  send(sock, response, strlen(response), 0);
 
-          if(strcmp(&buffer[0], "boats")){
+          if(strcmp(buffer, "boats") == 0) {
             std::vector<std::vector<int>> boats = {};
-            valread = read(sock, buffer, 1024);
+            
+            read(sock, buffer, 1024);
 	    printf("recieved data: %s\n", buffer);
             send(sock, response, strlen(response), 0);
 
@@ -73,11 +74,11 @@ int main() {
 	    }
 	    matrix.setBoats(boats);
 	  }
-	/*else if(strcmp(buffer, "hit")){
+	/*else if(strcmp(buffer, "hit") == 0){
 			xy position;
 			bool enemy;
             // std::string buffer;
-            valread = read(sock, buffer, 1024);
+            read(sock, buffer, 1024);
             send(sock, responce, strlen(responce), 0);
 			position.x = int(buffer[1] - '0');
 			position.y = int(buffer[3] - '0');
@@ -87,13 +88,13 @@ int main() {
 			xy position;
 			bool enemy;
             // std::string buffer;
-            valread = read(sock, buffer, 1024);
+            read(sock, buffer, 1024);
             send(sock, responce, strlen(responce), 0);
 			position.x = int(buffer[1] - '0');
 			position.y = int(buffer[3] - '0');
 			enemy = int(buffer[5] - '0');
 			matrix.miss(position, enemy);
-		}else if(strcmp(buffer, "getPos")){
+		}else if(strcmp(buffer, "getPos") == 0){
 			matrix.handleInput();
 		}
 */
