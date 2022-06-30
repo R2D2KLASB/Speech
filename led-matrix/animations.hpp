@@ -236,7 +236,8 @@ public:
         }
     }
 
-    void handleInput() {
+    std::string handleInput() {
+        std::ostringstream s;
         char input = -1;
         bool sw = false;
         for (;;) {
@@ -279,10 +280,9 @@ public:
                     break;
 
                 case '0':
-                    ///\TODO Fire Functie
-
-                    sw = true;
-                    break;
+                    s<<'('<<coordinatesEnemy.x<<','<<coordinatesEnemy.y<<')';
+                    std::string str(s.str()); 
+                    return str;
 
                 case '8':
                     sw = false;
