@@ -6,11 +6,12 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <iostream>
 
 using rgb_matrix::RGBMatrix;
 using rgb_matrix::Canvas;
 
-#define SERIAL_PORT "/dev/ttyACM0"
+#define SERIAL_PORT "/dev/ttyDisplay"
 #define BAUD_RATE 9600
 #define PORT 8080
 
@@ -18,7 +19,8 @@ int main() {
         int sock = 0, client_fd;
         struct sockaddr_in serv_addr;
         char buffer[1024] = { '\0' };
-	char* response = "ok";
+	    const char* response = "ok";
+        const char* response2 = "ready";
 
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
             printf("\n Socket creation error \n");
@@ -57,7 +59,12 @@ int main() {
 	for(;;) {
           read(sock, buffer, 1024);
           printf("recieved command: %s\n", buffer);
-	      send(sock, response, strlen(response), 0);
+          if(strcmp(buffer, "getPos") == 0){
+              send(sock, response2, strlen(response2), 0);
+          }else{
+              send(sock, response, strlen(response), 0);
+          }
+	   
 
           if(strcmp(buffer, "boats") == 0) {
             std::vector<std::vector<int>> boats = {};
@@ -78,24 +85,26 @@ int main() {
 			bool enemy;
             // std::string buffer;
             read(sock, buffer, 1024);
-            send(sock, responce, strlen(responce), 0);
+            send(sock, response, strlen(response), 0);
 			position.x = int(buffer[1] - '0');
 			position.y = int(buffer[3] - '0');
 			enemy = int(buffer[5] - '0');
 			matrix.hit(position, enemy);
-		}else if(strcmp(buffer, "miss")){
+		}else if(strcmp(buffer, "miss") == 0){
 			xy position;
 			bool enemy;
             // std::string buffer;
             read(sock, buffer, 1024);
-            send(sock, responce, strlen(responce), 0);
+            send(sock, response, strlen(response), 0);
 			position.x = int(buffer[1] - '0');
 			position.y = int(buffer[3] - '0');
 			enemy = int(buffer[5] - '0');
 			matrix.miss(position, enemy);
 		}else if(strcmp(buffer, "getPos") == 0){
-            std::string position = matrix.handleInput();
-            send(sock, position.c_str(), strlen(position.c_str()), 0);
+            		read(sock, buffer, 1024);
+			std::string position = matrix.handleInput();
+            		send(sock, position.c_str(), position.size(), 0);
+			printf("sent position: %s\n", position.c_str());
 		}
 	}
 }

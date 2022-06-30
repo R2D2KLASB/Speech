@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include "serialib/lib/serialib.h"
 #include <sstream>
+#include <iostream>
 
 
 #define Rows 16
@@ -17,6 +18,8 @@
 #define squarePlayerBeginX 2
 #define squarePlayerBeginY 16
 #define squareLength 12
+#define enemyColor {255, 80, 60}
+#define playerColor {220, 255, 220}
 
 using rgb_matrix::RGBMatrix;
 using rgb_matrix::Canvas;
@@ -44,8 +47,8 @@ public:
             coordinatesPlayer(coordinatesPlayer)
     {
         this->draw();
-        this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
-        this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+        this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength, enemyColor);
+        this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength, playerColor);
     }
 
     /// @brief makes the canvas blue
@@ -134,20 +137,20 @@ public:
             if(i){
                 this->setCircle(midpoint, startradius + i -1, bg);
                 this->drawBoats();
-                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
-                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength, enemyColor);
+                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength, playerColor);
             }
             if (i - 3) {
                 setCircle(midpoint, startradius + i - 4, bg);
                 this->drawBoats();
-                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
-                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength, enemyColor);
+                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength, playerColor);
             }
             if (i - 6) {
                 setCircle(midpoint, startradius + i - 7, bg);
                 this->drawBoats();
-                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
-                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+                this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength, enemyColor);
+                this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength, playerColor);
             }
             this->setCircle(midpoint, startradius + i, color);
             this->setCircle(midpoint, startradius + i - 3, color);
@@ -214,8 +217,8 @@ public:
             usleep(299999);
             this->setCircle(position, i, rgb{0,0,255});
         }
-        this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
-        this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
+        this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength, enemyColor);
+        this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength, playerColor);
         this->drawBoats();
     }
 
@@ -238,6 +241,8 @@ public:
     }
 
     std::string handleInput() {
+        canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 255, 0, 0);
+        serial.writeChar('1');
         std::ostringstream s;
         char input = -1;
         bool sw = false;
@@ -280,9 +285,10 @@ public:
                     sw = true;
                     break;
 
-                case '0':
-                    s<<'['<<coordinatesEnemy.x<<','<<coordinatesEnemy.y<<']';
-                    return s.str();
+                case '9':
+               	    input = -1;
+		    s<<'['<<coordinatesEnemy.x-squareEnemyBeginX-1<<','<<coordinatesEnemy.y-squareEnemyBeginY-1<<']';
+		    return s.str();
 
                 case '8':
                     sw = false;
