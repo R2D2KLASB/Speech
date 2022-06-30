@@ -53,6 +53,8 @@ int main() {
 
         Canvas *canvas = RGBMatrix::CreateFromOptions(my_defaults, runtime_defaults);
         Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1});
+        Pa_Initialize();
+
 
 	for(;;) {
           read(sock, buffer, 1024);
@@ -98,4 +100,5 @@ int main() {
             send(sock, position.c_str(), strlen(position.c_str()), 0);
 		}
 	}
+    Pa_Terminate();
 }

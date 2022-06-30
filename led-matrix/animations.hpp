@@ -4,6 +4,7 @@
 #define ANIMATIONS_HPP
 
 #include <led-matrix.h>
+#include <coordinate.hpp>
 #include <signal.h>
 #include <unistd.h>
 #include "serialib/lib/serialib.h"
@@ -289,7 +290,13 @@ public:
                     break;
 
                 case '6':
-                    this->setCircle(xy{20, 5}, 5, rgb{255,0,0});
+                    std::string strPosition = "Try again!";
+                    while (strPosition == "Try again!") {
+                        this->setCircle(xy{ 20, 5 }, 2, rgb{ 255,0,0 });
+                        strPosition = coordinates_speech(token, rec);
+                        this->setCircle(xy{ 20, 5 }, 2, rgb{ 255,0,0 });
+                    }
+                    return strPosition;
             }
         }
     }
@@ -302,6 +309,8 @@ private:
     serialib &serial;
     xy coordinatesEnemy;
     xy coordinatesPlayer;
+    transcriptionAPI token;
+    paRecorder rec;
 };
 
 #endif //ANIMATIONS_HPP

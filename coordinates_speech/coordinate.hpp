@@ -10,10 +10,8 @@
 #include <portaudio.h>
 #include "transcription_api.hpp"
 #include "pa_recorder.hpp"
-#include <string>
-#include <list>      
+#include <string>     
 #include <iostream>     
-
 #include <map>
 
 /// \brief
