@@ -6,7 +6,6 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include <iostream>
 
 using rgb_matrix::RGBMatrix;
 using rgb_matrix::Canvas;
@@ -57,30 +56,28 @@ int main() {
         Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1});
 
 	for(;;) {
-          read(sock, buffer, 1024);
-          printf("recieved command: %s\n", buffer);
-          if(strcmp(buffer, "getPos") == 0){
-              send(sock, response2, strlen(response2), 0);
-          }else{
-              send(sock, response, strlen(response), 0);
-          }
-	   
+        read(sock, buffer, 1024);
+        printf("recieved command: %s\n", buffer);
+        if(strcmp(buffer, "getPos") == 0){
+            send(sock, response2, strlen(response2), 0);
+        }else{
+            send(sock, response, strlen(response), 0);
+        }
 
-          if(strcmp(buffer, "boats") == 0) {
+        if(strcmp(buffer, "boats") == 0) {
             std::vector<std::vector<int>> boats = {};
-
             read(sock, buffer, 1024);
-	    printf("recieved data: %s\n", buffer);
+	        printf("recieved data: %s\n", buffer);
             send(sock, response, strlen(response), 0);
 
-	    for(unsigned int i = 2; i < strlen(buffer); i+=6){
-	      std::vector<int> v = {};
-	      v.push_back(int(buffer[i] - '0'));
-	      v.push_back(int(buffer[i+2] - '0'));
-	      boats.push_back(v);
-	    }
-	    matrix.setBoats(boats);
-	  }else if(strcmp(buffer, "hit") == 0){
+            for(unsigned int i = 2; i < strlen(buffer); i+=6){
+        	    std::vector<int> v = {};
+        	    v.push_back(int(buffer[i] - '0'));
+        	    v.push_back(int(buffer[i+2] - '0'));
+        	    boats.push_back(v);
+            }
+	        matrix.setBoats(boats);
+	    }else if(strcmp(buffer, "hit") == 0){
 			xy position;
 			bool enemy;
             // std::string buffer;
@@ -93,7 +90,6 @@ int main() {
 		}else if(strcmp(buffer, "miss") == 0){
 			xy position;
 			bool enemy;
-            // std::string buffer;
             read(sock, buffer, 1024);
             send(sock, response, strlen(response), 0);
 			position.x = int(buffer[1] - '0');
@@ -101,10 +97,12 @@ int main() {
 			enemy = int(buffer[5] - '0');
 			matrix.miss(position, enemy);
 		}else if(strcmp(buffer, "getPos") == 0){
-            		read(sock, buffer, 1024);
+            read(sock, buffer, 1024);
 			std::string position = matrix.handleInput();
-            		send(sock, position.c_str(), position.size(), 0);
+            send(sock, position.c_str(), position.size(), 0);
 			printf("sent position: %s\n", position.c_str());
-		}
+		}else if(strcmp(buffer, "READY") == 0){
+            matrix.reset();
+        }
 	}
 }

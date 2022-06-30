@@ -65,6 +65,14 @@ public:
         this->drawBoats();
     }
 
+    void reset(){
+        boats = {};
+        shipData = {};
+        this->draw();
+        this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength, enemyColor);
+        this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength, playerColor);
+    }
+
 
     /// @brief draws the boats on the canvas
     void drawBoats(){
