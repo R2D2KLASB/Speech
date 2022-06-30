@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 	paRecorder rec;	
 	std::string co = "Try again!";
 	while(co =="Try again!"){
-		co = Coordinate(token , rec);
+		co = coordinates_speech(token , rec);
 		std::cout<< co << std::endl;
 	}
 	Pa_Terminate();
