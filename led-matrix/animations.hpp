@@ -282,8 +282,8 @@ public:
 
                 case '0':
                     s<<'('<<coordinatesEnemy.x<<','<<coordinatesEnemy.y<<')';
-                    return std::string str(s.str());
-                    // return str;
+                    return s.str();
+
 
                 case '8':
                     sw = false;
