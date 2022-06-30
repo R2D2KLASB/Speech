@@ -18,7 +18,7 @@ class MatrixRelay: public rclcpp::Node {
   public:
     MatrixRelay(): Node("matrix") {
       subscription_ = this->create_subscription<std_msgs::msg::String>("game_info/intern/publish", 10, std::bind(&MatrixRelay::topic_callback, this, _1));
-      publisher_ = this->create_publisher<std_msgs::msg::String>("zeeslag_api", 10);
+      publisher_ = this->create_publisher<std_msgs::msg::String>("game_info/extern/B", 10);
       addrlen = sizeof(address);
       int opt = 1;
 

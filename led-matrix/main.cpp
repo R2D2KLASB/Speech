@@ -73,8 +73,7 @@ int main() {
 	      boats.push_back(v);
 	    }
 	    matrix.setBoats(boats);
-	  }
-	/*else if(strcmp(buffer, "hit") == 0){
+	  }else if(strcmp(buffer, "hit") == 0){
 			xy position;
 			bool enemy;
             // std::string buffer;
@@ -95,8 +94,8 @@ int main() {
 			enemy = int(buffer[5] - '0');
 			matrix.miss(position, enemy);
 		}else if(strcmp(buffer, "getPos") == 0){
-			matrix.handleInput();
+            std::string position = matrix.handleInput();
+            send(sock, position.c_str(), strlen(position.c_str()), 0);
 		}
-*/
 	}
 }

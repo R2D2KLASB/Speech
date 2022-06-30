@@ -281,13 +281,15 @@ public:
                     break;
 
                 case '0':
-                    s<<'('<<coordinatesEnemy.x<<','<<coordinatesEnemy.y<<')';
+                    s<<'['<<coordinatesEnemy.x<<','<<coordinatesEnemy.y<<']';
                     return s.str();
-
 
                 case '8':
                     sw = false;
                     break;
+
+                case '6':
+                    this->setCircle(xy{20, 5}, 5, rgb{255,0,0});
             }
         }
     }
