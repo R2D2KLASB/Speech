@@ -238,6 +238,8 @@ public:
     }
 
     std::string handleInput() {
+        canvas->SetPixel(coordinatesEnemy.x, coordinatesEnemy.y, 255, 0, 0);
+        serial.writeChar('1');
         std::ostringstream s;
         char input = -1;
         bool sw = false;
