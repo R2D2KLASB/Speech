@@ -20,14 +20,15 @@
 /// This function takes two parameters of type transcriptionAPI and paRecorder, it uses Portaudio library to use the microphone and convert the audio to text using an API.
 /// The function returns a string of 2 characters a postion(A5 for example) if the API hears the postion currectly, And "Try again!" if not.
 ///
-std::string coordinates_speech(transcriptionAPI & token, paRecorder & rec) {
+std::string Coordinate(transcriptionAPI & token, paRecorder & rec) {
 		token.getToken();
 		std::string transcription;
 		std::string letter_number_move = "";
 		std::map<std::string, std::string> map1_2 = { {"één","1"},
 													  {"├®├®n","1"},
 													  {"een","1"},
-													  {"twee","2"}
+													  {"twee","2"},
+													  {"10",":"}
 		};
 
 		std::string allowed_numbers[14] = { "één","├®├®n","een","twee","1","2","3","4","5","6","7","8","9","10" };
@@ -79,11 +80,15 @@ std::string coordinates_speech(transcriptionAPI & token, paRecorder & rec) {
 					return "Try again!";
 				}
 				else { 
-					return letter_number_move;	
+					std::stringstream ss;
+					letter_number_move[0] = letter_number_move[0] - 65 + 48;
+					letter_number_move[1] = letter_number_move[1] - 1;
+					ss << "[" << letter_number_move[0] << "," << letter_number_move[1] << "]";
+					return (ss.str());	
 				}
 			}
 			else {
-				std::cout << "Transcription failed :("<< std::endl;
+				std::cout << "Transcription fariled :("<< std::endl;
 			}
 		
 		
