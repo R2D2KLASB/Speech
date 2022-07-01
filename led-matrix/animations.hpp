@@ -46,7 +46,7 @@ public:
     {   
         Pa_Initialize();
         Token = transcriptionAPI::transcriptionAPI();
-    	Rec = paRecorder::transcriptionAPI();
+    	Rec = paRecorder::paRecorder();
         this->draw();
         this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
         this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
@@ -313,8 +313,8 @@ private:
     serialib &serial;
     xy coordinatesEnemy;
     xy coordinatesPlayer;
-    auto Token;
-    auto Rec;
+    transcriptionAPI Token;
+    paRecorder Rec;
 };
 
 #endif //ANIMATIONS_HPP
