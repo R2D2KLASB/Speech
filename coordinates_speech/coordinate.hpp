@@ -13,6 +13,7 @@
 #include <string>     
 #include <iostream>     
 #include <map>
+#include <list>
 
 /// \brief
 /// coordinates_speech function
