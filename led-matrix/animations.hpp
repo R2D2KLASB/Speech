@@ -38,11 +38,13 @@ class Animations{
 public:
     /// @brief constructor for the animations
     /// @param canvas: canvas pointer
-    Animations(Canvas *canvas, serialib &serial, xy coordinatesEnemy, xy coordinatesPlayer):
+    Animations(Canvas *canvas, serialib &serial, xy coordinatesEnemy, xy coordinatesPlayer, transcriptionAPI & token, paRecorder & rec):
             canvas(canvas),
             serial(serial),
             coordinatesEnemy(coordinatesEnemy),
-            coordinatesPlayer(coordinatesPlayer)
+            coordinatesPlayer(coordinatesPlayer),
+            token(token),
+            rec(rec)
     {
         this->draw();
         this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
