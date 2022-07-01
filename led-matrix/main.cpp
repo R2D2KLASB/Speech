@@ -18,7 +18,7 @@ int main() {
         int sock = 0, client_fd;
         struct sockaddr_in serv_addr;
         char buffer[1024] = { '\0' };
-	char* response = "ok";
+	const char* response = "ok";
 
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
             printf("\n Socket creation error \n");
@@ -80,7 +80,7 @@ int main() {
 			bool enemy;
             // std::string buffer;
             read(sock, buffer, 1024);
-            send(sock, responce, strlen(responce), 0);
+            send(sock, response, strlen(response), 0);
 			position.x = int(buffer[1] - '0');
 			position.y = int(buffer[3] - '0');
 			enemy = int(buffer[5] - '0');
@@ -90,7 +90,7 @@ int main() {
 			bool enemy;
             // std::string buffer;
             read(sock, buffer, 1024);
-            send(sock, responce, strlen(responce), 0);
+            send(sock, response, strlen(response), 0);
 			position.x = int(buffer[1] - '0');
 			position.y = int(buffer[3] - '0');
 			enemy = int(buffer[5] - '0');

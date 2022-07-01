@@ -4,7 +4,7 @@
 #define ANIMATIONS_HPP
 
 #include <led-matrix.h>
-#include <coordinate.hpp>
+#include "coordinate.hpp"
 #include <signal.h>
 #include <unistd.h>
 #include "serialib/lib/serialib.h"

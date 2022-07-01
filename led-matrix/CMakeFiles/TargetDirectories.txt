@@ -1,0 +1,3 @@
+/home/ubuntu/zeeslag_speech/led-matrix/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/zeeslag_speech/led-matrix/CMakeFiles/edit_cache.dir
+/home/ubuntu/zeeslag_speech/led-matrix/CMakeFiles/matrix.dir
