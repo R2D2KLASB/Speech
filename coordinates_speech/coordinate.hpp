@@ -20,7 +20,7 @@
 /// This function takes two parameters of type transcriptionAPI and paRecorder, it uses Portaudio library to use the microphone and convert the audio to text using an API.
 /// The function returns a string with the matrix position([4,3] for example) if the API hears the postion currectly, And "Try again!" if not.
 ///
-std::string Coordinate(transcriptionAPI & token, paRecorder & rec) {
+std::string coordinates_speech(transcriptionAPI & token, paRecorder & rec) {
 		token.getToken();
 		std::string transcription;
 		std::string letter_number_move = "";
