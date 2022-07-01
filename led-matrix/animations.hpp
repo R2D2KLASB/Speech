@@ -45,8 +45,8 @@ public:
             coordinatesPlayer(coordinatesPlayer)
     {   
         Pa_Initialize();
-        Token = transcriptionAPI::transcriptionAPI();
-    	Rec = paRecorder::paRecorder();
+        Token = transcriptionAPI();
+    	Rec = paRecorder();
         this->draw();
         this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
         this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
