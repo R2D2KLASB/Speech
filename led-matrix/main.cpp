@@ -53,7 +53,10 @@ int main() {
         runtime_defaults.gpio_slowdown = 4;
 
         Canvas *canvas = RGBMatrix::CreateFromOptions(my_defaults, runtime_defaults);
-        Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1});
+	
+	transcriptionAPI token;
+    	paRecorder rec;
+        Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1},token , rec);
         
 
 
