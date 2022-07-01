@@ -15,6 +15,7 @@ using rgb_matrix::Canvas;
 #define PORT 8080
 
 int main() {
+    Pa_Initialize();
         int sock = 0, client_fd;
         struct sockaddr_in serv_addr;
         char buffer[1024] = { '\0' };
@@ -53,7 +54,7 @@ int main() {
 
         Canvas *canvas = RGBMatrix::CreateFromOptions(my_defaults, runtime_defaults);
         Animations matrix(canvas, serial, xy{squareEnemyBeginX + 1, squareEnemyBeginY + 1}, xy{squarePlayerBeginX + 1, squarePlayerBeginY + 1});
-        Pa_Initialize();
+        
 
 
 	for(;;) {
