@@ -38,19 +38,21 @@ class Animations{
 public:
     /// @brief constructor for the animations
     /// @param canvas: canvas pointer
-    Animations(Canvas *canvas, serialib &serial, xy coordinatesEnemy, xy coordinatesPlayer, transcriptionAPI & token, paRecorder & rec):
+    Animations(Canvas *canvas, serialib &serial, xy coordinatesEnemy, xy coordinatesPlayer):
             canvas(canvas),
             serial(serial),
             coordinatesEnemy(coordinatesEnemy),
-            coordinatesPlayer(coordinatesPlayer),
-            token(token),
-            rec(rec)
-    {
+            coordinatesPlayer(coordinatesPlayer)
+    {   
+        Pa_Initialize();
+        Token = transcriptionAPI::transcriptionAPI();
+    	Rec = paRecorder::transcriptionAPI();
         this->draw();
         this->setSquare({squareEnemyBeginX, squareEnemyBeginY}, squareLength);
         this->setSquare({squarePlayerBeginX, squarePlayerBeginY}, squareLength);
     }
-
+    
+    ~Animations(){Pa_Terminate();}
     /// @brief makes the canvas blue
     void draw(){
         canvas->Fill(0,0,255);
@@ -295,7 +297,7 @@ public:
                     std::string strPosition = "Try again!";
                     while (strPosition == "Try again!") {
                         this->setCircle(xy{ 20, 5 }, 2, rgb{ 255,0,0 });
-                        strPosition = coordinates_speech(token, rec);
+                        strPosition = coordinates_speech(Token, Rec);
                         this->setCircle(xy{ 20, 5 }, 2, rgb{ 255,0,0 });
                     }
                     return strPosition;
@@ -311,8 +313,8 @@ private:
     serialib &serial;
     xy coordinatesEnemy;
     xy coordinatesPlayer;
-    transcriptionAPI token;
-    paRecorder rec;
+    auto Token;
+    auto Rec;
 };
 
 #endif //ANIMATIONS_HPP
