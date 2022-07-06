@@ -49,3 +49,5 @@ Before you can run the speech node you have to set your mic as the default input
     > . install/setup.bash
 5. Execute the node:
     > ros2 run speech_ros2 talker
+
+![IMG_20220706_190316__01__01](https://user-images.githubusercontent.com/43569137/177605218-ff4a4a69-c67f-48d0-a154-31586f3163ba.jpg)
