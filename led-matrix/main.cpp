@@ -45,10 +45,10 @@ int main() {
         my_defaults.chain_length = 1;
         my_defaults.rows = Rows;
         my_defaults.cols = Cols;
+        my_defaults.parallel = Parallel;
         my_defaults.show_refresh_rate = true;
         my_defaults.disable_hardware_pulsing = 1;
         my_defaults.show_refresh_rate = false;
-        my_defaults.parallel = 2;
         rgb_matrix::RuntimeOptions runtime_defaults;
         runtime_defaults.gpio_slowdown = 4;
 

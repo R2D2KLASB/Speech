@@ -13,6 +13,7 @@
 
 #define Rows 16
 #define Cols 32
+#define Parallel 2
 #define squareEnemyBeginX 18
 #define squareEnemyBeginY 16
 #define squarePlayerBeginX 2
