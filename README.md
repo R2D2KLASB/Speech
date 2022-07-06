@@ -51,3 +51,4 @@ Before you can run the speech node you have to set your mic as the default input
     > ros2 run speech_ros2 talker
 
 ![IMG_20220706_190316__01__01](https://user-images.githubusercontent.com/43569137/177605218-ff4a4a69-c67f-48d0-a154-31586f3163ba.jpg)
+![IMG_20220706_190316__01__01](https://user-images.githubusercontent.com/43569137/177605921-ff5487e8-88b5-4eed-b125-0aaa3e7eed85.jpg)
